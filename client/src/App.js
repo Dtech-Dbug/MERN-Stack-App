@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Login } from "./components/pages/auth/login";
 import { Register } from "./components/pages/auth/register";
 import { RegisterComplete } from "./components/pages/auth/registerComplete";
+import { ForgotPassword } from "./components/pages/auth/ForgotPassword";
+
 import { Home } from "./components/pages/home";
 import { Nav } from "./components/nav";
 
@@ -44,6 +46,7 @@ function App() {
 			<Route path="/login" exact component={Login} />
 			<Route path="/register" exact component={Register} />
 			<Route path="/register/complete" exact component={RegisterComplete} />
+			<Route path="/forgot/password" exact component={ForgotPassword} />
 		</div>
 	);
 }
