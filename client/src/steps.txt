@@ -1,0 +1,12 @@
+for email sign in verification :
+visit : https://firebase.google.com/docs/auth/web/email-link-auth
+for the steps
+
+
+1. Create React App
+2. create Components prototype
+3. react router dom for route handling
+4. NAV BAR WITH ANT DEOSGN , BOOTSTRAP
+5. REGISTER Component
+6. REGISTER COMPOENT : EMAIL AUTH / Install firebase before
+7. uSE react-TOSTIFY FOR SENDING MSG AFTER VERIFICATION LINK IS SENT TO USER EMAIL
