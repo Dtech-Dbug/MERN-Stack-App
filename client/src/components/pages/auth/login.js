@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth, googleAuthProvider } from "../../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
-import { MailOutlined } from "@ant-design/icons";
+import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 
 export const Login = ({ history }) => {
@@ -19,6 +19,7 @@ export const Login = ({ history }) => {
 			const result = await auth.signInWithEmailAndPassword(email, password);
 			const { user } = result;
 			const userIdToken = await user.getIdTokenResult();
+
 			dispatch({
 				type: "USER_LOGGED_IN",
 				payload: {
@@ -26,9 +27,29 @@ export const Login = ({ history }) => {
 					token: userIdToken.token,
 				},
 			});
+			history.push("/");
 		} catch (error) {
 			console.log(error.message);
 			setLoading(false);
+		}
+	};
+
+	const googleLogin = async (e) => {
+		try {
+			const result = await auth.signInWithPopup(googleAuthProvider);
+			const { user } = result;
+			const userIdToken = await user.getIdTokenResult();
+
+			dispatch({
+				type: "USER_LOGGED_IN",
+				payload: {
+					email: user.email,
+					token: userIdToken.token,
+				},
+			});
+			history.push("/");
+		} catch (error) {
+			console.log(error.message);
 		}
 	};
 
@@ -74,8 +95,24 @@ export const Login = ({ history }) => {
 		<div className="container p-5">
 			<div className="row">
 				<div className="col-md-6 offset-md-2">
-					{loading ? <h3 className='danget-text'>Loading...</h3> ? <h3>Login</h3>}
+					{loading ? (
+						<h3 className="text-danger">Loading...</h3>
+					) : (
+						<h3>Login</h3>
+					)}
 					{LoginForm()}
+					<Button
+						icon={<GoogleOutlined />}
+						onClick={googleLogin}
+						block
+						shape="round"
+						size="large"
+						type="danger"
+						disabled={!email || password.length < 6}
+						className="mt-2 mb-2"
+					>
+						Login with Google
+					</Button>
 				</div>
 			</div>
 		</div>
