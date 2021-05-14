@@ -11,13 +11,14 @@ import {
 
 import firebase from "firebase";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const { SubMenu, Item } = Menu;
 
 export const Nav = () => {
 	const [current, setCurrent] = useState("home");
 	const dispatch = useDispatch();
+	const { user } = useSelector((state) => ({ ...state }));
 	const history = useHistory();
 
 	const handleClick = (e) => {
@@ -42,24 +43,35 @@ export const Nav = () => {
 				<Link to="/">Home</Link>
 			</Item>
 
-			<Item key="register" icon={<UserAddOutlined />} className="float-right">
-				<Link to="/register">Register</Link>
-			</Item>
-
-			<Item
-				key="login"
-				icon={<UserOutlined twoToneColor="crimson" />}
-				className="float-right"
-			>
-				<Link to="/login">Login</Link>
-			</Item>
-
-			<SubMenu icon={<SmileTwoTone twoToneColor="crimson" />} title="User">
-				<Item key="setting:1">Option 1</Item>
-				<Item icon={<LogoutOutlined />} onClick={logout}>
-					Logout
+			{!user && (
+				<Item key="register" icon={<UserAddOutlined />} className="float-right">
+					<Link to="/register">Register</Link>
 				</Item>
-			</SubMenu>
+			)}
+
+			{!user && (
+				<Item
+					key="login"
+					icon={<UserOutlined twoToneColor="crimson" />}
+					className="float-right"
+				>
+					<Link to="/login">Login</Link>
+				</Item>
+			)}
+
+			{user && (
+				<SubMenu
+					icon={<SmileTwoTone twoToneColor="crimson" />}
+					title={user.email.split("@")[0]}
+					//.split('@) to split at '@' : e.g => name@gmail.com split at @ => ['name' , 'gmail.com'] we need the 0th element for the name
+					className="float-right"
+				>
+					<Item key="setting:1">Option 1</Item>
+					<Item icon={<LogoutOutlined />} onClick={logout}>
+						Logout
+					</Item>
+				</SubMenu>
+			)}
 		</Menu>
 	);
 };
