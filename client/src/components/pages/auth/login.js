@@ -1,16 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../../../firebase";
+import { auth, googleAuthProvider } from "../../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { MailOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
 
 export const Login = ({ history }) => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState("good@gmail.com");
+	const [password, setPassword] = useState("123456");
+	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setLoading(true);
 		//console.table("email ", email, " password ", password);
+		try {
+			const result = await auth.signInWithEmailAndPassword(email, password);
+			const { user } = result;
+			const userIdToken = await user.getIdTokenResult();
+			dispatch({
+				type: "USER_LOGGED_IN",
+				payload: {
+					email: user.email,
+					token: userIdToken.token,
+				},
+			});
+		} catch (error) {
+			console.log(error.message);
+			setLoading(false);
+		}
 	};
 
 	const LoginForm = () => (
@@ -55,7 +74,7 @@ export const Login = ({ history }) => {
 		<div className="container p-5">
 			<div className="row">
 				<div className="col-md-6 offset-md-2">
-					<h3>Login</h3>
+					{loading ? <h3 className='danget-text'>Loading...</h3> ? <h3>Login</h3>}
 					{LoginForm()}
 				</div>
 			</div>
