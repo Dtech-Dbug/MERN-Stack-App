@@ -4,9 +4,17 @@ import { toast } from "react-toastify";
 import { Button } from "antd";
 import { useSelector } from "react-redux";
 
-export const ForgotPassword = () => {
+export const ForgotPassword = ({ history }) => {
 	const [email, setEmail] = useState("");
 	const [loading, setLoading] = useState(false);
+
+	const { user } = useSelector((state) => ({ ...state }));
+
+	useEffect(() => {
+		if (user && user.token) {
+			history.pushState("/");
+		}
+	});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
