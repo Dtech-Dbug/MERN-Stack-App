@@ -4,6 +4,11 @@ const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
+//route autohandling
+const fs = require("fs");
+
+//routes
+//const authRouter = require("./routes/auth");
 
 //app
 const app = express();
@@ -24,11 +29,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //route
-app.get("/api", (req, res) => {
-	res.json({
-		data: "wowo, slowly gettin there",
-	});
-});
+//app.use("/api", authRouter);
+fs.readdirSync("./routes").map((route) =>
+	app.use("/api", require("./routes/" + route))
+);
 
 //port
 const port = process.env.PORT || 8000;
