@@ -3,7 +3,7 @@ import { auth, googleAuthProvider } from "../../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const Login = ({ history }) => {
@@ -11,6 +11,14 @@ export const Login = ({ history }) => {
 	const [password, setPassword] = useState("123456");
 	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
+
+	const { user } = useSelector((state) => ({ ...state }));
+
+	useEffect(() => {
+		if (user && user.token) {
+			history.pushState("/");
+		}
+	});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
