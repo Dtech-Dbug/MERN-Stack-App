@@ -16,7 +16,7 @@ export const Login = ({ history }) => {
 
 	useEffect(() => {
 		if (user && user.token) {
-			history.pushState("/");
+			history.push("/");
 		}
 	});
 
