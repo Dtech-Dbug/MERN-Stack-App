@@ -3,7 +3,7 @@ import { auth } from "../../../firebase";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
-export const Register = () => {
+export const Register = ({history}) => {
 	const [email, setEmail] = useState("");
 
 	const { user } = useSelector((state) => ({ ...state }));
