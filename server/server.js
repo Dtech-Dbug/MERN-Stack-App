@@ -24,14 +24,14 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //route
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
 	res.json({
 		data: "wowo, slowly gettin there",
 	});
 });
 
 //port
-const port = env.process.PORT || 8000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
 	console.log(`RUNNING ON ${port}`);
