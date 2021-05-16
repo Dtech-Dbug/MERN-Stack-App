@@ -9,22 +9,22 @@ import { Link } from "react-router-dom";
 //for fetching
 import axios from "axios";
 
-// const createOrUpdateUser = async (authToken) => {
-// 	return await axios.post(
-// 		"http://localhost:8000/api/create-update-user",
-// 		{
-// 			//leaving it empty , bcz currently not sending anything in the body
-// 			//sending token in headers
-// 		},
-// 		{
-// 			headers: {
-// 				authToken,
-// 				"Access-Control-Allow-Origin": "*",
-// 				"Access-Control-Allow-Headers": "*",
-// 			},
-// 		}
-// 	);
-// };
+const createOrUpdateUser = async (authToken) => {
+	return await axios.post(
+		process.env.REACT_APP_API_BACKEND,
+		{
+			//leaving it empty , bcz currently not sending anything in the body
+			//sending token in headers
+		},
+		{
+			headers: {
+				authToken,
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Headers": "*",
+			},
+		}
+	);
+};
 
 export const Login = ({ history }) => {
 	const [email, setEmail] = useState(
@@ -51,16 +51,8 @@ export const Login = ({ history }) => {
 			const { user } = result;
 			const userIdToken = await user.getIdTokenResult();
 
-			fetch(
-				"http://localhost:8000/api/create-update-user",
-				{ method: "POST" },
-				{
-					header: {
-						authToken: userIdToken.token,
-					},
-				}
-			)
-				.then((res) => console.log("create-update-user  ", res))
+			createOrUpdateUser(userIdToken.token)
+				.then((res) => console.log("create-update-user : ", res))
 				.catch((err) => alert(err.message));
 
 			// dispatch({
