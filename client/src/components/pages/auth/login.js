@@ -6,8 +6,30 @@ import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+//for fetching
+import axios from "axios";
+
+// const createOrUpdateUser = async (authToken) => {
+// 	return await axios.post(
+// 		"http://localhost:8000/api/create-update-user",
+// 		{
+// 			//leaving it empty , bcz currently not sending anything in the body
+// 			//sending token in headers
+// 		},
+// 		{
+// 			headers: {
+// 				authToken,
+// 				"Access-Control-Allow-Origin": "*",
+// 				"Access-Control-Allow-Headers": "*",
+// 			},
+// 		}
+// 	);
+// };
+
 export const Login = ({ history }) => {
-	const [email, setEmail] = useState("good@gmail.com");
+	const [email, setEmail] = useState(
+		"dwaipayan.chakroborty.fiem.ece18@teamfuture.in"
+	);
 	const [password, setPassword] = useState("123456");
 	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
@@ -29,14 +51,26 @@ export const Login = ({ history }) => {
 			const { user } = result;
 			const userIdToken = await user.getIdTokenResult();
 
-			dispatch({
-				type: "USER_LOGGED_IN",
-				payload: {
-					email: user.email,
-					token: userIdToken.token,
-				},
-			});
-			history.push("/");
+			fetch(
+				"http://localhost:8000/api/create-update-user",
+				{ method: "POST" },
+				{
+					header: {
+						authToken: userIdToken.token,
+					},
+				}
+			)
+				.then((res) => console.log("create-update-user  ", res))
+				.catch((err) => alert(err.message));
+
+			// dispatch({
+			// 	type: "USER_LOGGED_IN",
+			// 	payload: {
+			// 		email: user.email,
+			// 		token: userIdToken.token,
+			// 	},
+			// });
+			// history.push("/");
 		} catch (error) {
 			console.log(error.message);
 			setLoading(false);
@@ -49,6 +83,7 @@ export const Login = ({ history }) => {
 			const { user } = result;
 			const userIdToken = await user.getIdTokenResult();
 
+			//createOrUpdateUser(userIdToken.token);
 			dispatch({
 				type: "USER_LOGGED_IN",
 				payload: {
