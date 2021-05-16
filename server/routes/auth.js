@@ -18,3 +18,14 @@ router.post(
 //we will recieve info from FE here, so the method will be post
 
 module.exports = router;
+
+// Just for fun
+//const myOwnMiddleware = (req, res, next) => {
+// 	console.log("created own middleware , yaaaaaay");
+// 	next();
+// };
+// router.get("/testing", myOwnMiddleware, (req, res) => {
+// 	res.json({
+// 		data: "yaya , genius",
+// 	});
+// });
