@@ -14,3 +14,16 @@ for the steps
 9. set up firebase functionalities for login with google
 
 ::process : grab user AND token from firebase and use it for further purposes
+
+
+
+
+
+ERROR AND SOLVE :
+[
+Faced an issue while making an axio request passsing the usridtoken as header.
+Apparently there was network error, and i checked the request was being to : https://localhost:8000/api/create-update-user
+was guving me SSL error, 
+after hard coding the link url for fetch , the error went away.
+the issue lied somewhere with a little typo in the requst URL.
+]
