@@ -4,3 +4,8 @@
 4. set up controllers
 5. Set up database
 6. firebase admin tool : to get token from firebase verify them and store user in our own DB
+
+7. fetch a post of the userIDToken when user logsIn. 
+8. Grab the auth token
+
+9. The auth middleware then validated the token and passes it to the controller , to save the user in our DATABASE
