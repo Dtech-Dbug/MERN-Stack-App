@@ -2,7 +2,7 @@
 2. Set up routes
 3.Set up auto handling of routes
 4. set up controllers
-5. Set up database
+5. Set up database  : mongoose Schema
 6. firebase admin tool : to get token from firebase verify them and store user in our own DB
 
 7. fetch a post of the userIDToken when user logsIn. 
