@@ -6,25 +6,10 @@ import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-//for fetching
-import axios from "axios";
+//importing the function for sending the authToekn from FE to backend
+import { createOrUpdateUser } from "../../../functions/create-update-user-async";
 
-const createOrUpdateUser = async (authToken) => {
-	return await axios.post(
-		process.env.REACT_APP_API_BACKEND,
-		{
-			//leaving it empty , bcz currently not sending anything in the body
-			//sending token in headers
-		},
-		{
-			headers: {
-				authToken,
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Headers": "*",
-			},
-		}
-	);
-};
+//for fetching
 
 export const Login = ({ history }) => {
 	const [email, setEmail] = useState(
@@ -52,17 +37,19 @@ export const Login = ({ history }) => {
 			const userIdToken = await user.getIdTokenResult();
 
 			createOrUpdateUser(userIdToken.token)
-				.then((res) => console.log("create-update-user : ", res))
+				.then((res) => {
+					console.log("create-update-user : ", res);
+					dispatch({
+						type: "USER_LOGGED_IN",
+						payload: {
+							email: user.email,
+							token: userIdToken.token,
+						},
+					});
+				})
 				.catch((err) => alert(err.message));
 
-			// dispatch({
-			// 	type: "USER_LOGGED_IN",
-			// 	payload: {
-			// 		email: user.email,
-			// 		token: userIdToken.token,
-			// 	},
-			// });
-			// history.push("/");
+			history.push("/");
 		} catch (error) {
 			console.log(error.message);
 			setLoading(false);
@@ -75,14 +62,18 @@ export const Login = ({ history }) => {
 			const { user } = result;
 			const userIdToken = await user.getIdTokenResult();
 
-			//createOrUpdateUser(userIdToken.token);
-			dispatch({
-				type: "USER_LOGGED_IN",
-				payload: {
-					email: user.email,
-					token: userIdToken.token,
-				},
-			});
+			createOrUpdateUser(userIdToken.token)
+				.then((res) => {
+					console.log("create-update-user : ", res);
+					dispatch({
+						type: "USER_LOGGED_IN",
+						payload: {
+							email: user.email,
+							token: userIdToken.token,
+						},
+					});
+				})
+				.catch((err) => alert(err.message));
 			history.push("/");
 		} catch (error) {
 			console.log(error.message);
