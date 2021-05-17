@@ -14,6 +14,9 @@ import { Nav } from "./components/nav";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
+import { currentUser } from "./functions/curentUser";
+
+//importing the axios function to send data to our bakcend
 
 function App() {
 	const dispatch = useDispatch();
@@ -24,13 +27,21 @@ function App() {
 			if (user) {
 				const userIdToken = await user.getIdTokenResult();
 				console.log("USer loged in ", user);
-				dispatch({
-					type: "USER_LOGGED_IN",
-					payload: {
-						email: user.email,
-						token: userIdToken.token,
-					},
-				});
+
+				currentUser(userIdToken.token)
+					.then((res) => {
+						dispatch({
+							type: "USER_LOGGED_IN",
+							payload: {
+								email: user.email,
+								token: userIdToken.token,
+								name: res.data.name,
+								// role: res.data.user.role,
+								// _id: res.data.user._id,
+							},
+						});
+					})
+					.catch((err) => console.log(err));
 			}
 		});
 		//cleanup
