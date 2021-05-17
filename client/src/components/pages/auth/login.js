@@ -25,7 +25,7 @@ export const Login = ({ history }) => {
 		if (user && user.token) {
 			history.push("/");
 		}
-	});
+	}, [user]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -36,14 +36,18 @@ export const Login = ({ history }) => {
 			const { user } = result;
 			const userIdToken = await user.getIdTokenResult();
 
+			//instead of firebase , we get response from our own server and dispatch them to the redux store
 			createOrUpdateUser(userIdToken.token)
 				.then((res) => {
-					console.log("create-update-user : ", res);
+					console.log("create-update-user from Our DB: ", res);
 					dispatch({
 						type: "USER_LOGGED_IN",
 						payload: {
+							name: res.data.user.name,
 							email: user.email,
 							token: userIdToken.token,
+							role: res.data.user.role,
+							_id: res.data.user._id,
 						},
 					});
 				})
@@ -68,12 +72,16 @@ export const Login = ({ history }) => {
 					dispatch({
 						type: "USER_LOGGED_IN",
 						payload: {
+							name: res.data.user.name,
 							email: user.email,
 							token: userIdToken.token,
+							role: res.data.user.role,
+							_id: res.data.user._id,
 						},
 					});
 				})
 				.catch((err) => alert(err.message));
+
 			history.push("/");
 		} catch (error) {
 			console.log(error.message);
