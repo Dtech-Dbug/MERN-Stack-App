@@ -11,6 +11,7 @@ import { ForgotPassword } from "./components/pages/auth/ForgotPassword";
 
 import { Home } from "./components/pages/home";
 import { Nav } from "./components/nav";
+import { History } from "./components/pages/protected-routes/user/history";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -59,6 +60,7 @@ function App() {
 			<Route path="/register" exact component={Register} />
 			<Route path="/register/complete" exact component={RegisterComplete} />
 			<Route path="/forgot/password" exact component={ForgotPassword} />
+			<Route path="/user/history" exact component={History} />
 		</div>
 	);
 }
