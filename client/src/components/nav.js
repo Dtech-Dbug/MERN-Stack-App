@@ -62,7 +62,7 @@ export const Nav = () => {
 			{user && (
 				<SubMenu
 					icon={<SmileTwoTone twoToneColor="crimson" />}
-					title={user.email.split("@")[0]}
+					title={user.email && user.email.split("@")[0]}
 					//.split('@) to split at '@' : e.g => name@gmail.com split at @ => ['name' , 'gmail.com'] we need the 0th element for the name
 					className="float-right"
 				>
