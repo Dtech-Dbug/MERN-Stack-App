@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
 		},
 
 		role: {
-			type: string,
+			type: String,
 			default: "Subscriber",
 		},
 		cart: {
@@ -21,12 +21,12 @@ const userSchema = new mongoose.Schema(
 			default: [],
 		},
 
-		address: string,
+		address: String,
 	},
 	{ timestamps: true }
 );
 
-module.exports = mongoose("User", userSchema);
+module.exports = mongoose.model("User", userSchema);
 
 //timeStamps : wil give the time the user is created or updated
 //index : true , will help us query our database more efficiently
