@@ -30,14 +30,15 @@ function App() {
 
 				currentUser(userIdToken.token)
 					.then((res) => {
+						console.log("res from own server , currentUSer ", res);
 						dispatch({
 							type: "USER_LOGGED_IN",
 							payload: {
 								email: user.email,
 								token: userIdToken.token,
 								name: res.data.name,
-								// role: res.data.user.role,
-								// _id: res.data.user._id,
+								role: res.data.role,
+								_id: res.data._id,
 							},
 						});
 					})
