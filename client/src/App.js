@@ -17,6 +17,8 @@ import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 import { currentUser } from "./functions/curentUser";
 
+import { UserRoute } from "./components/pages/protected-routes/user/userRoute";
+
 //importing the axios function to send data to our bakcend
 
 function App() {
@@ -60,7 +62,7 @@ function App() {
 			<Route path="/register" exact component={Register} />
 			<Route path="/register/complete" exact component={RegisterComplete} />
 			<Route path="/forgot/password" exact component={ForgotPassword} />
-			<Route path="/user/history" exact component={History} />
+			<UserRoute path="/user/history" exact component={History} />
 		</div>
 	);
 }
