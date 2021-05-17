@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 //controllers
-const { createOrUpdateUser } = require("../controllers/auth");
+const { createOrUpdateUser, currentUser } = require("../controllers/auth");
 
 //middlewares
 const {
@@ -16,6 +16,9 @@ router.post(
 	createOrUpdateUser
 );
 //we will recieve info from FE here, so the method will be post
+
+// creatinga  new end point to get the details of the current user
+router.post("/current-user", createOrUpdateUserMiddleware, currentUser);
 
 module.exports = router;
 
