@@ -19,3 +19,5 @@
 
 12. Before admin can create products , there must be categories and sub categories where admin can CRUD products.  
 13. We will create some categories , categories schema , routes and controllers , to handle those routes. 
+
+14. Create categorySchema : model
