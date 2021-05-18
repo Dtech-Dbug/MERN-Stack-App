@@ -10,13 +10,9 @@ const LoadingToRedirect = () => {
 			setCount((currentCount) => --currentCount);
 		}, 1000);
 		// redirect once count is equal to 0
-		if (count === 0) {
-			console.log("count reacged : ", count);
-			console.log("TIME TO CLEAR INTERVAL AND PUSH");
-
-			clearInterval(interval);
-			history.push("/");
-		}
+		count === 0 && history.push("/");
+		// cleanup
+		return () => clearInterval(interval);
 	}, [count]);
 
 	return (
