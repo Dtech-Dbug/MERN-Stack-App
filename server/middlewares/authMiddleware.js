@@ -32,8 +32,9 @@ exports.adminCheckMiddleware = async (req, res, next) => {
 	const adminUser = await User.findOne({ email }).exec();
 
 	//conditional redirect bades on role
+	console.log("ADMIN USER :", adminUser);
 
-	if (adminUser.role === "admin") {
+	if (adminUser.role !== "admin") {
 		res.status(403).json({
 			err: "Access denied",
 		});
