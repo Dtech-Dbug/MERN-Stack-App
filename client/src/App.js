@@ -10,8 +10,9 @@ import { RegisterComplete } from "./components/pages/auth/registerComplete";
 import { ForgotPassword } from "./components/pages/auth/ForgotPassword";
 
 import { Home } from "./components/pages/home";
-import { Nav } from "./components/nav";
+import { Nav } from "./components/Nav/nav";
 import { History } from "./components/pages/protected-routes/user/history";
+import { UserPassword } from "./components/pages/protected-routes/user/passwordUpdate";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -65,6 +66,7 @@ function App() {
 
 			<Switch>
 				<UserRoute exact path="/user/history" component={History} />
+				<UserRoute exact path="/user/password" component={UserPassword} />
 			</Switch>
 		</div>
 	);
