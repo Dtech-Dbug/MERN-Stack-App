@@ -1,4 +1,5 @@
 const admin = require("../firebase/index");
+const User = require("../model/userModel");
 
 exports.createOrUpdateUserMiddleware = async (req, res, next) => {
 	//console.log(req.headers);
@@ -21,4 +22,22 @@ exports.createOrUpdateUserMiddleware = async (req, res, next) => {
 	}
 
 	//next() : just passes onto the next function
+};
+
+exports.adminCheckMiddleware = async (req, res, next) => {
+	//destructure email from req.user
+	const { email } = req.user;
+
+	//await function , query our databse for email and grab user's role
+	const adminUser = await User.findOne({ email }).exec();
+
+	//conditional redirect bades on role
+
+	if (adminUser.role === "admin") {
+		res.status(403).json({
+			err: "Access denied",
+		});
+	} else {
+		next();
+	}
 };
