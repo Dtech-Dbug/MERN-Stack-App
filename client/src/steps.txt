@@ -1,0 +1,29 @@
+for email sign in verification :
+visit : https://firebase.google.com/docs/auth/web/email-link-auth
+for the steps
+
+
+1. Create React App
+2. create Components prototype
+3. react router dom for route handling
+4. NAV BAR WITH ANT DEOSGN , BOOTSTRAP
+5. REGISTER Component
+6. REGISTER COMPOENT : EMAIL AUTH / Install firebase before
+7. uSE react-TOSTIFY FOR SENDING MSG AFTER VERIFICATION LINK IS SENT TO USER EMAIL
+8. set up register/register complete/login page
+9. set up firebase functionalities for login with google
+
+::process : grab user AND token from firebase and use it for further purposes
+
+
+
+
+
+ERROR AND SOLVE :
+[
+Faced an issue while making an axio request passsing the usridtoken as header.
+Apparently there was network error, and i checked the request was being to : https://localhost:8000/api/create-update-user
+was guving me SSL error, 
+after hard coding the link url for fetch , the error went away.
+the issue lied somewhere with a little typo in the requst URL.
+]
