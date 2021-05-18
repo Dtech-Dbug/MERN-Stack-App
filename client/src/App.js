@@ -62,7 +62,10 @@ function App() {
 			<Route path="/register" exact component={Register} />
 			<Route path="/register/complete" exact component={RegisterComplete} />
 			<Route path="/forgot/password" exact component={ForgotPassword} />
-			<UserRoute path="/user/history" exact component={History} />
+
+			<Switch>
+				<UserRoute exact path="/user/history" component={History} />
+			</Switch>
 		</div>
 	);
 }
