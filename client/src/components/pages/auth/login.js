@@ -15,7 +15,7 @@ export const Login = ({ history }) => {
 	const [email, setEmail] = useState(
 		"dwaipayan.chakroborty.fiem.ece18@teamfuture.in"
 	);
-	const [password, setPassword] = useState("123456");
+	const [password, setPassword] = useState("123456789");
 	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
 
@@ -66,6 +66,7 @@ export const Login = ({ history }) => {
 			//history.push("/");
 		} catch (error) {
 			console.log(error.message);
+			toast.error(error.message);
 			setLoading(false);
 		}
 	};
