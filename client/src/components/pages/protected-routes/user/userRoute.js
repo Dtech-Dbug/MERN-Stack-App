@@ -1,6 +1,9 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Route, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import LoadingToRedirect from "./redirectCountdown";
 
 export const UserRoute = ({ children, ...rest }) => {
 	//access the user for protection
@@ -9,7 +12,7 @@ export const UserRoute = ({ children, ...rest }) => {
 	return user && user.token ? (
 		<Route {...rest} render={() => children} />
 	) : (
-		<h3>LogIn first</h3>
+		<LoadingToRedirect />
 	);
 };
 
