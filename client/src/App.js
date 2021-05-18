@@ -11,14 +11,19 @@ import { ForgotPassword } from "./components/pages/auth/ForgotPassword";
 
 import { Home } from "./components/pages/home";
 import { Nav } from "./components/Nav/nav";
-import { History } from "./components/pages/protected-routes/user/history";
-import { UserPassword } from "./components/pages/protected-routes/user/passwordUpdate";
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 import { currentUser } from "./functions/curentUser";
 
+//protected routes/user
 import { UserRoute } from "./components/pages/protected-routes/user/userRoute";
+import { History } from "./components/pages/protected-routes/user/history";
+import { UserPassword } from "./components/pages/protected-routes/user/passwordUpdate";
+
+//protected routes / admin
+import { AdminDashboard } from "./components/pages/protected-routes/admin/AdminDashboard";
+import { AdminRoute } from "./components/pages/protected-routes/admin/AdminRoute";
 
 //importing the axios function to send data to our bakcend
 
@@ -67,6 +72,7 @@ function App() {
 			<Switch>
 				<UserRoute exact path="/user/history" component={History} />
 				<UserRoute exact path="/user/password" component={UserPassword} />
+				<AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
 			</Switch>
 		</div>
 	);
