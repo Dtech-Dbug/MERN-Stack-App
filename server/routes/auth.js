@@ -8,6 +8,7 @@ const { createOrUpdateUser, currentUser } = require("../controllers/auth");
 //middlewares
 const {
 	createOrUpdateUserMiddleware,
+	adminCheckMiddleware,
 } = require("../middlewares/authMiddleware");
 
 router.post(
@@ -19,6 +20,14 @@ router.post(
 
 // creatinga  new end point to get the details of the current user
 router.post("/current-user", createOrUpdateUserMiddleware, currentUser);
+
+//adding one middleware to the same endpoint to check the role of the loggedin user
+router.post(
+	"/current-admin",
+	createOrUpdateUserMiddleware,
+	adminCheckMiddleware,
+	currentUser
+);
 
 module.exports = router;
 
