@@ -9,11 +9,7 @@ export const UserRoute = ({ children, ...rest }) => {
 	//access the user for protection
 	const { user } = useSelector((state) => ({ ...state }));
 
-	return user && user.token ? (
-		<Route {...rest} render={() => children} />
-	) : (
-		<LoadingToRedirect />
-	);
+	return user && user.token ? <Route {...rest} /> : <LoadingToRedirect />;
 };
 
 //if the user is logged in ,,we pass in th rest of the props and return the children content
