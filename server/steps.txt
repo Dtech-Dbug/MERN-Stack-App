@@ -21,3 +21,8 @@
 13. We will create some categories , categories schema , routes and controllers , to handle those routes. 
 
 14. Create categorySchema : model
+
+15. Routes and controllers
+16. Category Controller: for CRUD functions in the server side
+
+17. Then building them visually in the front end.
