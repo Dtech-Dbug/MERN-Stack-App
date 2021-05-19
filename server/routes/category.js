@@ -35,7 +35,6 @@ router.post(
 //send slug from FE , and based on slug we can query our DB and return the sigle category
 router.get(
 	"/category/:slug",
-
 	read
 	//we do not need to apply middleware here , bcz it has to be publicly visible
 );
