@@ -27,3 +27,8 @@ was guving me SSL error,
 after hard coding the link url for fetch , the error went away.
 the issue lied somewhere with a little typo in the requst URL.
 ]
+
+
+
+Create Admin NAV
+create category : for admin to CRUD categories visually in the FE.
