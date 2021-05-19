@@ -36,6 +36,12 @@ const AdminNav = () => {
 				</li>
 
 				<li className="nav-item">
+					<Link to="/admin/coupons" className="nav-link">
+						Coupons
+					</Link>
+				</li>
+
+				<li className="nav-item">
 					<Link to="/admin/password" className="nav-link">
 						Password
 					</Link>
