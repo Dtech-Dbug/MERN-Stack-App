@@ -7,6 +7,7 @@ import {
 	UserAddOutlined,
 	HomeTwoTone,
 	LogoutOutlined,
+	DashboardTwoTone,
 } from "@ant-design/icons";
 
 import firebase from "firebase";
@@ -67,13 +68,13 @@ export const Nav = () => {
 					className="float-right"
 				>
 					{user && user.role === "admin" && (
-						<Item>
+						<Item icon={<DashboardTwoTone />}>
 							<Link to="/admin/dashboard">Dashboard</Link>
 						</Item>
 					)}
 
 					{user && user.role !== "admin" && (
-						<Item>
+						<Item icon={<DashboardTwoTone />}>
 							<Link to="/user/history">User History/Dashboard</Link>
 						</Item>
 					)}
