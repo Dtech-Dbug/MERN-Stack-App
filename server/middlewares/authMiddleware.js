@@ -18,7 +18,7 @@ exports.createOrUpdateUserMiddleware = async (req, res, next) => {
 
 		next();
 	} catch (err) {
-		alert(err.message);
+		console.log(err.message);
 	}
 
 	//next() : just passes onto the next function
