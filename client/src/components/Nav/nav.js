@@ -66,7 +66,18 @@ export const Nav = () => {
 					//.split('@) to split at '@' : e.g => name@gmail.com split at @ => ['name' , 'gmail.com'] we need the 0th element for the name
 					className="float-right"
 				>
-					<Item key="setting:1">Option 1</Item>
+					{user && user.role === "admin" && (
+						<Item>
+							<Link to="/admin/dashboard">Dashboard</Link>
+						</Item>
+					)}
+
+					{user && user.role !== "admin" && (
+						<Item>
+							<Link to="/user/history">User History/Dashboard</Link>
+						</Item>
+					)}
+
 					<Item icon={<LogoutOutlined />} onClick={logout}>
 						Logout
 					</Item>
