@@ -24,6 +24,7 @@ import { UserPassword } from "./components/pages/protected-routes/user/passwordU
 //protected routes / admin
 import { AdminDashboard } from "./components/pages/protected-routes/admin/AdminDashboard";
 import { AdminRoute } from "./components/pages/protected-routes/admin/AdminRoute";
+import { CreateCategory } from "./components/pages/protected-routes/admin/Category/categoryCreate";
 
 //importing the axios function to send data to our bakcend
 
@@ -73,6 +74,7 @@ function App() {
 				<UserRoute exact path="/user/history" component={History} />
 				<UserRoute exact path="/user/password" component={UserPassword} />
 				<AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
+				<AdminRoute exact path="/admin/category" component={CreateCategory} />
 			</Switch>
 		</div>
 	);
