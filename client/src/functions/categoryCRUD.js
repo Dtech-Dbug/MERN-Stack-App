@@ -13,14 +13,11 @@ export const getCategory = async (slug) => {
 
 //to remove a category
 export const removeCategory = async (slug, authtoken) => {
-	return await axios.delete(
-		`${process.env.REACT_API_BACKEND_COMMON}/category/${slug}`,
-		{
-			headers: {
-				authtoken,
-			},
-		}
-	);
+	return await axios.delete(`http://localhost:8000/api/category/${slug}`, {
+		headers: {
+			authtoken,
+		},
+	});
 };
 
 //o update category // 3args => slug , newName and authtoken , bcz it willbe done by admin only : the newNameCategory is the newName that il be sent in the req.body in the backened for processing

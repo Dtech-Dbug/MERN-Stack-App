@@ -60,10 +60,17 @@ exports.remove = async (req, res) => {
 
 exports.list = async (req, res) => {
 	//we just grab al the categories created
-	res.json(await Category.find({}).sort({ createdAt: -1 }).exec());
-	if (err) {
-		console.log(err.message);
-	}
+	res.json(
+		await Category.find({})
+			.sort({ createdAt: -1 })
+			.exec((err, data) => {
+				if (err) {
+					res.send(err);
+					console.log(err.message);
+				}
+			})
+	);
+
 	//createdAt : -1 : returns the latest created category
 	//
 };

@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import AdminNav from "../../../../Nav/Admin-Nav";
 import { toast } from "react-toastify";
-import { EditTwoToned, DeleteTwoToned } from "@ant-design/icons";
+import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 //access state : for user authtoken
 import { useSelector } from "react-redux";
 //function for interacting w backend
@@ -10,35 +11,29 @@ import {
 	createCategory,
 	removeCategory,
 } from "../../../../../functions/categoryCRUD";
+import { Link } from "react-router-dom";
 
 export const CreateCategory = () => {
 	const { user } = useSelector((state) => ({ ...state }));
 	const [name, setName] = useState("");
-	const [categoriesList, setCategoriesLists] = useState([]);
+	const [categoriesList, setCategoriesList] = useState(["dell"]);
 
 	//to render the lists of category, using useEffect
 
 	useEffect(() => {
-		loadLists();
+		loadCategories();
 	}, []);
 
-	const loadLists = () =>
-		getCategoryLists()
-			.then((res) => {
-				console.log(res);
-				setCategoriesLists(res.data);
-			})
-			.catch((err) => {
-				toast.error(`A booboo happened`);
-			});
+	const loadCategories = () =>
+		getCategoryLists().then((c) => setCategoriesList(c.data));
 
 	function handleSubmit(e) {
 		e.preventDefault();
 		console.log(name);
 		createCategory({ name }, user.token)
 			.then((res) => {
-				setCategoriesLists(res.data.name);
 				toast.success(`${name} has been created`);
+				setName("");
 			})
 			.catch((err) => {
 				console.log(err);
@@ -76,13 +71,11 @@ export const CreateCategory = () => {
 						Welcome Admin. Ready to create categories?
 					</h2>
 					{categoryForm()}
+					{categoriesList.length}
 
-					{categoriesList.map((c) => (
-						<div className="alert alert-primary" key={c._id}>
-							{c.name}
-							<span></span>
-						</div>
-					))}
+					{/* {categoriesList.map((c) => {
+						return <div className={c._id}>hello</div>;
+					})} */}
 				</div>
 			</div>
 		</div>
