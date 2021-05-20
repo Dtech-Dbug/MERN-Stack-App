@@ -22,13 +22,15 @@ export const CreateCategory = () => {
 		loadLists();
 	}, []);
 
-	const loadLists = await getCategoryLists()
-		.then((res) => {
-			console.log(res);
-		})
-		.catch((err) => {
-			toast.error(`A booboo happened`);
-		});
+	const loadLists = () =>
+		getCategoryLists()
+			.then((res) => {
+				console.log(res);
+				setCategoriesLists(res.data);
+			})
+			.catch((err) => {
+				toast.error(`A booboo happened`);
+			});
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -74,6 +76,13 @@ export const CreateCategory = () => {
 						Welcome Admin. Ready to create categories?
 					</h2>
 					{categoryForm()}
+
+					{categoriesList.map((c) => (
+						<div className="alert alert-primary" key={c._id}>
+							{c.name}
+							<span></span>
+						</div>
+					))}
 				</div>
 			</div>
 		</div>
