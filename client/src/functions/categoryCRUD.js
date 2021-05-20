@@ -3,8 +3,8 @@ import axios from "axios";
 //REACT_API_BACKEND_COMMON = "http://localhost:8000/api"
 
 // function for viwing the list / get all the lists
-export const getCategoyLists = async () =>
-	await axios.get(`${process.env.REACT_API_BACKEND_COMMON}/categories`);
+export const getCategoryLists = async () =>
+	await axios.get(`http://localhost:8000/api/categories`);
 
 //function for getting a single categpory/ read
 export const getCategory = async (slug) => {
@@ -12,7 +12,7 @@ export const getCategory = async (slug) => {
 };
 
 //to remove a category
-export const removeeCategory = async (slug, authtoken) => {
+export const removeCategory = async (slug, authtoken) => {
 	return await axios.delete(
 		`${process.env.REACT_API_BACKEND_COMMON}/category/${slug}`,
 		{
@@ -35,11 +35,11 @@ export const updateCategory = async (slug, categoryName, authtoken) => {
 	);
 };
 
-export const createCategory = async (categoryName, authtoken) => {
-	return await axios.put(
-		`${process.env.REACT_API_BACKEND_COMMON}/categoryprocess.env.`,
+export const createCategory = async (category, authtoken) => {
+	return await axios.post(
+		`http://localhost:8000/api/category`,
 
-		categoryName,
+		category,
 		{
 			headers: {
 				authtoken,
