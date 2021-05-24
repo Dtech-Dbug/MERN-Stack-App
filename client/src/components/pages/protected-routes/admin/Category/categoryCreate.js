@@ -13,10 +13,21 @@ import {
 } from "../../../../../functions/categoryCRUD";
 import { Link } from "react-router-dom";
 
+//importing the filer component
+import { FilterForm } from "../../../../reusable-Components/filterForm";
+
 export const CreateCategory = () => {
 	const { user } = useSelector((state) => ({ ...state }));
 	const [name, setName] = useState("");
 	const [categoriesList, setCategoriesList] = useState([]);
+
+	//step2 : keyword states for search
+	const [keyword, setKeyword] = useState("");
+
+	//step1 & 3 : searChInputChange function : moved to seperate components
+
+	// step4 : search function
+	const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
 	//to render the lists of category, using useEffect
 
@@ -91,7 +102,9 @@ export const CreateCategory = () => {
 					</h2>
 					{categoryForm()}
 
-					{categoriesList.map((c) => {
+					<FilterForm keyword={keyword} setKeyword={setKeyword} />
+
+					{categoriesList.filter(searched(keyword)).map((c) => {
 						return (
 							<div key={c._id} className="alert alert-primary">
 								{c.name}
@@ -103,7 +116,7 @@ export const CreateCategory = () => {
 								</span>
 
 								<span>
-									<Link to="/category/update">
+									<Link to={`/admin/category/${c.slug}`}>
 										<EditTwoTone className="btn btn-raised btn-primary float-right" />
 									</Link>
 								</span>
