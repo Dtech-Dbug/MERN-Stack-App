@@ -16,24 +16,42 @@ import { Link } from "react-router-dom";
 export const CreateCategory = () => {
 	const { user } = useSelector((state) => ({ ...state }));
 	const [name, setName] = useState("");
-	const [categoriesList, setCategoriesList] = useState(["dell"]);
+	const [categoriesList, setCategoriesList] = useState([]);
 
 	//to render the lists of category, using useEffect
 
 	useEffect(() => {
+		console.log("use effct in effect");
+
 		loadCategories();
 	}, []);
 
 	const loadCategories = () =>
 		getCategoryLists().then((c) => setCategoriesList(c.data));
 
+	const removeItem = async (slug) => {
+		removeCategory(slug, user.token);
+		let answer = window.confirm(`Sure, you wanna delete ${slug}`);
+
+		if (answer) {
+			removeCategory(slug, user.token)
+				.then((res) => {
+					console.group(res);
+					toast.success(`${slug} has been deleted`);
+					loadCategories();
+				})
+				.catch((err) => toast.error(err.message));
+		}
+	};
+
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log(name);
+
 		createCategory({ name }, user.token)
 			.then((res) => {
-				toast.success(`${name} has been created`);
 				setName("");
+				toast.success(`${res.data.name} has been created`);
+				loadCategories();
 			})
 			.catch((err) => {
 				console.log(err);
@@ -48,6 +66,7 @@ export const CreateCategory = () => {
 						<h3>Name:</h3>
 					</label>
 					<input
+						value={name}
 						placeholder="Create Category"
 						className="form-control"
 						type="text"
@@ -71,11 +90,26 @@ export const CreateCategory = () => {
 						Welcome Admin. Ready to create categories?
 					</h2>
 					{categoryForm()}
-					{categoriesList.length}
 
-					{/* {categoriesList.map((c) => {
-						return <div className={c._id}>hello</div>;
-					})} */}
+					{categoriesList.map((c) => {
+						return (
+							<div key={c._id} className="alert alert-primary">
+								{c.name}
+								<span>
+									<DeleteTwoTone
+										onClick={() => removeItem(c.slug)}
+										className="btn btn-raised btn-danger ml-1  float-right"
+									/>
+								</span>
+
+								<span>
+									<Link to="/category/update">
+										<EditTwoTone className="btn btn-raised btn-primary float-right" />
+									</Link>
+								</span>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 		</div>
