@@ -18,7 +18,7 @@ const {
 	update,
 	remove,
 	list,
-} = require("../controllers/categoryController");
+} = require("../controllers/subCategoryControllers");
 
 //we do not need to create different end points : we will use same route , but different methods like get,post,put,update
 
