@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { objectId, name } = mongoose.Schema;
+const { ObjectId, name } = mongoose.Schema;
 
 const subCategrorySchema = new mongoose.Schema(
 	{
@@ -18,9 +18,9 @@ const subCategrorySchema = new mongoose.Schema(
 			index: true,
 		},
 		parent: {
-			type: objectId,
+			type: ObjectId,
 			name: name,
-			ref: Category,
+			ref: "Category",
 			required: true,
 		},
 	},
