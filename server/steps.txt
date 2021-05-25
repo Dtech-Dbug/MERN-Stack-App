@@ -26,3 +26,11 @@
 16. Category Controller: for CRUD functions in the server side
 
 17. Then building them visually in the front end.
+
+
+18. Creating Sub Category
+i. Create SubCategory  ---- > Create routes 
+ii . create controllers
+iii. create functions for FE, to interact with the backend
+1v. Create pages for FE/ create , list , remove , update sucategories
+v. Process similar to that of creating categories
