@@ -20,6 +20,7 @@ export const CreateSubCategory = () => {
 	const { user } = useSelector((state) => ({ ...state }));
 	const [name, setName] = useState("");
 	const [categoriesList, setCategoriesList] = useState([]);
+	const [parentCategory, setParentCategory] = useState("");
 
 	//step2 : keyword states for search
 	const [keyword, setKeyword] = useState("");
@@ -78,7 +79,7 @@ export const CreateSubCategory = () => {
 					</label>
 					<input
 						value={name}
-						placeholder="Create Category"
+						placeholder="Create Sub Category"
 						className="form-control"
 						type="text"
 						autoFocus
@@ -100,6 +101,15 @@ export const CreateSubCategory = () => {
 					<h2 className="text-warning">
 						Welcome Admin. Ready to create Sub-Categories?
 					</h2>
+
+					<div className="categoryOptions">
+						<label>Select Category</label>
+						<select className="form-control">
+							{categoriesList.map((c) => {
+								return <option key={c._id}>{c.name}</option>;
+							})}
+						</select>
+					</div>
 					{categoryForm()}
 
 					<FilterForm keyword={keyword} setKeyword={setKeyword} />
