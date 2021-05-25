@@ -61,6 +61,7 @@ export const CreateCategory = () => {
 		createCategory({ name }, user.token)
 			.then((res) => {
 				setName("");
+				console.log(res);
 				toast.success(`${res.data.name} has been created`);
 				loadCategories();
 			})
