@@ -63,7 +63,7 @@ function App() {
 	return (
 		<div className="App">
 			<Nav />
-			<ToastContainer toastStyle={{ backgroundColor: "crimson" }} />
+			<ToastContainer />
 
 			<Route path="/" exact component={Home} />
 			<Route path="/login" exact component={Login} />
@@ -84,7 +84,7 @@ function App() {
 				<AdminRoute
 					exact
 					path="/admin/subCategory"
-					component={CreateCategory}
+					component={CreateSubCategory}
 				/>
 			</Switch>
 		</div>
