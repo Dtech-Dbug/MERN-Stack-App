@@ -40,7 +40,7 @@ export const CreateSubCategory = () => {
 		console.log("use effct in effect");
 
 		loadCategories();
-		//loadSubCategories();
+		loadSubCategories();
 	}, []);
 
 	const loadCategories = () =>
@@ -58,7 +58,7 @@ export const CreateSubCategory = () => {
 				.then((res) => {
 					console.group(res);
 					toast.error(`${slug} has been deleted`);
-					loadCategories();
+					loadSubCategories();
 				})
 				.catch((err) => toast.error(err.message));
 		}
@@ -71,6 +71,8 @@ export const CreateSubCategory = () => {
 			.then((res) => {
 				console.log(res);
 				setName("");
+				toast.success(`${res.data.name} has been created`);
+				loadSubCategories();
 			})
 			.catch((err) => {
 				console.log(err);
