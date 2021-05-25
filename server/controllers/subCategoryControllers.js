@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
 			parent,
 			slug: slugify(name),
 		}).save();
-		console.log(subCategory);
+		console.log("Sub category created --->", subCategory);
 		res.json(subCategory);
 	} catch (err) {
 		(err) => console.log(err);

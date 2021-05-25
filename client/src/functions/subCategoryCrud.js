@@ -8,8 +8,8 @@ export const getSubcategoryList = async (slug) => {
 	await axios.get(`http://localhost:8000/api/subCategory/${slug}`);
 };
 
-export const createSubcategory = async (name, authtoken) => {
-	await axios.post("https://localhost:8000/api/subCategory", name, {
+export const createSubcategory = async (subC, authtoken) => {
+	await axios.post("http://localhost:8000/api/subCategory", subC, {
 		headers: {
 			authtoken,
 		},

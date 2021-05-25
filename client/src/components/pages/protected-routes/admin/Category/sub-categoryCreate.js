@@ -5,12 +5,15 @@ import { toast } from "react-toastify";
 import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 //access state : for user authtoken
 import { useSelector } from "react-redux";
+
 //function for interacting w backend
+import { getCategoryLists } from "../../../../../functions/categoryCRUD";
+
 import {
-	getCategoryLists,
-	createCategory,
-	removeCategory,
-} from "../../../../../functions/categoryCRUD";
+	createSubcategory,
+	removeSubcategory,
+	getSubcategoryLists,
+} from "../../../../../functions/subCategoryCrud";
 import { Link } from "react-router-dom";
 
 //importing the filer component
@@ -21,6 +24,7 @@ export const CreateSubCategory = () => {
 	const [name, setName] = useState("");
 	const [categoriesList, setCategoriesList] = useState([]);
 	const [parentCategory, setParentCategory] = useState("");
+	const [subcategoriesList, setSubcategoriesList] = useState([]);
 
 	//step2 : keyword states for search
 	const [keyword, setKeyword] = useState("");
@@ -36,20 +40,24 @@ export const CreateSubCategory = () => {
 		console.log("use effct in effect");
 
 		loadCategories();
+		//loadSubCategories();
 	}, []);
 
 	const loadCategories = () =>
 		getCategoryLists().then((c) => setCategoriesList(c.data));
 
+	// for subcategories
+	const loadSubCategories = () =>
+		getSubcategoryLists().then((s) => setSubcategoriesList(s.data));
+
 	const removeItem = async (slug) => {
-		removeCategory(slug, user.token);
 		let answer = window.confirm(`Sure, you wanna delete ${slug}`);
 
 		if (answer) {
-			removeCategory(slug, user.token)
+			removeSubcategory(slug, user.token)
 				.then((res) => {
 					console.group(res);
-					toast.success(`${slug} has been deleted`);
+					toast.error(`${slug} has been deleted`);
 					loadCategories();
 				})
 				.catch((err) => toast.error(err.message));
@@ -59,11 +67,10 @@ export const CreateSubCategory = () => {
 	function handleSubmit(e) {
 		e.preventDefault();
 
-		createCategory({ name }, user.token)
+		createSubcategory({ name, parent: parentCategory }, user.token)
 			.then((res) => {
+				console.log(res);
 				setName("");
-				toast.success(`${res.data.name} has been created`);
-				loadCategories();
 			})
 			.catch((err) => {
 				console.log(err);
@@ -104,17 +111,28 @@ export const CreateSubCategory = () => {
 
 					<div className="categoryOptions">
 						<label>Select Category</label>
-						<select className="form-control">
-							{categoriesList.map((c) => {
-								return <option key={c._id}>{c.name}</option>;
-							})}
+						<select
+							className="form-control"
+							onChange={(e) => setParentCategory(e.target.value)}
+						>
+							<option>Please Select a Category</option>
+
+							{categoriesList.length > 0 &&
+								categoriesList.map((c) => {
+									return (
+										<option key={c._id} value={c._id}>
+											{c.name}
+										</option>
+									);
+								})}
 						</select>
 					</div>
+					{JSON.stringify(parentCategory)}
 					{categoryForm()}
 
 					<FilterForm keyword={keyword} setKeyword={setKeyword} />
 
-					{categoriesList.filter(searched(keyword)).map((c) => {
+					{subcategoriesList.filter(searched(keyword)).map((c) => {
 						return (
 							<div key={c._id} className="alert alert-primary">
 								{c.name}

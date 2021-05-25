@@ -19,7 +19,7 @@ const subCategrorySchema = new mongoose.Schema(
 		},
 		parent: {
 			type: ObjectId,
-			name: name,
+
 			ref: "Category",
 			required: true,
 		},
