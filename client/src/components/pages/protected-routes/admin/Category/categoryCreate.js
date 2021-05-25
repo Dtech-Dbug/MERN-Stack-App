@@ -48,7 +48,7 @@ export const CreateCategory = () => {
 			removeCategory(slug, user.token)
 				.then((res) => {
 					console.group(res);
-					toast.success(`${slug} has been deleted`);
+					toast.error(`${slug} has been deleted`);
 					loadCategories();
 				})
 				.catch((err) => toast.error(err.message));
