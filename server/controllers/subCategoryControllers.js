@@ -47,7 +47,7 @@ exports.remove = async (req, res) => {
 	try {
 		const deletedSubcategory = await SubCategory.findOneAndDelete({
 			slug: req.params.slug,
-		});
+		}).exec();
 		res.json(deletedSubcategory);
 	} catch (err) {
 		(err) => console.log("Removal of subcategory failed ----> ", err);
