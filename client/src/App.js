@@ -27,6 +27,7 @@ import { AdminRoute } from "./components/pages/protected-routes/admin/AdminRoute
 import { CreateCategory } from "./components/pages/protected-routes/admin/Category/categoryCreate";
 import { UpdateCategory } from "./components/pages/protected-routes/admin/Category/updateCategory";
 import { CreateSubCategory } from "./components/pages/protected-routes/admin/Category/sub-categoryCreate";
+import { UpdateSubCategory } from "./components/pages/protected-routes/admin/Category/updateSubcategory";
 //importing the axios function to send data to our bakcend
 
 function App() {
@@ -85,6 +86,11 @@ function App() {
 					exact
 					path="/admin/subCategory"
 					component={CreateSubCategory}
+				/>
+				<AdminRoute
+					exact
+					path={`/admin/subCategory/:slug`}
+					component={UpdateSubCategory}
 				/>
 			</Switch>
 		</div>
