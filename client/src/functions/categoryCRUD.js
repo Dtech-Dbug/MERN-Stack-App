@@ -3,8 +3,9 @@ import axios from "axios";
 //REACT_API_BACKEND_COMMON = "http://localhost:8000/api"
 
 // function for viwing the list / get all the lists
-export const getCategoryLists = async () =>
-	await axios.get(`http://localhost:8000/api/categories`);
+export const getCategoryLists = async () => {
+	return await axios.get(`http://localhost:8000/api/categories`);
+};
 
 //function for getting a single categpory/ read
 export const getCategory = async (slug) => {
