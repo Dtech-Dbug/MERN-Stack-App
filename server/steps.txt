@@ -34,3 +34,36 @@ ii . create controllers
 iii. create functions for FE, to interact with the backend
 1v. Create pages for FE/ create , list , remove , update sucategories
 v. Process similar to that of creating categories
+
+19. Product category : most important part : users can upload images of prodcuts based on categories andall... very exciting
+
+steps:
+i. Create prodcut model : title , slug , description , category (refer to category model , type : ObjectId) , price , subCategory (ref : SUBcategory model , type : ObectId) , Quantity: {inventory , and values will be resposnsive , that is less if chosen} ,Sold(qty : Number)
+ Images : {
+     type : Number
+ } , 
+ shipping : {
+     type : true,
+     enum : ['yes' , 'no]  //default value , as set to what we want and no other values
+ }
+ color : {
+     typr : String,
+     color : ['red' , 'black' , 'blue' , 'white' , 'brown']   
+ } 
+ Brand : { optiinal , I wil not do it}
+ rating : [{
+     star : Number,
+     poetdBy : {type : ObjectId , ref : 'User'} // ref to the user model to save ghe details of the user who rated
+ }]
+
+ add time stamps too
+ We will be uploading images in Cloudinary and save the URL generated in the IMages array in the product model
+
+
+ 20. create Routes 
+
+
+
+
+
+ 21. Create controllers , sowe can perform prodcut CRUD operations
