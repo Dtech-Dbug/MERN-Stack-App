@@ -10,6 +10,6 @@ exports.createProduct = async (req, res) => {
 		res.json(New_Product);
 	} catch (err) {
 		console.log(err);
-		res.status(400).send("Category Creation Failed , due to ");
+		res.status(400).send("Product Creation Failed , due to ");
 	}
 };
