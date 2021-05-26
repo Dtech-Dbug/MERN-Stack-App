@@ -5,7 +5,7 @@ export const getSubcategoryLists = async () => {
 };
 
 export const getSubcategoryList = async (slug) => {
-	await axios.get(`http://localhost:8000/api/subCategory/${slug}`);
+	return await axios.get(`http://localhost:8000/api/subCategory/${slug}`);
 };
 
 export const createSubcategory = async (subC, authtoken) => {
@@ -20,6 +20,7 @@ export const updateSubcategory = async (slug, name, authtoken) => {
 	return await axios.put(
 		`http://localhost:8000/api/subCategory/${slug}`,
 		name,
+
 		{
 			headers: {
 				authtoken,
