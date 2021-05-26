@@ -146,7 +146,7 @@ export const CreateSubCategory = () => {
 								</span>
 
 								<span>
-									<Link to={`/admin/category/${c.slug}`}>
+									<Link to={`/admin/subCategory/${c.slug}`}>
 										<EditTwoTone className="btn btn-raised btn-primary float-right" />
 									</Link>
 								</span>
