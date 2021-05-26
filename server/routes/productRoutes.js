@@ -10,8 +10,10 @@ const {
 const { createProduct } = require("../controllers/productControllers");
 
 router.post(
-	"/products",
+	"/product",
 	createOrUpdateUserMiddleware,
 	adminCheckMiddleware,
 	createProduct
 );
+
+module.exports = router;
