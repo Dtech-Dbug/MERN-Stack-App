@@ -1,6 +1,9 @@
 import React from "react";
 
-export const ProductCreateForm = () => {
+export const ProductCreateForm = ({ handleChange, handleSubmit, values }) => {
+	const { title, description, price, quantity, shipping, color, colors } =
+		values;
+
 	return (
 		<form onSubmit={handleSubmit}>
 			<div className="form-group">
