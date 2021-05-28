@@ -16,6 +16,10 @@ import { createProduct } from "../../../../../functions/productCRUD";
 import { ProductCreateForm } from "../../../../reusable-Components/productCreateForm";
 
 //import function for fetching all categories
+import {
+	getCategoryLists,
+	getSubs,
+} from "../../../../../functions/categoryCRUD";
 const initialState = {
 	title: "",
 	description: "",
@@ -36,7 +40,19 @@ export const CreateProduct = () => {
 
 	const [values, setValues] = useState(initialState);
 
+	//show sub options only when category is selected,
+	const [showSubcategories, setShowSubcategories] = useState([]);
+	const [selectedCategory, setSelectedCategory] = useState(false);
 	// destructure yhe values so we dont have to use value.field
+	useEffect(() => {
+		loadCategories();
+	}, []);
+
+	function loadCategories() {
+		getCategoryLists().then((res) =>
+			setValues({ ...values, categories: res.data })
+		);
+	}
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -54,6 +70,17 @@ export const CreateProduct = () => {
 
 		setValues({ ...values, [e.target.name]: e.target.value });
 	}
+
+	function handleCategoryChange(e) {
+		e.preventDefault();
+		console.log("Parent ID ----> ", e.target.value);
+		setValues({ ...values, category: e.target.value });
+		getSubs(e.target.value).then((res) => {
+			console.log(res);
+			setShowSubcategories(res.data);
+		});
+	}
+
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -64,10 +91,16 @@ export const CreateProduct = () => {
 				<div className="col-md-10">
 					<h3>Create Product</h3>
 
+					{JSON.stringify(values.subCategories)}
+
 					<ProductCreateForm
 						handleChange={handleChange}
 						handleSubmit={handleSubmit}
 						values={values}
+						setValues={setValues}
+						handleCategoryChange={handleCategoryChange}
+						showSubcategories={showSubcategories}
+						selectedCategory={selectedCategory}
 					/>
 				</div>
 			</div>
