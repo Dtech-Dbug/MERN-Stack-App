@@ -67,3 +67,10 @@ i. Create prodcut model : title , slug , description , category (refer to catego
 
 
  21. Create controllers , sowe can perform prodcut CRUD operations
+
+ 22. create product form : usual with the fileds
+ 22.i) Also include categories list (interact w the BE DB of categories)
+ 22.ii) Also include sub category list ( whivh is dependant on category ID)
+ 23.iii) Ccreatinh the sub category list is tricky : 
+ - create a new end piint in the product route witha route /category/sub/_id
+ - cerate a new controller that  takes the slu in the req.params._id and resturns the response , that is subcategpries in the id(id if the parent categpry is what we pass)
