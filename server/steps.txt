@@ -74,3 +74,6 @@ i. Create prodcut model : title , slug , description , category (refer to catego
  23.iii) Ccreatinh the sub category list is tricky : 
  - create a new end piint in the product route witha route /category/sub/_id
  - cerate a new controller that  takes the slu in the req.params._id and resturns the response , that is subcategpries in the id(id if the parent categpry is what we pass)
+
+
+23. Create  a prodcut endpoint , to read all the products created
