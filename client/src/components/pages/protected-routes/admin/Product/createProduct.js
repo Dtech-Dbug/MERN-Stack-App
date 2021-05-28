@@ -15,6 +15,7 @@ import { createProduct } from "../../../../../functions/productCRUD";
 //import product crate form
 import { ProductCreateForm } from "../../../../reusable-Components/productCreateForm";
 
+//import function for fetching all categories
 const initialState = {
 	title: "",
 	description: "",
@@ -36,8 +37,6 @@ export const CreateProduct = () => {
 	const [values, setValues] = useState(initialState);
 
 	// destructure yhe values so we dont have to use value.field
-	const { title, description, price, quantity, shipping, color, colors } =
-		values;
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -47,7 +46,7 @@ export const CreateProduct = () => {
 				console.log(window.location.href);
 				window.alert(`${res.data.title} is created`);
 			})
-			.catch((err) => toast.error(err.message));
+			.catch((err) => toast.error(err.response.data.err));
 	}
 
 	function handleChange(e) {
