@@ -118,8 +118,12 @@ export const ProductCreateForm = ({
 					value={subCategories}
 					onChange={(value) => setValues({ ...values, subCategories: value })}
 				>
-					<Option value="one">option one</Option>
-					<Option value="two">option tow</Option>
+					{showSubcategories.length &&
+						showSubcategories.map((s) => (
+							<Option key={s._id} value={s._id}>
+								{s.name}
+							</Option>
+						))}
 				</Select>
 			</div>
 			<button onClick={handleSubmit} className="btn btn-raised btn-primary">
