@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Select } from "antd";
+const { Option } = Select;
 
-export const ProductCreateForm = ({ handleChange, handleSubmit, values }) => {
-	const { title, description, price, quantity, shipping, color, colors } =
-		values;
+export const ProductCreateForm = ({
+	handleChange,
+	handleSubmit,
+	handleCategoryChange,
+	values,
+	setValues,
+	selectedCategory,
+	showSubcategories,
+}) => {
+	useEffect(() => {
+		console.log(categories);
+	}, []);
+	const {
+		title,
+		description,
+		price,
+		quantity,
+		shipping,
+		color,
+		colors,
+		categories,
+		subCategories,
+	} = values;
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -27,7 +49,6 @@ export const ProductCreateForm = ({ handleChange, handleSubmit, values }) => {
 					onChange={handleChange}
 				/>
 			</div>
-
 			<div className="form-group">
 				<label>Price</label>
 				<input
@@ -38,7 +59,6 @@ export const ProductCreateForm = ({ handleChange, handleSubmit, values }) => {
 					onChange={handleChange}
 				/>
 			</div>
-
 			<div className="form-group">
 				<label>Shipping</label>
 				<select
@@ -51,7 +71,6 @@ export const ProductCreateForm = ({ handleChange, handleSubmit, values }) => {
 					<option value="Yes">Yes</option>
 				</select>
 			</div>
-
 			<div className="form-group">
 				<label>Quantity</label>
 				<input
@@ -62,7 +81,6 @@ export const ProductCreateForm = ({ handleChange, handleSubmit, values }) => {
 					onChange={handleChange}
 				/>
 			</div>
-
 			<div className="form-group">
 				<label>Color</label>
 				<select name="color" className="form-control" onChange={handleChange}>
@@ -74,7 +92,36 @@ export const ProductCreateForm = ({ handleChange, handleSubmit, values }) => {
 					))}
 				</select>
 			</div>
+			<div className="form-group">
+				<label>Select Category</label>
+				<select className="form-control" onChange={handleCategoryChange}>
+					<option>Please Select a Category</option>
 
+					{categories.length > 0 &&
+						categories.map((c) => {
+							return (
+								<option key={c._id} value={c._id}>
+									{c.name}
+								</option>
+							);
+						})}
+				</select>
+
+				{showSubcategories.length}
+			</div>
+			<div>
+				<label>Sub Categories</label>
+				<Select
+					mode="multiple"
+					style={{ width: "100%" }}
+					placeholder="Please select"
+					value={subCategories}
+					onChange={(value) => setValues({ ...values, subCategories: value })}
+				>
+					<Option value="one">option one</Option>
+					<Option value="two">option tow</Option>
+				</Select>
+			</div>
 			<button onClick={handleSubmit} className="btn btn-raised btn-primary">
 				Save
 			</button>
