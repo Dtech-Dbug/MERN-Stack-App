@@ -18,6 +18,7 @@ const {
 	update,
 	remove,
 	list,
+	getSubs,
 } = require("../controllers/categoryController");
 
 //we do not need to create different end points : we will use same route , but different methods like get,post,put,update
@@ -52,4 +53,6 @@ router.delete(
 	remove
 );
 
+//getting all the subcategories based on parentcategpry ID
+router.get("/category/subcategory/:_id", getSubs);
 module.exports = router;

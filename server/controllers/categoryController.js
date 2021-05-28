@@ -1,4 +1,5 @@
 const Category = require("../model/categoryModel");
+const SubCategory = require("../model/subCategoryModel");
 
 const slugify = require("slugify");
 
@@ -65,3 +66,11 @@ exports.list = async (req, res) => {
 
 //createdAt : -1 : returns the latest created category
 //
+
+//let us do it without async for knowledge
+exports.getSubs = (req, res) => {
+	SubCategory.find({ parent: req.params._id }).exec((err, data) => {
+		if (err) console.log(err.message);
+		res.json(data);
+	});
+};
