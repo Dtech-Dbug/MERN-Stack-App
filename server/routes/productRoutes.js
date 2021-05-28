@@ -7,7 +7,10 @@ const {
 	adminCheckMiddleware,
 } = require("../middlewares/authMiddleware");
 
-const { createProduct } = require("../controllers/productControllers");
+const {
+	createProduct,
+	listProducts,
+} = require("../controllers/productControllers");
 
 router.post(
 	"/product",
@@ -16,4 +19,5 @@ router.post(
 	createProduct
 );
 
+router.get("/products", listProducts);
 module.exports = router;

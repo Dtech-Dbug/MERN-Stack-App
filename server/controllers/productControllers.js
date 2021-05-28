@@ -15,3 +15,8 @@ exports.createProduct = async (req, res) => {
 		});
 	}
 };
+
+exports.listProducts = async (req, res) => {
+	const products = await ProductModel.find({});
+	res.json(products);
+};
