@@ -77,3 +77,13 @@ i. Create prodcut model : title , slug , description , category (refer to catego
 
 
 23. Create  a prodcut endpoint , to read all the products created
+
+
+23. IMage upload
+i. Sign up to cloudinary to get AAPI Key, Secret.
+ii. Create endpoints, controllers , fro our server to upload and remove images to cloudinary
+iii. Resize the images directly from FE,(to reduce the size and make data transfer faster) and send to our server
+iv. Our server will upload those to cloudinary and recieve the iMage URL's in return
+v. Those upoaded URL will be sent back to FE
+vi. At this point , FE will haev images with upload URLs
+vii. We can save the urls , in the image arrays , in our own database
