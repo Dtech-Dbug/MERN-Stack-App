@@ -15,6 +15,8 @@ import { createProduct } from "../../../../../functions/productCRUD";
 //import product crate form
 import { ProductCreateForm } from "../../../../reusable-Components/productCreateForm";
 
+//import FileUpload component
+import { FileUpload } from "../../../../reusable-Components/fileUpload";
 //import function for fetching all categories
 import {
 	getCategoryLists,
@@ -93,6 +95,10 @@ export const CreateProduct = () => {
 
 				<div className="col-md-10">
 					<h3>Create Product</h3>
+
+					<div className="p-3">
+						<FileUpload values={values} setValues={setValues} />
+					</div>
 
 					{JSON.stringify(values.subCategories)}
 
