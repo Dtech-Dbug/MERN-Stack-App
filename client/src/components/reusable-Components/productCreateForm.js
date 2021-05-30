@@ -109,6 +109,7 @@ export const ProductCreateForm = ({
 
 				{showSubcategories.length}
 			</div>
+
 			{selectedCategory && (
 				<div>
 					<label>Sub Categories</label>

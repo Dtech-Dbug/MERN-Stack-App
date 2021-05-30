@@ -7,6 +7,7 @@ exports.createProduct = async (req, res) => {
 		console.log("Request Body ------> ", req.body);
 		req.body.slug = slugify(req.body.title);
 		const New_Product = await new ProductModel(req.body).save();
+		console.log("Product created ==>", New_Product);
 		res.json(New_Product);
 	} catch (err) {
 		console.log(err);
