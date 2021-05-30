@@ -18,7 +18,7 @@ exports.upload = async (req, res) => {
 	// fpr json/binary data just req.body.image (since we resize the image in the FE  the data is binary)
 	//the upload finction takes two args
 	//1st arg : data path//2nd arg : object
-	let result = cloudinary.uploader.upload(req.body.image, {
+	let result = await cloudinary.uploader.upload(req.body.image, {
 		public_id: `${Date.now()}`, //this is the id publicly visible
 		resource_type: "auto",
 		//jpeg/png all file type
