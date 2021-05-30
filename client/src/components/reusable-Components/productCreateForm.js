@@ -109,23 +109,25 @@ export const ProductCreateForm = ({
 
 				{showSubcategories.length}
 			</div>
-			<div>
-				<label>Sub Categories</label>
-				<Select
-					mode="multiple"
-					style={{ width: "100%" }}
-					placeholder="Please select"
-					value={subCategories}
-					onChange={(value) => setValues({ ...values, subCategories: value })}
-				>
-					{showSubcategories.length &&
-						showSubcategories.map((s) => (
-							<Option key={s._id} value={s._id}>
-								{s.name}
-							</Option>
-						))}
-				</Select>
-			</div>
+			{selectedCategory && (
+				<div>
+					<label>Sub Categories</label>
+					<Select
+						mode="multiple"
+						style={{ width: "100%" }}
+						placeholder="Please select"
+						value={subCategories}
+						onChange={(value) => setValues({ ...values, subCategories: value })}
+					>
+						{showSubcategories.length &&
+							showSubcategories.map((sub) => (
+								<Option key={sub._id} value={sub._id}>
+									{sub.name}
+								</Option>
+							))}
+					</Select>
+				</div>
+			)}
 			<button onClick={handleSubmit} className="btn btn-raised btn-primary">
 				Save
 			</button>

@@ -61,6 +61,7 @@ export const CreateProduct = () => {
 				console.log(res);
 				console.log(window.location.href);
 				window.alert(`${res.data.title} is created`);
+				//window.location.reload();
 			})
 			.catch((err) => toast.error(err.response.data.err));
 	}
@@ -74,11 +75,13 @@ export const CreateProduct = () => {
 	function handleCategoryChange(e) {
 		e.preventDefault();
 		console.log("Parent ID ----> ", e.target.value);
-		setValues({ ...values, category: e.target.value });
+		setValues({ ...values, subCategories: [], category: e.target.value });
+
 		getSubs(e.target.value).then((res) => {
 			console.log(res);
 			setShowSubcategories(res.data);
 		});
+		setSelectedCategory(true);
 	}
 
 	return (

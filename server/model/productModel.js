@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema();
+const { ObjectId } = mongoose.Schema;
 
 const productSchema = new mongoose.Schema(
 	{
@@ -44,16 +44,17 @@ const productSchema = new mongoose.Schema(
 			enum: ["Red", "Blue", "Green", "Black", "White"],
 		},
 
-		// category: {
-		// 	type: ObjectId,
-		// 	ref: "Category",
-		// },
-		// subcategory: [
-		// 	{
-		// 		type: ObjectId,
-		// 		ref: "SubCategory",
-		// 	},
-		// ],
+		category: {
+			type: ObjectId,
+			ref: "Category",
+		},
+		subcategories: [
+			{
+				type: ObjectId,
+				ref: "SubCategory",
+			},
+		],
+
 		// images: {
 		// 	type: Array,
 		// },
