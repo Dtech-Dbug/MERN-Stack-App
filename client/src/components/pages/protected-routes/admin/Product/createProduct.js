@@ -100,7 +100,7 @@ export const CreateProduct = () => {
 						<FileUpload values={values} setValues={setValues} />
 					</div>
 
-					{JSON.stringify(values.subCategories)}
+					{JSON.stringify(values.images)}
 
 					<ProductCreateForm
 						handleChange={handleChange}
