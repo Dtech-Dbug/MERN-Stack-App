@@ -21,8 +21,8 @@ export const FileUpload = ({ values, setValues }) => {
 			for (let i = 0; i < files.length; i++) {
 				Resizer.imageFileResizer(
 					files[i],
-					720,
-					720,
+					200,
+					200,
 					"JPEG",
 					100,
 					0,
@@ -43,6 +43,8 @@ export const FileUpload = ({ values, setValues }) => {
 							)
 							.then((res) => {
 								console.log("res from images ==>", res);
+								filesUploaded.push(res.data);
+								setValues({ ...values, images: filesUploaded });
 							})
 							.catch((err) => {
 								toast.error(err.message);
