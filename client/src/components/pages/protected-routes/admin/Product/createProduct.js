@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import AdminNav from "../../../../Nav/Admin-Nav";
 import { toast } from "react-toastify";
+import { LoadingOutlined } from "@ant-design/icons";
 
 //access state : for user authtoken
 import { useSelector } from "react-redux";
-//function for interacting w backend
 
 import { Link } from "react-router-dom";
 
@@ -33,7 +33,20 @@ const initialState = {
 	categories: [],
 	category: "",
 	subCategories: [],
-	images: [],
+	images: [
+		// {
+		// 	public_id: "jwrzeubemmypod99e8lz",
+		// 	url: "https://res.cloudinary.com/dcqjrwaoi/image/upload/v1599480909/jwrzeubemmypod99e8lz.jpg",
+		// },
+		// {
+		// 	public_id: "j7uerlvhog1eic0oyize",
+		// 	url: "https://res.cloudinary.com/dcqjrwaoi/image/upload/v1599480912/j7uerlvhog1eic0oyize.jpg",
+		// },
+		// {
+		// 	public_id: "ho6wnp7sugyemnmtoogf",
+		// 	url: "https://res.cloudinary.com/dcqjrwaoi/image/upload/v1599480913/ho6wnp7sugyemnmtoogf.jpg",
+		// },
+	],
 };
 
 export const CreateProduct = () => {
@@ -45,6 +58,7 @@ export const CreateProduct = () => {
 	//show sub options only when category is selected,
 	const [showSubcategories, setShowSubcategories] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState(false);
+	const [loading, setLoading] = useState(false);
 	// destructure yhe values so we dont have to use value.field
 	useEffect(() => {
 		loadCategories();
@@ -94,10 +108,19 @@ export const CreateProduct = () => {
 				</div>
 
 				<div className="col-md-10">
-					<h3>Create Product</h3>
+					{loading ? (
+						<LoadingOutlined className="alert alert-danger" />
+					) : (
+						<h3>Create Product</h3>
+					)}
 
 					<div className="p-3">
-						<FileUpload values={values} setValues={setValues} />
+						<FileUpload
+							values={values}
+							setValues={setValues}
+							loading={loading}
+							setLoading={setLoading}
+						/>
 					</div>
 
 					{JSON.stringify(values.images)}
@@ -110,6 +133,8 @@ export const CreateProduct = () => {
 						handleCategoryChange={handleCategoryChange}
 						showSubcategories={showSubcategories}
 						selectedCategory={selectedCategory}
+						loading={loading}
+						setLoading={setLoading}
 					/>
 				</div>
 			</div>
