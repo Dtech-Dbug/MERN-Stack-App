@@ -1,12 +1,13 @@
 import React from "react";
 import Resizer from "react-image-file-resizer";
 import axios from "axios";
+import { Avatar, Badge } from "antd";
 
 //upload is a protected route so we nned to access the user token too
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-export const FileUpload = ({ values, setValues }) => {
+export const FileUpload = ({ values, setValues, setLoading }) => {
 	const { user } = useSelector((state) => ({ ...state }));
 
 	function fileUploadAndResize(e) {
@@ -18,6 +19,7 @@ export const FileUpload = ({ values, setValues }) => {
 		//buty for multiple uploads , we need to loop through the arrys of file lists
 		let files = e.target.files;
 		if (files) {
+			setLoading(true);
 			for (let i = 0; i < files.length; i++) {
 				Resizer.imageFileResizer(
 					files[i],
@@ -43,12 +45,14 @@ export const FileUpload = ({ values, setValues }) => {
 							)
 							.then((res) => {
 								console.log("res from images ==>", res);
+								setLoading(false);
 								filesUploaded.push(res.data);
 								setValues({ ...values, images: filesUploaded });
 							})
 							.catch((err) => {
 								toast.error(err.message);
 								console.log(err.message);
+								setLoading(false);
 							});
 
 						//make request to backend with images
@@ -62,18 +66,38 @@ export const FileUpload = ({ values, setValues }) => {
 		//get response , and set images URL in the images array in the values object
 	}
 	return (
-		<div className="row">
-			<label className="btn btn-primary btn-raised">
-				Choose File
-				<input
-					type="file"
-					multiple
-					accept="/images/*"
-					hidden
-					onChange={fileUploadAndResize}
-				/>
-			</label>
-		</div>
+		<>
+			{values.images &&
+				values.images.map((image) => {
+					return (
+						<Badge
+							key={image.public_id}
+							count="❌"
+							title="Delete"
+							style={{ cursor: "pointer" }}
+						>
+							<Avatar
+								src={image.url}
+								size={100}
+								shape="square"
+								className="ml-3 mb-2"
+							/>
+						</Badge>
+					);
+				})}
+			<div className="row">
+				<label className="btn btn-primary btn-raised">
+					Choose File
+					<input
+						type="file"
+						multiple
+						accept="/images/*"
+						hidden
+						onChange={fileUploadAndResize}
+					/>
+				</label>
+			</div>
+		</>
 	);
 };
 
