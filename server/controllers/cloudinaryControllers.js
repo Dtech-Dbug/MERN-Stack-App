@@ -36,11 +36,14 @@ exports.remove = (req, res) => {
 	let image_id = req.body.public_id;
 	//easch uploaded image will have a publc_id : so we can use that to remove an image
 	cloudinary.uploader.destroy(image_id, (err, result) => {
-		if (err)
+		if (err) {
+			console.log(err);
 			return res.json({
 				success: false,
 				err,
 			});
+		}
+
 		//since it is a selete function
 		//we do not have anything to retur  tp the client
 		//except for the success stautus upon sucesfull task completeion
