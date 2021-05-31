@@ -65,6 +65,35 @@ export const FileUpload = ({ values, setValues, setLoading }) => {
 
 		//get response , and set images URL in the images array in the values object
 	}
+
+	const handleImageRemove = (public_id) => {
+		setLoading(true);
+		console.log("remove image", public_id);
+		axios
+			.post(
+				`http://localhost:8000/api/imageremove`,
+				{ public_id },
+				{
+					headers: {
+						authtoken: user ? user.token : "",
+					},
+				}
+			)
+			.then((res) => {
+				setLoading(false);
+				const { images } = values;
+				let filteredImages = images.filter((item) => {
+					return item.public_id !== public_id;
+				});
+				setValues({ ...values, images: filteredImages });
+			})
+			.catch((err) => {
+				console.log(err);
+				toast.error(err.message);
+				setLoading(false);
+			});
+	};
+
 	return (
 		<>
 			{values.images &&
@@ -75,6 +104,7 @@ export const FileUpload = ({ values, setValues, setLoading }) => {
 							count="❌"
 							title="Delete"
 							style={{ cursor: "pointer" }}
+							onClick={() => handleImageRemove(image.public_id)}
 						>
 							<Avatar
 								src={image.url}
