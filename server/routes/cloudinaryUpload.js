@@ -17,7 +17,7 @@ router.post(
 	upload
 );
 
-router.delete(
+router.post(
 	"/imageremove",
 	createOrUpdateUserMiddleware,
 	adminCheckMiddleware,
