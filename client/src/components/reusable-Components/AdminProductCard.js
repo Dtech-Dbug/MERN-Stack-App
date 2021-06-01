@@ -4,9 +4,9 @@ import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 import { Card } from "antd";
 const { Meta } = Card;
 
-const AdminProductCard = ({ product }) => {
+const AdminProductCard = ({ product, handleRemove }) => {
 	// destructure
-	const { title, description, images } = product;
+	const { title, description, images, slug } = product;
 
 	return (
 		<Card
@@ -30,6 +30,7 @@ const AdminProductCard = ({ product }) => {
 					className="btn btn-outline-danger btn-raised"
 					style={{ width: "50%" }}
 					title="Delete Product"
+					onClick={() => handleRemove(slug)}
 				/>,
 			]}
 		>
