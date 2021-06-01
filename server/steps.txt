@@ -87,3 +87,9 @@ iv. Our server will upload those to cloudinary and recieve the iMage URL's in re
 v. Those upoaded URL will be sent back to FE
 vi. At this point , FE will haev images with upload URLs
 vii. We can save the urls , in the image arrays , in our own database
+
+
+24. After product upload with images is done :
+i. get all products endpoint.
+ii. Show the endpoints in a page (products)
+iii. In a card , from ant design
