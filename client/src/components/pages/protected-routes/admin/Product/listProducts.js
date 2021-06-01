@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { listAllProducts } from "../../../../../functions/productCRUD";
 import AdminProductCard from "../../../../reusable-Components/AdminProductCard";
-import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
+
 const { default: AdminNav } = require("../../../../Nav/Admin-Nav");
 
 const ListAllProducts = () => {
