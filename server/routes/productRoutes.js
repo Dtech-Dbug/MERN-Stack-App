@@ -10,6 +10,7 @@ const {
 const {
 	createProduct,
 	listProducts,
+	removeProduct,
 } = require("../controllers/productControllers");
 
 router.post(
@@ -20,4 +21,10 @@ router.post(
 );
 
 router.get("/products/:count", listProducts);
+router.delete(
+	"/product/:slug ",
+	createOrUpdateUserMiddleware,
+	adminCheckMiddleware,
+	removeProduct
+);
 module.exports = router;
