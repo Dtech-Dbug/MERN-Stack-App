@@ -13,7 +13,7 @@ export const listAllProducts = async (count) => {
 };
 
 export const removeProduct = async (slug, authtoken) => {
-	return await axios.delete(`http://localhost:8000/product/${slug}`, {
+	return await axios.delete(`http://localhost:8000/api/product/${slug}`, {
 		headers: {
 			authtoken,
 		},
