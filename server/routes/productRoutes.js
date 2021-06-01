@@ -22,7 +22,7 @@ router.post(
 
 router.get("/products/:count", listProducts);
 router.delete(
-	"/product/:slug ",
+	"/product/:slug",
 	createOrUpdateUserMiddleware,
 	adminCheckMiddleware,
 	removeProduct
