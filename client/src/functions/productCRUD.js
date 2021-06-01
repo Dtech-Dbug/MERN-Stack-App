@@ -7,3 +7,7 @@ export const createProduct = async (product, authtoken) => {
 		},
 	});
 };
+
+export const listAllProducts = async (count) => {
+	return axios.get(`http://localhost:8000/api/products/${count}`);
+};
