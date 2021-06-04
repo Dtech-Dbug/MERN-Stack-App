@@ -19,3 +19,7 @@ export const removeProduct = async (slug, authtoken) => {
 		},
 	});
 };
+
+export const readProduct = async (slug) => {
+	return await axios.post(`http://localhost:8000/api/product.${slug}`);
+};
