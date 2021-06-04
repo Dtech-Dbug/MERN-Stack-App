@@ -38,3 +38,17 @@ exports.removeProduct = async (req, res) => {
 		return res.status(400).send("Product deletion failed");
 	}
 };
+
+exports.readProduct = async (req, res) => {
+	try {
+		const readProduct = await ProductModel.find({
+			slug: req.params.slug,
+		})
+			.populate("category")
+			.populate("subCategories")
+			.exec();
+		res.json(readProduct);
+	} catch (err) {
+		console.log(err.message);
+	}
+};
