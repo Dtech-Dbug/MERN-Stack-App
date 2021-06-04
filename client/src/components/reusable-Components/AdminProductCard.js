@@ -22,7 +22,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
 				/>
 			}
 			actions={[
-				<Link to={`product/${slug}`}>
+				<Link to={`/admin/product/${slug}`}>
 					<EditTwoTone
 						className="btn btn-outline-primary btn-raised"
 						style={{ width: "50%" }}
