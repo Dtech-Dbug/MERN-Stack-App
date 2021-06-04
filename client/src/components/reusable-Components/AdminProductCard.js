@@ -1,5 +1,6 @@
 import React from "react";
 import JS from "../../Default images/js logo.png";
+import { Link } from "react-router-dom";
 import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 import { Card } from "antd";
 const { Meta } = Card;
@@ -21,11 +22,13 @@ const AdminProductCard = ({ product, handleRemove }) => {
 				/>
 			}
 			actions={[
-				<EditTwoTone
-					className="btn btn-outline-primary btn-raised"
-					style={{ width: "50%" }}
-					title="Edit Product"
-				/>,
+				<Link to={`product/${slug}`}>
+					<EditTwoTone
+						className="btn btn-outline-primary btn-raised"
+						style={{ width: "50%" }}
+						title="Edit Product"
+					/>
+				</Link>,
 				<DeleteTwoTone
 					className="btn btn-outline-danger btn-raised"
 					style={{ width: "50%" }}
