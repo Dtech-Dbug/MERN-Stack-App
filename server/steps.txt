@@ -93,3 +93,11 @@ vii. We can save the urls , in the image arrays , in our own database
 i. get all products endpoint.
 ii. Show the endpoints in a page (products)
 iii. In a card , from ant design
+
+
+25.Product Update 
+i. To update a update a specific product we first hve to read that prodcuts based on id/slug
+ii. Create a endpoint for reading
+iii. Create a controller fro the read function 
+iv. test the endpoint
+v. Crate a function inthe FrntEnd wthat will intrect with withis endpoint
