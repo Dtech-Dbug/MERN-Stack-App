@@ -52,7 +52,7 @@ export const UpdateProduct = ({ match }) => {
 	function loadCategory() {
 		readProduct(match.params.slug).then((res) => {
 			console.log("response fater readig product ==> ", res);
-			setValues({ ...values, ...res.data });
+			setValues({ ...values, ...res.data[0] });
 		});
 	}
 
