@@ -52,3 +52,6 @@ exports.readProduct = async (req, res) => {
 		console.log(err.message);
 	}
 };
+// since we used find , the Query will be finding based on the slug
+//to get the response populated , based on a single slug , we nedd to specify the index from the response (which is an array of single product)
+//to avoid using (res.data[0] => to prepopulate the forms while uodating ) ===> we can use findOne , which is a more specific query.
