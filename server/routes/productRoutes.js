@@ -11,6 +11,7 @@ const {
 	createProduct,
 	listProducts,
 	removeProduct,
+	readProduct,
 } = require("../controllers/productControllers");
 
 router.post(
@@ -27,4 +28,6 @@ router.delete(
 	adminCheckMiddleware,
 	removeProduct
 );
+
+router.get("/product/:slug", readProduct);
 module.exports = router;
