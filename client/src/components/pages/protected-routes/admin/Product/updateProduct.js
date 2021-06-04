@@ -18,6 +18,8 @@ import {
 	getCategoryLists,
 	getSubs,
 } from "../../../../../functions/categoryCRUD";
+import { readProduct } from "../../../../../functions/productCRUD";
+import { ProductUpdateForm } from "../../../../reusable-Components/productUpdateForm";
 const initialState = {
 	title: "",
 	description: "",
@@ -29,23 +31,10 @@ const initialState = {
 	categories: [],
 	category: "",
 	subCategories: [],
-	images: [
-		// {
-		// 	public_id: "jwrzeubemmypod99e8lz",
-		// 	url: "https://res.cloudinary.com/dcqjrwaoi/image/upload/v1599480909/jwrzeubemmypod99e8lz.jpg",
-		// },
-		// {
-		// 	public_id: "j7uerlvhog1eic0oyize",
-		// 	url: "https://res.cloudinary.com/dcqjrwaoi/image/upload/v1599480912/j7uerlvhog1eic0oyize.jpg",
-		// },
-		// {
-		// 	public_id: "ho6wnp7sugyemnmtoogf",
-		// 	url: "https://res.cloudinary.com/dcqjrwaoi/image/upload/v1599480913/ho6wnp7sugyemnmtoogf.jpg",
-		// },
-	],
+	images: [],
 };
 
-export const UpdateProduct = () => {
+export const UpdateProduct = ({ match }) => {
 	//redux state
 	const { user } = useSelector((state) => ({ ...state }));
 
@@ -57,13 +46,32 @@ export const UpdateProduct = () => {
 	const [loading, setLoading] = useState(false);
 	// destructure yhe values so we dont have to use value.field
 	useEffect(() => {
-		loadCategories();
+		loadCategory();
 	}, []);
 
-	function loadCategories() {
-		getCategoryLists().then((res) =>
-			setValues({ ...values, categories: res.data })
-		);
+	function loadCategory() {
+		readProduct(match.params.slug).then((res) => {
+			console.log("response fater readig product ==> ", res);
+			setValues({ ...values, ...res.data });
+		});
+	}
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		// createProduct(values, user.token)
+		// 	.then((res) => {
+		// 		console.log(res);
+		// 		console.log(window.location.href);
+		// 		window.alert(`${res.data.title} is created`);
+		// 		//window.location.reload();
+		// 	})
+		// 	.catch((err) => toast.error(err.response.data.err));
+	}
+
+	function handleChange(e) {
+		e.preventDefault();
+
+		setValues({ ...values, [e.target.name]: e.target.value });
 	}
 
 	return (
@@ -90,7 +98,14 @@ export const UpdateProduct = () => {
 						/>
 					</div>
 
-					{JSON.stringify(values.images)}
+					{JSON.stringify(values)}
+
+					<ProductUpdateForm
+						handleChange={handleChange}
+						handleSubmit={handleSubmit}
+						values={values}
+						setValues={setValues}
+					/>
 				</div>
 			</div>
 		</div>
