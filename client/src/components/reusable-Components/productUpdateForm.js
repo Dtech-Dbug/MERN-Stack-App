@@ -63,6 +63,7 @@ export const ProductUpdateForm = ({
 					name="shipping"
 					className="form-control"
 					onChange={handleChange}
+                                        value={shipping === "Yes" ? "Yes" : "No"}
 				>
 					<option>Please select</option>
 					<option value="No">No</option>
@@ -81,7 +82,7 @@ export const ProductUpdateForm = ({
 			</div>
 			<div className="form-group">
 				<label>Color</label>
-				<select name="color" className="form-control" onChange={handleChange}>
+				<select name="color" className="form-control" onChange={handleChange} value-{color}>
 					<option>Please select</option>
 					{colors.map((c) => (
 						<option key={c} value={c}>
