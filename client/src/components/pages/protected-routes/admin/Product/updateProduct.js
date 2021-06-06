@@ -28,7 +28,6 @@ const initialState = {
 	shipping: "",
 	color: "",
 	colors: ["Red", "Blue", "Green", "Black", "White"],
-	categories: [],
 	category: "",
 	subCategories: [],
 	images: [],
@@ -42,8 +41,12 @@ export const UpdateProduct = ({ match }) => {
 
 	//show sub options only when category is selected,
 	const [showSubcategories, setShowSubcategories] = useState([]);
+	
 	const [selectedCategory, setSelectedCategory] = useState(false);
 	const [loading, setLoading] = useState(false);
+	
+	//a new state for the categories
+	const [categories,setCategories] = useState([])
 	// destructure yhe values so we dont have to use value.field
 	useEffect(() => {
 		loadCategory();
@@ -53,6 +56,15 @@ export const UpdateProduct = ({ match }) => {
 		readProduct(match.params.slug).then((res) => {
 			console.log("response fater readig product ==> ", res);
 			setValues({ ...values, ...res.data[0] });
+		});
+	}
+	//Creating a new state for the categories , in the updateComponent
+	//As the categpries from the values can override any othr declarations 
+	//delete categoried from the initialState object and put it in a different state,and popualate it with data from server on component mount
+		function loadCategories() {
+		getCategoryLists().then((res) => {
+			console.log("Res : category Losts in update Produyct page ==>", res.data);
+			setCategories(res.data);
 		});
 	}
 
@@ -105,6 +117,7 @@ export const UpdateProduct = ({ match }) => {
 						handleSubmit={handleSubmit}
 						values={values}
 						setValues={setValues}
+                                                categories={categories}
 					/>
 				</div>
 			</div>
