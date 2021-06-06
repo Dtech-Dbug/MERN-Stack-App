@@ -8,6 +8,7 @@ export const ProductUpdateForm = ({
 	handleCategoryChange,
 	values,
 	setValues,
+	categories
 }) => {
 	useEffect(() => {
 		console.log(categories);
@@ -20,7 +21,6 @@ export const ProductUpdateForm = ({
 		shipping,
 		color,
 		colors,
-		categories,
 		subCategories,
 	} = values;
 
@@ -91,10 +91,10 @@ export const ProductUpdateForm = ({
 					))}
 				</select>
 			</div>
-			{/* <div className="form-group">
+			 <div className="form-group">
 				<label>Select Category</label>
 				<select className="form-control" onChange={handleCategoryChange}>
-					<option>Please Select a Category</option>
+					<option>{category ? category.name : "Please Select a Category"}</option>
 
 					{categories.length > 0 &&
 						categories.map((c) => {
@@ -106,10 +106,10 @@ export const ProductUpdateForm = ({
 						})}
 				</select>
 
-				{showSubcategories.length}
+				
 			</div>
 
-			{selectedCategory && (
+			{/*{selectedCategory && (
 				<div>
 					<label>Sub Categories</label>
 					<Select
