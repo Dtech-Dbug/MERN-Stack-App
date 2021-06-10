@@ -42,6 +42,8 @@ export const UpdateProduct = ({ match }) => {
 	//show sub options only when category is selected,
 	const [showSubcategories, setShowSubcategories] = useState([]);
 
+	//new array to store array of sub Categories Id : for useing it in values of SELECT element in antd
+	const [arrayOfSubcategoriesId, setArrayOfSubcategoriesId] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState(false);
 	const [loading, setLoading] = useState(false);
 
@@ -49,13 +51,33 @@ export const UpdateProduct = ({ match }) => {
 	const [categories, setCategories] = useState([]);
 	// destructure yhe values so we dont have to use value.field
 	useEffect(() => {
-		loadCategory();
+		loadProduct();
+		loadCategories();
 	}, []);
 
-	function loadCategory() {
+	function loadProduct() {
 		readProduct(match.params.slug).then((res) => {
+			//1. Load single product
 			console.log("response fater readig product ==> ", res);
+
+			//2. spread the values
 			setValues({ ...values, ...res.data });
+
+			//get subs based on category ID
+			getSubs(res.data.category._id).then((res) => {
+				//show sub categories based on parent categpry ID
+				setShowSubcategories(res.data);
+			});
+
+			//pushing ids of subCategories in an array
+			// to work woth SELECT component from antd
+			//bcx it accepets simple arrays, and our subCategories array was array of objects
+			const arrayOfIds = [];
+			res.data.subCategories.map((item) => {
+				return arrayOfIds.push(item._id);
+			});
+			console.log("ARRAY OF IDS", arrayOfIds);
+			setArrayOfSubcategoriesId((prev) => arrayOfIds);
 		});
 	}
 	//Creating a new state for the categories , in the updateComponent
@@ -118,6 +140,9 @@ export const UpdateProduct = ({ match }) => {
 						values={values}
 						setValues={setValues}
 						categories={categories}
+						showSubcategories={showSubcategories}
+						arrayOfSubcategoriesId={arrayOfSubcategoriesId}
+						setArrayOfSubcategoriesId={setArrayOfSubcategoriesId}
 					/>
 				</div>
 			</div>
