@@ -41,7 +41,7 @@ exports.removeProduct = async (req, res) => {
 
 exports.readProduct = async (req, res) => {
 	try {
-		const readProduct = await ProductModel.find({
+		const readProduct = await ProductModel.findOne({
 			slug: req.params.slug,
 		})
 			.populate("category")
