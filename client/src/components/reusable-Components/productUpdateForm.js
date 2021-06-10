@@ -9,6 +9,9 @@ export const ProductUpdateForm = ({
 	values,
 	setValues,
 	categories,
+	showSubcategories,
+	arrayOfSubcategoriesId,
+	setArrayOfSubcategoriesId,
 }) => {
 	useEffect(() => {
 		console.log(categories);
@@ -99,7 +102,11 @@ export const ProductUpdateForm = ({
 			</div>
 			<div className="form-group">
 				<label>Select Category</label>
-				<select className="form-control" onChange={handleCategoryChange}>
+				<select
+					name="category"
+					className="form-control"
+					onChange={handleCategoryChange}
+				>
 					<option>
 						{category ? category.name : "Please Select a Category"}
 					</option>
@@ -115,25 +122,24 @@ export const ProductUpdateForm = ({
 				</select>
 			</div>
 
-			{/*{selectedCategory && (
-				<div>
-					<label>Sub Categories</label>
-					<Select
-						mode="multiple"
-						style={{ width: "100%" }}
-						placeholder="Please select"
-						value={subCategories}
-						onChange={(value) => setValues({ ...values, subCategories: value })}
-					>
-						{showSubcategories.length &&
-							showSubcategories.map((sub) => (
-								<Option key={sub._id} value={sub._id}>
-									{sub.name}
-								</Option>
-							))}
-					</Select>
-				</div>
-			)} */}
+			<div>
+				<label>Sub Categories</label>
+				<Select
+					mode="multiple"
+					style={{ width: "100%" }}
+					placeholder="Please select"
+					value={arrayOfSubcategoriesId}
+					onChange={(value) => setArrayOfSubcategoriesId(value)}
+				>
+					{showSubcategories.length &&
+						showSubcategories.map((sub) => (
+							<Option key={sub._id} value={sub._id}>
+								{sub.name}
+							</Option>
+						))}
+				</Select>
+			</div>
+
 			<button onClick={handleSubmit} className="btn btn-raised btn-primary">
 				Save
 			</button>
