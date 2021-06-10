@@ -101,3 +101,16 @@ ii. Create a endpoint for reading
 iii. Create a controller fro the read function 
 iv. test the endpoint
 v. Crate a function inthe FrntEnd wthat will intrect with withis endpoint
+
+//Create  a reqsubale component called product Update 
+//it will be pretty much same as product create , instead we will pre populate the fields with existing data , that admin used to create the product
+// pre populating otehr data is easy
+//Pre populating categories and sub categories is a little tricky but very function
+
+steps for pre populating category:
+i. Create a new state for categories
+ii read the categoies when component mounts
+iii. Update the categpris array with respomse.data from the server
+iv. Pass the categories list as props from main component to cProduct Update form
+v. At this point : categoires list will be available in the slect dropdwon
+vi. To pre populate ,set the option to [category.name] => Resoonse from server after reading product based on id
