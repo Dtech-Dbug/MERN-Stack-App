@@ -114,3 +114,6 @@ iii. Update the categpris array with respomse.data from the server
 iv. Pass the categories list as props from main component to cProduct Update form
 v. At this point : categoires list will be available in the slect dropdwon
 vi. To pre populate ,set the option to [category.name] => Resoonse from server after reading product based on id
+
+After pre populating it is necessary to keep the categories and sub categories in sync:
+steps:
