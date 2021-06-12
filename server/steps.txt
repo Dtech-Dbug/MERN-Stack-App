@@ -117,3 +117,5 @@ vi. To pre populate ,set the option to [category.name] => Resoonse from server a
 
 After pre populating it is necessary to keep the categories and sub categories in sync:
 steps:
+i. In the update page , users can select any other category and choose sub categories based on that.
+ii. But , upon returning to the previosly slected category while creating , the subcategories should be prepopulated
