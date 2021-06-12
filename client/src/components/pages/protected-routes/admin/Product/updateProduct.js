@@ -107,6 +107,22 @@ export const UpdateProduct = ({ match }) => {
 
 		setValues({ ...values, [e.target.name]: e.target.value });
 	}
+	function handleCategoryChange(e) {
+		e.preventDefault();
+		console.log("Parent ID ----> ", e.target.value);
+		setValues({ ...values, category: e.target.value });
+
+		getSubs(e.target.value).then((res) => {
+			console.log(res);
+			setShowSubcategories(res.data);
+		});
+		setSelectedCategory(true);
+
+		//set The array of subcategpries to empty when the categories changes,
+		// So , as they do not persisit
+		//e.g => lenovo subCategories, are deleted from the subcategory SELECT Option when admin chooses a different category
+		setArrayOfSubcategoriesId([]);
+	}
 
 	return (
 		<div className="container-fluid">
@@ -137,6 +153,7 @@ export const UpdateProduct = ({ match }) => {
 					<ProductUpdateForm
 						handleChange={handleChange}
 						handleSubmit={handleSubmit}
+						handleCategoryChange={handleCategoryChange}
 						values={values}
 						setValues={setValues}
 						categories={categories}
