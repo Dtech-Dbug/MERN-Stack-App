@@ -102,6 +102,9 @@ iii. Create a controller fro the read function
 iv. test the endpoint
 v. Crate a function inthe FrntEnd wthat will intrect with withis endpoint
 
+
+FRONT END operations
+
 //Create  a reqsubale component called product Update 
 //it will be pretty much same as product create , instead we will pre populate the fields with existing data , that admin used to create the product
 // pre populating otehr data is easy
@@ -119,3 +122,7 @@ After pre populating it is necessary to keep the categories and sub categories i
 steps:
 i. In the update page , users can select any other category and choose sub categories based on that.
 ii. But , upon returning to the previosly slected category while creating , the subcategories should be prepopulated
+iii. restore the selected sub Categories if users wishes to stick to the initial parent category at the time of creation.
+iv . Created a new state , for watching category change.
+v. The default category from ReadProduct is compared to the category change, if they are equal (user came back to the initial category) we load the sub Categories by calling the loadProduct function => which reads the product detail based on slugs
+- passed the selectedCategory state as props to updateProductForm
