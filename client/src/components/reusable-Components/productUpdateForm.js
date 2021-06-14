@@ -12,6 +12,7 @@ export const ProductUpdateForm = ({
 	showSubcategories,
 	arrayOfSubcategoriesId,
 	setArrayOfSubcategoriesId,
+	selectedCategory,
 }) => {
 	useEffect(() => {
 		console.log(categories);
@@ -106,11 +107,8 @@ export const ProductUpdateForm = ({
 					name="category"
 					className="form-control"
 					onChange={handleCategoryChange}
+					value={selectedCategory ? selectedCategory : category._id}
 				>
-					<option>
-						{category ? category.name : "Please Select a Category"}
-					</option>
-
 					{categories.length > 0 &&
 						categories.map((c) => {
 							return (
