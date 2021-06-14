@@ -153,7 +153,6 @@ export const UpdateProduct = ({ match }) => {
 						<FileUpload
 							values={values}
 							setValues={setValues}
-							loading={loading}
 							setLoading={setLoading}
 						/>
 					</div>
