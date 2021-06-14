@@ -44,7 +44,7 @@ export const UpdateProduct = ({ match }) => {
 
 	//new array to store array of sub Categories Id : for useing it in values of SELECT element in antd
 	const [arrayOfSubcategoriesId, setArrayOfSubcategoriesId] = useState([]);
-	const [selectedCategory, setSelectedCategory] = useState(false);
+	const [selectedCategory, setSelectedCategory] = useState("");
 	const [loading, setLoading] = useState(false);
 
 	//a new state for the categories
@@ -110,18 +110,28 @@ export const UpdateProduct = ({ match }) => {
 	function handleCategoryChange(e) {
 		e.preventDefault();
 		console.log("Parent ID ----> ", e.target.value);
-		setValues({ ...values, category: e.target.value });
+		setValues({ ...values });
 
 		getSubs(e.target.value).then((res) => {
 			console.log(res);
 			setShowSubcategories(res.data);
 		});
-		setSelectedCategory(true);
+		// in here , setSelectedCategory holds the state of the categories that the user clicks on in the update form
+		// We chech the target.value with default catgory id to restore the subcategories, if user wishes to stick to it;ss choice of creation
+		setSelectedCategory(e.target.value);
+		console.log("default category ", values.category);
+		console.log("selected Ctaegory on update ", e.target.value);
+
+		//we check if the default category id is equal to the new category that user clicked
+		//we show the subs while creation
 
 		//set The array of subcategpries to empty when the categories changes,
 		// So , as they do not persisit
 		//e.g => lenovo subCategories, are deleted from the subcategory SELECT Option when admin chooses a different category
 		setArrayOfSubcategoriesId([]);
+		if (values.category._id === e.target.value) {
+			loadProduct();
+		}
 	}
 
 	return (
@@ -160,6 +170,7 @@ export const UpdateProduct = ({ match }) => {
 						showSubcategories={showSubcategories}
 						arrayOfSubcategoriesId={arrayOfSubcategoriesId}
 						setArrayOfSubcategoriesId={setArrayOfSubcategoriesId}
+						selectedCategory={selectedCategory}
 					/>
 				</div>
 			</div>
