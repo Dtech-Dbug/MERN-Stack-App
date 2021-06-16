@@ -24,7 +24,7 @@ export const readProduct = async (slug) => {
 	return await axios.get(`http://localhost:8000/api/product/${slug}`);
 };
 
-export const updateProduct = async (product, slug, authtoken) => {
+export const updateProduct = async (slug, product, authtoken) => {
 	return axios.put(`http://localhost:8000/api/product/${slug}`, product, {
 		header: {
 			authtoken,
