@@ -59,13 +59,17 @@ exports.readProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
 	req.body.slug = req.body;
 	try {
+		if (req.body.title) {
+			req.body.slug = slugify(req.body.title);
+		}
 		const UpdatedProduct = await ProductModel.findOneAndUpdate(
 			{
 				slug: req.params.slug,
 			},
 			req.body,
 			{ new: true }
-		);
+		).exec();
+		console.log("Updated product ===> ", UpdatedProduct);
 		res.json(UpdatedProduct);
 	} catch (err) {
 		console.log(err);
