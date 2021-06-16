@@ -103,11 +103,14 @@ export const UpdateProduct = ({ match, history }) => {
 		values.category = selectedCategory ? selectedCategory : values.category;
 		updateProduct(match.params.slug, values, user.token)
 			.then((res) => {
-				console.log(res);
-				toast.succes(`${res.data.title} is updated`);
+				console.log("Updaet response ==> ", res);
+				toast.success(`${res.data.title} Product is updated`);
 				history.push("/admin/products");
 			})
-			.catch((err) => toast.error(err.response.data.err));
+			.catch((err) => {
+				console.log(err);
+				toast.error(err.response.data.err);
+			});
 	}
 
 	function handleChange(e) {
