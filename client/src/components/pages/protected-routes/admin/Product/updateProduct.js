@@ -18,8 +18,12 @@ import {
 	getCategoryLists,
 	getSubs,
 } from "../../../../../functions/categoryCRUD";
-import { readProduct } from "../../../../../functions/productCRUD";
+import {
+	readProduct,
+	updateProduct,
+} from "../../../../../functions/productCRUD";
 import { ProductUpdateForm } from "../../../../reusable-Components/productUpdateForm";
+
 const initialState = {
 	title: "",
 	description: "",
@@ -33,7 +37,7 @@ const initialState = {
 	images: [],
 };
 
-export const UpdateProduct = ({ match }) => {
+export const UpdateProduct = ({ match, history }) => {
 	//redux state
 	const { user } = useSelector((state) => ({ ...state }));
 
@@ -92,14 +96,18 @@ export const UpdateProduct = ({ match }) => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		// createProduct(values, user.token)
-		// 	.then((res) => {
-		// 		console.log(res);
-		// 		console.log(window.location.href);
-		// 		window.alert(`${res.data.title} is created`);
-		// 		//window.location.reload();
-		// 	})
-		// 	.catch((err) => toast.error(err.response.data.err));
+		//append the ew states to the values object
+		//subcategory and category
+
+		values.subCategories = arrayOfSubcategoriesId;
+		values.category = selectedCategory ? selectedCategory : values.category;
+		updateProduct(match.params.slug, values, user.token)
+			.then((res) => {
+				console.log(res);
+				toast.succes(`${res.data.title} is updated`);
+				history.push("/admin/products");
+			})
+			.catch((err) => toast.error(err.response.data.err));
 	}
 
 	function handleChange(e) {
