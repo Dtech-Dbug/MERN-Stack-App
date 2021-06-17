@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { listAllProducts } from "../../functions/productCRUD";
+import HomePageProductCard from "../reusable-Components/HomePageProductCard";
 
 export const Home = () => {
 	const [products, setProducts] = useState([]);
@@ -8,14 +9,25 @@ export const Home = () => {
 	}, []);
 
 	const loadAllProducts = () => {
-		listAllProducts(5).then((res) => {
+		listAllProducts(3).then((res) => {
 			setProducts(res.data);
 		});
 	};
 
 	return (
 		<>
-			<h2>Home</h2>;{JSON.stringify(products)}
+			<h2>Home</h2>;
+			<div className="jumbotron text-center font-wright-bold">Hello</div>
+			<hr />
+			<div className="container">
+				<div className="row">
+					{products.map((product) => (
+						<div key={product._id} className="col-md-4">
+							<HomePageProductCard product={product} />
+						</div>
+					))}
+				</div>
+			</div>
 		</>
 	);
 };
