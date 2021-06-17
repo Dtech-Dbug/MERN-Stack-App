@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { listAllProducts } from "../../functions/productCRUD";
 import HomePageProductCard from "../reusable-Components/HomePageProductCard";
+import TypewriterComponent from "../reusable-Components/TypewriterComponent";
 
 export const Home = () => {
 	const [products, setProducts] = useState([]);
@@ -17,7 +18,11 @@ export const Home = () => {
 	return (
 		<>
 			<h2>Home</h2>;
-			<div className="jumbotron text-center font-wright-bold">Hello</div>
+			<div className="jumbotron text-center h1 font-wright-bold">
+				<TypewriterComponent
+					text={["Latest Arrivals", "Hottest Deals", "Sale!Sale!Sale"]}
+				/>
+			</div>
 			<hr />
 			<div className="container">
 				<div className="row">
