@@ -1,5 +1,5 @@
 import React from "react";
-import Typewriter from "typewriter-effect/dist/core";
+import Typewriter from "typewriter-effect";
 
 const TypewriterComponent = ({ text }) => (
 	<Typewriter
