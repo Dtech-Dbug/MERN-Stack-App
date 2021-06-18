@@ -15,7 +15,7 @@ export const Home = () => {
 		setLoading(true);
 		listAllProducts(3).then((res) => {
 			setProducts(res.data);
-			setLoading(true);
+			setLoading(false);
 		});
 	};
 
@@ -28,10 +28,10 @@ export const Home = () => {
 				/>
 			</div>
 			<hr />
-			{loading ? (
-				<LoadingCardComponent />
-			) : (
-				<div className="container">
+			<div className="container">
+				{loading ? (
+					<LoadingCardComponent count={3} />
+				) : (
 					<div className="row">
 						{products.map((product) => (
 							<div key={product._id} className="col-md-4">
@@ -39,8 +39,8 @@ export const Home = () => {
 							</div>
 						))}
 					</div>
-				</div>
-			)}
+				)}
+			</div>
 		</>
 	);
 };
