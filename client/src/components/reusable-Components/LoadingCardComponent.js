@@ -7,7 +7,7 @@ const LoadingCardComponent = ({ count }) => {
 
 		for (let i = 0; i < count; i++) {
 			cardArray.push(
-				<Card className="col-md-4 m-2">
+				<Card className="col-md-4">
 					<Skeleton active></Skeleton>
 				</Card>
 			);
