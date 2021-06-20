@@ -13,6 +13,7 @@ const {
 	removeProduct,
 	readProduct,
 	updateProduct,
+	list,
 } = require("../controllers/productControllers");
 
 router.post(
@@ -38,4 +39,9 @@ router.put(
 	adminCheckMiddleware,
 	updateProduct
 );
+
+//we are using post method
+// because it is easier to send data in the req.body in post method
+// we will send data , like count, limit , order , sort to list products based on certain options => for new sellers and best sellers
+router.post("/products", list);
 module.exports = router;
