@@ -18,6 +18,7 @@ export const Home = () => {
 		setLoading(true);
 		listOrderedProducts("createdAt", "asc", 2).then((res) => {
 			setProducts(res.data);
+			console.log("res from new funtion ", res);
 			setLoading(false);
 		});
 	};
@@ -33,7 +34,7 @@ export const Home = () => {
 			<hr />
 			<div className="container">
 				{loading ? (
-					<LoadingCardComponent count={3} />
+					<LoadingCardComponent count={2} />
 				) : (
 					<div className="row">
 						{products.map((product) => (
