@@ -6,23 +6,9 @@ import {
 import HomePageProductCard from "../reusable-Components/HomePageProductCard";
 import LoadingCardComponent from "../reusable-Components/LoadingCardComponent";
 import TypewriterComponent from "../reusable-Components/TypewriterComponent";
+import { NewestArrivals } from "./HomePageSections/NewestArrivals";
 
 export const Home = () => {
-	const [products, setProducts] = useState([]);
-	const [loading, setLoading] = useState(false);
-	useEffect(() => {
-		loadAllProducts();
-	}, []);
-
-	const loadAllProducts = () => {
-		setLoading(true);
-		listOrderedProducts("createdAt", "asc", 2).then((res) => {
-			setProducts(res.data);
-			console.log("res from new funtion ", res);
-			setLoading(false);
-		});
-	};
-
 	return (
 		<>
 			<h2>Home</h2>;
@@ -32,19 +18,10 @@ export const Home = () => {
 				/>
 			</div>
 			<hr />
-			<div className="container">
-				{loading ? (
-					<LoadingCardComponent count={2} />
-				) : (
-					<div className="row">
-						{products.map((product) => (
-							<div key={product._id} className="col-md-4">
-								<HomePageProductCard product={product} />
-							</div>
-						))}
-					</div>
-				)}
-			</div>
+			<h3 className="display-6 jumbotron text-center mt-1 mb-1">
+				Newset Deals
+			</h3>
+			<NewestArrivals />
 		</>
 	);
 };
