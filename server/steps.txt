@@ -126,3 +126,14 @@ iii. restore the selected sub Categories if users wishes to stick to the initial
 iv . Created a new state , for watching category change.
 v. The default category from ReadProduct is compared to the category change, if they are equal (user came back to the initial category) we load the sub Categories by calling the loadProduct function => which reads the product detail based on slugs
 - passed the selectedCategory state as props to updateProductForm
+
+
+
+
+26. Create a new endpoint to list products based on latest creation and best sellers.
+- that is basically an end pointwhich will query the database and sort based on ceratin option.
+
+steps : 
+i. create aen endpoint in the backend, route.
+ii . create the controller method.[the function that will query the databse , perfom given opearion and resturn res.json]
+iii. create frontend function => for the frontend to interact with the backend
