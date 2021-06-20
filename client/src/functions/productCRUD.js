@@ -33,10 +33,5 @@ export const updateProduct = async (slug, product, authtoken) => {
 };
 
 /// list products based on options => for new sellers , best sellers
-export const listOrderedProducts = async (sort, order, limit) => {
-	return (
-		await axios.post(`http://localhost:8000/products`),
-		{ sort, order, limit },
-	
-	);
-};
+export const listOrderedProducts = async (sort, order, limit) =>
+	await axios.post(`http://localhost:8000/products`, { sort, order, limit });
