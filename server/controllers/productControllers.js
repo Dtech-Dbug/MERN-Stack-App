@@ -78,3 +78,26 @@ exports.updateProduct = async (req, res) => {
 		});
 	}
 };
+
+exports.list = async (req, res) => {
+	try {
+		//destructure the options we need to send
+
+		//sort : createdAt/Updatedat ; order : 'asc'/'desc;  limit : number
+		const { sort, oder, limit } = req.body;
+
+		const recievedProducts = await ProductModel.find({})
+			.populate("category")
+			.populate("subcategories")
+			.sort([[sort, order]]) // sort takes an array. If it more than one element , we use another array. so => [[sort , order]]
+			.limit(limit)
+			.exec();
+
+		res.json(recievedProducts);
+	} catch (err) {
+		console.log(err);
+		res.status(400).json({
+			err: err.message,
+		});
+	}
+};
