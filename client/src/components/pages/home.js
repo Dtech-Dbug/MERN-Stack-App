@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { listAllProducts } from "../../functions/productCRUD";
+import {
+	listAllProducts,
+	listOrderedProducts,
+} from "../../functions/productCRUD";
 import HomePageProductCard from "../reusable-Components/HomePageProductCard";
 import LoadingCardComponent from "../reusable-Components/LoadingCardComponent";
 import TypewriterComponent from "../reusable-Components/TypewriterComponent";
@@ -13,7 +16,7 @@ export const Home = () => {
 
 	const loadAllProducts = () => {
 		setLoading(true);
-		listAllProducts(3).then((res) => {
+		listOrderedProducts("createdAt", "asc", 2).then((res) => {
 			setProducts(res.data);
 			setLoading(false);
 		});
