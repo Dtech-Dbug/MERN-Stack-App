@@ -84,7 +84,7 @@ exports.list = async (req, res) => {
 		//destructure the options we need to send
 
 		//sort : createdAt/Updatedat ; order : 'asc'/'desc;  limit : number
-		const { sort, oder, limit } = req.body;
+		const { sort, order, limit } = req.body;
 
 		const recievedProducts = await ProductModel.find({})
 			.populate("category")
