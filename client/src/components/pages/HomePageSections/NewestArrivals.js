@@ -16,7 +16,7 @@ export const NewestArrivals = () => {
 
 	const loadAllProducts = () => {
 		setLoading(true);
-		listOrderedProducts("createdAt", "asc", 3).then((res) => {
+		listOrderedProducts("createdAt", "desc", 3).then((res) => {
 			setProducts(res.data);
 			console.log("res from new funtion ", res);
 			setLoading(false);
