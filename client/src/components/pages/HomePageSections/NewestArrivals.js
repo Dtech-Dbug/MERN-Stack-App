@@ -5,7 +5,6 @@ import {
 } from "../../../functions/productCRUD";
 import HomePageProductCard from "../../reusable-Components/HomePageProductCard";
 import LoadingCardComponent from "../../reusable-Components/LoadingCardComponent";
-import TypewriterComponent from "../../reusable-Components/TypewriterComponent";
 
 export const NewestArrivals = () => {
 	const [products, setProducts] = useState([]);
