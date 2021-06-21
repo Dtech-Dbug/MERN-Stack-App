@@ -6,6 +6,7 @@ import {
 
 import TypewriterComponent from "../reusable-Components/TypewriterComponent";
 import { NewestArrivals } from "./HomePageSections/NewestArrivals";
+import { BestSellers } from "./HomePageSections/BestSellers";
 
 export const Home = () => {
 	return (
@@ -21,6 +22,12 @@ export const Home = () => {
 				Newset Deals
 			</h3>
 			<NewestArrivals />
+			<br />
+			<br />
+			<h3 className="display-6 jumbotron text-center mt-1 mb-1">
+				Best Sellers
+			</h3>
+			<BestSellers />
 		</>
 	);
 };
