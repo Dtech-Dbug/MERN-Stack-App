@@ -150,3 +150,5 @@ ii. Create a controller.
 iii. Update front end function 
 
 iv. use pagination component from antd
+
+v. have a state to stpre the current pagaination count and the update
