@@ -23,6 +23,8 @@ router.post(
 	adminCheckMiddleware,
 	createProduct
 );
+//new endpoint for GETting the products count
+router.get("/products/totalcount", getProductsCount);
 
 router.get("/products/:count", listProducts);
 router.delete(
@@ -46,6 +48,4 @@ router.put(
 // we will send data , like count, limit , order , sort to list products based on certain options => for new sellers and best sellers
 router.post("/products", list);
 
-//new endpoint for GETting the products count
-router.get("/products/count", getProductsCount);
 module.exports = router;
