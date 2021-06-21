@@ -3,8 +3,7 @@ import {
 	listAllProducts,
 	listOrderedProducts,
 } from "../../functions/productCRUD";
-import HomePageProductCard from "../reusable-Components/HomePageProductCard";
-import LoadingCardComponent from "../reusable-Components/LoadingCardComponent";
+
 import TypewriterComponent from "../reusable-Components/TypewriterComponent";
 import { NewestArrivals } from "./HomePageSections/NewestArrivals";
 
