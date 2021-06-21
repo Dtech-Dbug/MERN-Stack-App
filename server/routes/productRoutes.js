@@ -14,6 +14,7 @@ const {
 	readProduct,
 	updateProduct,
 	list,
+	getProductsCount,
 } = require("../controllers/productControllers");
 
 router.post(
@@ -44,4 +45,7 @@ router.put(
 // because it is easier to send data in the req.body in post method
 // we will send data , like count, limit , order , sort to list products based on certain options => for new sellers and best sellers
 router.post("/products", list);
+
+//new endpoint for GETting the products count
+router.get("/products/count", getProductsCount);
 module.exports = router;
