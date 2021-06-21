@@ -52,11 +52,15 @@ export const NewestArrivals = () => {
 				)}
 			</div>
 
-			<Pagination
-				current={pageCount}
-				total={(productsCount / 3) * 10}
-				onChange={(value) => setPageCount(value)}
-			/>
+			<div className="row">
+				<nav className="col-md-4 offset-md-4 text-center p-3">
+					<Pagination
+						current={pageCount}
+						total={(productsCount / 3) * 10}
+						onChange={(value) => setPageCount(value)}
+					/>
+				</nav>
+			</div>
 		</>
 	);
 };
