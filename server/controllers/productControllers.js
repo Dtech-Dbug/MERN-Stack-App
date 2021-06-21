@@ -101,3 +101,10 @@ exports.list = async (req, res) => {
 		});
 	}
 };
+
+exports.getProductsCount = async (req, res) => {
+	const TotalProductsCount = await ProductModel.find({})
+		.estimatedDocumentCount()
+		.exec();
+	res.json(TotalProductsCount);
+};
