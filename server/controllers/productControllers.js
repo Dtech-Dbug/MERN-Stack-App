@@ -79,18 +79,47 @@ exports.updateProduct = async (req, res) => {
 	}
 };
 
+// exports.list = async (req, res) => {
+// 	try {
+// 		//destructure the options we need to send
+
+// 		//sort : createdAt/Updatedat ; order : 'asc'/'desc;  limit : number
+// 		const { sort, order, limit } = req.body;
+
+// 		const recievedProducts = await ProductModel.find({})
+// 			.populate("category")
+// 			.populate("subcategories")
+// 			.sort([[sort, order]]) // sort takes an array. If it more than one element , we use another array. so => [[sort , order]]
+// 			.limit(limit)
+// 			.exec();
+
+// 		res.json(recievedProducts);
+// 	} catch (err) {
+// 		console.log(err);
+// 		res.status(400).json({
+// 			err: err.message,
+// 		});
+// 	}
+// };
+
+// Modify the list controller => to support pagination
 exports.list = async (req, res) => {
 	try {
 		//destructure the options we need to send
 
 		//sort : createdAt/Updatedat ; order : 'asc'/'desc;  limit : number
-		const { sort, order, limit } = req.body;
+		// Skip prodcuts to avoid listing the same ones on every pagination
+		//eg => if currentpage = 3 ; we skip=> (3-1)* 3 => skip 6 products and show the 7th-8th-9th prodcuts on the 3rd page.
+		const { sort, order, page } = req.body;
+		const currentPage = page || 1;
+		const CountPerPage = 3; // 2
 
 		const recievedProducts = await ProductModel.find({})
+			.skip((currentPage - 1) * CountPerPage)
 			.populate("category")
 			.populate("subcategories")
 			.sort([[sort, order]]) // sort takes an array. If it more than one element , we use another array. so => [[sort , order]]
-			.limit(limit)
+			.limit(CountPerPage)
 			.exec();
 
 		res.json(recievedProducts);
