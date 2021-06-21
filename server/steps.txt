@@ -136,4 +136,17 @@ v. The default category from ReadProduct is compared to the category change, if 
 steps : 
 i. create aen endpoint in the backend, route.
 ii . create the controller method.[the function that will query the databse , perfom given opearion and resturn res.json]
-iii. create frontend function => for the frontend to interact with the backend
+iii. create frontend function => for the frontend to interact with the backend.
+
+
+
+PAGINATION.
+i. create an endpoint to get total product counts.
+- Beacuse we will need counts for pagination impementation
+
+ii. Create a controller.
+-Similar to  fetching sorted prodcuts , except we pass page as an option now.
+
+iii. Update front end function 
+
+iv. use pagination component from antd
