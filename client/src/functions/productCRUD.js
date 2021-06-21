@@ -41,5 +41,5 @@ export const listOrderedProducts = async (sort, order, page) =>
 	});
 
 export const getProductsCount = async () => {
-	return await axios.get(`http://localhost:8000/api/products/count`);
+	return await axios.get(`http://localhost:8000/api/products/totalcount`);
 };
