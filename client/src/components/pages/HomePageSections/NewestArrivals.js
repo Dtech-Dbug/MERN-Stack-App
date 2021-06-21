@@ -2,20 +2,33 @@ import React, { useEffect, useState } from "react";
 import {
 	listAllProducts,
 	listOrderedProducts,
+	getProductsCount,
 } from "../../../functions/productCRUD";
 import HomePageProductCard from "../../reusable-Components/HomePageProductCard";
 import LoadingCardComponent from "../../reusable-Components/LoadingCardComponent";
 
+//import Pagination from antd
+import { Pagination } from "antd";
+
 export const NewestArrivals = () => {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(false);
+
+	//to store the state of the current page
+	const [pageCount, setPageCount] = useState(1);
+	const [productsCount, setProductsCount] = useState();
+
 	useEffect(() => {
 		loadAllProducts();
-	}, []);
+	}, [pageCount]);
+
+	useEffect(() => {
+		getProductsCount().then((res) => setProductsCount(res.data));
+	});
 
 	const loadAllProducts = () => {
 		setLoading(true);
-		listOrderedProducts("createdAt", "desc", 3).then((res) => {
+		listOrderedProducts("createdAt", "desc", pageCount).then((res) => {
 			setProducts(res.data);
 			console.log("res from new funtion ", res);
 			setLoading(false);
@@ -25,6 +38,7 @@ export const NewestArrivals = () => {
 	return (
 		<>
 			<div className="container">
+				{productsCount}
 				{loading ? (
 					<LoadingCardComponent count={3} />
 				) : (
@@ -37,6 +51,12 @@ export const NewestArrivals = () => {
 					</div>
 				)}
 			</div>
+
+			<Pagination
+				current={pageCount}
+				total={(productsCount / 3) * 10}
+				onChange={(value) => setPageCount(value)}
+			/>
 		</>
 	);
 };
