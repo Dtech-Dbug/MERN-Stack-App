@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { readProduct } from "../../functions/productCRUD";
+import SingleProductViewCard from "../reusable-Components/SingleProductViewCard";
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
@@ -21,6 +22,8 @@ const ViewProduct = ({ match }) => {
 			<br />
 
 			{JSON.stringify(products)}
+
+			<SingleProductViewCard products={products} />
 		</div>
 	);
 };
