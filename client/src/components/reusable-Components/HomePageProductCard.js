@@ -1,11 +1,12 @@
 import React from "react";
 import { Card } from "antd";
+import { Link } from "react-router-dom";
 import JS from "../../Default images/js logo.png";
 import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
 const { Meta } = Card;
 
 const HomePageProductCard = ({ product }) => {
-	const { images, title, description } = product;
+	const { images, title, description, slug } = product;
 	return (
 		<Card
 			className="m-3"
@@ -20,7 +21,9 @@ const HomePageProductCard = ({ product }) => {
 			}
 			actions={[
 				<>
-					<EyeOutlined className="text-warning" /> <br /> view Prouct
+					<Link to={`/products/${slug}`}>
+						<EyeOutlined className="text-warning" /> <br /> view Prouct
+					</Link>
 				</>,
 
 				<>
