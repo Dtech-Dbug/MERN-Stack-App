@@ -21,8 +21,6 @@ const ViewProduct = ({ match }) => {
 			<br />
 			<br />
 
-			{JSON.stringify(products)}
-
 			<div className="container-fluid">
 				<div className="row pt-3 p-3">
 					<SingleProductViewCard products={products} />
