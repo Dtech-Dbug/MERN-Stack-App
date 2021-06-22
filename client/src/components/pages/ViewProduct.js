@@ -23,7 +23,15 @@ const ViewProduct = ({ match }) => {
 
 			{JSON.stringify(products)}
 
-			<SingleProductViewCard products={products} />
+			<div className="container-fluid">
+				<div className="row pt-3 p-3">
+					<SingleProductViewCard products={products} />
+				</div>
+
+				<div className="row">
+					<h3>Related Prodcuts</h3>
+				</div>
+			</div>
 		</div>
 	);
 };
