@@ -4,12 +4,12 @@ import SingleProductViewCard from "../reusable-Components/SingleProductViewCard"
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
-	const [products, setProducts] = useState([]);
+	const [product, setProduct] = useState([]);
 
 	useEffect(() => {
 		readProduct(slug).then((res) => {
 			console.log("Response in the single product", res.data);
-			setProducts(res.data);
+			setProduct(res.data);
 		});
 	}, []);
 
@@ -23,7 +23,7 @@ const ViewProduct = ({ match }) => {
 
 			<div className="container-fluid">
 				<div className="row pt-3 p-3">
-					<SingleProductViewCard products={products} />
+					<SingleProductViewCard product={product} />
 				</div>
 
 				<div className="row">
