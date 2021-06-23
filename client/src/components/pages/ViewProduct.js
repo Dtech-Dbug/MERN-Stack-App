@@ -16,10 +16,6 @@ const ViewProduct = ({ match }) => {
 	return (
 		<div>
 			<h1>Welcome</h1>
-			<h3>{slug}</h3>
-
-			<br />
-			<br />
 
 			<div className="container-fluid">
 				<div className="row pt-3 p-3">
@@ -27,7 +23,11 @@ const ViewProduct = ({ match }) => {
 				</div>
 
 				<div className="row">
-					<h3>Related Prodcuts</h3>
+					<div className="col p-3 text-center">
+						<h3 className="font-weight-bold">
+							<u>Related Prodcuts</u>
+						</h3>
+					</div>
 				</div>
 			</div>
 		</div>
