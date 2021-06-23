@@ -10,7 +10,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const { Meta } = Card;
-const { Tabpane } = Tabs;
+const { TabPane } = Tabs;
 const SingleProductViewCard = ({ product }) => {
 	const { title, images, description } = product;
 	return (
@@ -24,15 +24,18 @@ const SingleProductViewCard = ({ product }) => {
 						})}
 				</Carousel>
 
-				<Tabs>
-					<Tabpane tab="Description" key="1">
+				<Tabs type="card">
+					<TabPane tab="Description" key="1">
 						{description && description}
-					</Tabpane>
+					</TabPane>
+					<TabPane tab="More" key="2">
+						<p>Contact Us For more Info , here 🤜 xxxxxxxx</p>
+					</TabPane>
 				</Tabs>
 			</div>
 
 			<div className="col-md-5">
-				<h3 className="text-center ">{title}</h3>
+				<h3 className="bg-info text-center ">{title}</h3>
 				<Card
 					actions={[
 						<>
