@@ -16,7 +16,6 @@ const SingleProductViewCard = ({ product }) => {
 	return (
 		<>
 			<div className="col-md-7">
-				<h2>Image craousel</h2>
 				<Carousel showArrows={true} autoPlay infiniteLoop>
 					{images &&
 						images.map((i) => {
