@@ -23,6 +23,7 @@ const SingleProductViewCard = ({ products }) => {
 			</div>
 
 			<div className="col-md-5">
+				<h3 className='text-center '>{title}</h3>
 				<Card
 					actions={[
 						<>
@@ -34,7 +35,7 @@ const SingleProductViewCard = ({ products }) => {
 						</Link>,
 					]}
 				>
-					<Meta title={title} description={description} />
+					
 					<p>
 						price/category/subs/shipping/color/brand/quantity available/sold
 					</p>
