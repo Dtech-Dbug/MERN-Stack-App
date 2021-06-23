@@ -10,7 +10,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 const { Meta } = Card;
 const SingleProductViewCard = ({ products }) => {
-	const { title, description, slug, images } = products;
+	const { title, images } = products;
 	return (
 		<>
 			<div className="col-md-7">
