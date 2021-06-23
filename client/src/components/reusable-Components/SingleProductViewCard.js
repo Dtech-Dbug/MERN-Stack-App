@@ -1,30 +1,38 @@
 import React from "react";
-import SingleProductInfo from './SingleProductInfo'
+import SingleProductInfo from "./SingleProductInfo";
 import { Link } from "react-router-dom";
-import { Card } from "antd";
+import { Card, Tabs } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
 
 // import caraousel from react-responsive-caraousel
-import {Carousel} from 'react-responsive-carousel'
+import { Carousel } from "react-responsive-carousel";
 //import css files for react-responsive-Carousel
-import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const { Meta } = Card;
+const { Tabpane } = Tabs;
 const SingleProductViewCard = ({ product }) => {
-	const { title, images } = product;
+	const { title, images, description } = product;
 	return (
 		<>
 			<div className="col-md-7">
 				<h2>Image craousel</h2>
 				<Carousel showArrows={true} autoPlay infiniteLoop>
-					{images && images.map((i) => {
-						 return <img src={i.url} key={i.public_id} alt='oops' />
-					})}
+					{images &&
+						images.map((i) => {
+							return <img src={i.url} key={i.public_id} alt="oops" />;
+						})}
 				</Carousel>
+
+				<Tabs>
+					<Tabpane tab="Description" key="1">
+						{description && description}
+					</Tabpane>
+				</Tabs>
 			</div>
 
 			<div className="col-md-5">
-				<h3 className='text-center '>{title}</h3>
+				<h3 className="text-center ">{title}</h3>
 				<Card
 					actions={[
 						<>
@@ -36,7 +44,7 @@ const SingleProductViewCard = ({ product }) => {
 						</Link>,
 					]}
 				>
-					<SingleProductInfo product={product}/>
+					<SingleProductInfo product={product} />
 				</Card>
 			</div>
 		</>
