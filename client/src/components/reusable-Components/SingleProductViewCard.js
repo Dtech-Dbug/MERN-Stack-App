@@ -1,4 +1,5 @@
 import React from "react";
+import SingleProductInfo from './SingleProductInfo'
 import { Link } from "react-router-dom";
 import { Card } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
@@ -9,8 +10,8 @@ import {Carousel} from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 const { Meta } = Card;
-const SingleProductViewCard = ({ products }) => {
-	const { title, images } = products;
+const SingleProductViewCard = ({ product }) => {
+	const { title, images } = product;
 	return (
 		<>
 			<div className="col-md-7">
@@ -35,10 +36,7 @@ const SingleProductViewCard = ({ products }) => {
 						</Link>,
 					]}
 				>
-					
-					<p>
-						price/category/subs/shipping/color/brand/quantity available/sold
-					</p>
+					<SingleProductInfo product={product}/>
 				</Card>
 			</div>
 		</>
