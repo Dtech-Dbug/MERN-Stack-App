@@ -137,3 +137,5 @@ exports.getProductsCount = async (req, res) => {
 		.exec();
 	res.json(TotalProductsCount);
 };
+
+exports.rateProduct = async (req, res) => {};
