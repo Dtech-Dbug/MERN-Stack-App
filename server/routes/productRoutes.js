@@ -15,6 +15,7 @@ const {
 	updateProduct,
 	list,
 	getProductsCount,
+	rateProduct,
 } = require("../controllers/productControllers");
 
 router.post(
@@ -47,5 +48,12 @@ router.put(
 // because it is easier to send data in the req.body in post method
 // we will send data , like count, limit , order , sort to list products based on certain options => for new sellers and best sellers
 router.post("/products", list);
+
+//new route for rating system
+router.put(
+	"/product/star/:productId",
+	createOrUpdateUserMiddleware,
+	rateProduct
+);
 
 module.exports = router;
