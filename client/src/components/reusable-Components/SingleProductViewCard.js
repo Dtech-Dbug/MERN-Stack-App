@@ -3,7 +3,10 @@ import SingleProductInfo from "./SingleProductInfo";
 import { Link } from "react-router-dom";
 import { Card, Tabs } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
-import StarRatings from "react-star-ratings";
+import StarRating from "react-star-ratings";
+
+//import modal component
+import RatingModal from "../Modal/RatingModal";
 
 // import caraousel from react-responsive-caraousel
 import { Carousel } from "react-responsive-carousel";
@@ -13,7 +16,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const { Meta } = Card;
 const { TabPane } = Tabs;
 const SingleProductViewCard = ({ product }) => {
-	const { title, images, description } = product;
+	const { title, images, description, _id } = product;
 	return (
 		<>
 			<div className="col-md-7">
@@ -36,11 +39,6 @@ const SingleProductViewCard = ({ product }) => {
 
 			<div className="col-md-5">
 				<h3 className="bg-info text-center ">{title}</h3>
-				<StarRatings
-					rating={3}
-					numberOfStars={5}
-					starRatedColor="yellow"
-				></StarRatings>
 
 				<Card
 					actions={[
@@ -51,6 +49,18 @@ const SingleProductViewCard = ({ product }) => {
 						<Link to="/">
 							<HeartOutlined className="text-info" /> <br /> Add to Wishlist
 						</Link>,
+						<RatingModal>
+							<StarRating
+								name={_id}
+								numberOfStars={5}
+								rating={2}
+								changeRating={(newRating, name) =>
+									console.log("newRating", newRating, "name", name)
+								}
+								isSelectable={true}
+								starRatedColor="red"
+							/>
+						</RatingModal>,
 					]}
 				>
 					<SingleProductInfo product={product} />
