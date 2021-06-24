@@ -4,16 +4,23 @@ import { useSelector } from "react-redux";
 import { StarOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const RatingModal = ({ children }) => {
 	const { user } = useSelector((state) => ({ ...state }));
 	const [showModal, setShowModal] = useState(false);
+	const { slug } = useParams();
 	const history = useHistory();
 	function handleModal() {
 		if (user && user.token) {
 			setShowModal(true);
 		} else {
-			history.pushState("/login");
+			//we want to redirect the user from this page to logIn page
+			//if user is not signed in
+			history.push({
+				pathname: "/login",
+				state: { from: `products/${slug}` },
+			});
 		}
 	}
 
