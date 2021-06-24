@@ -3,7 +3,7 @@ import SingleProductInfo from "./SingleProductInfo";
 import { Link } from "react-router-dom";
 import { Card, Tabs } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
-import StarRating from "react-star-ratings";
+import StarRatings from "react-star-ratings";
 
 //import modal component
 import RatingModal from "../Modal/RatingModal";
@@ -50,7 +50,7 @@ const SingleProductViewCard = ({ product }) => {
 							<HeartOutlined className="text-info" /> <br /> Add to Wishlist
 						</Link>,
 						<RatingModal>
-							<StarRating
+							<StarRatings
 								name={_id}
 								numberOfStars={5}
 								rating={2}
@@ -58,7 +58,7 @@ const SingleProductViewCard = ({ product }) => {
 									console.log("newRating", newRating, "name", name)
 								}
 								isSelectable={true}
-								starRatedColor="red"
+								starRatedColor="Yellow"
 							/>
 						</RatingModal>,
 					]}
