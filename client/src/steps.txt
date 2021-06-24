@@ -32,3 +32,10 @@ the issue lied somewhere with a little typo in the requst URL.
 
 Create Admin NAV
 create category : for admin to CRUD categories visually in the FE.
+
+
+
+AFTER RATING :
+case 1.Logged In  usercan Rate.
+case 2: Not logged in user will have to logIn to Rate
+case 2.a=> When user logn In to rate, he/she needs to be redirected
