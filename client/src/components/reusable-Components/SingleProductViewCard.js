@@ -3,6 +3,7 @@ import SingleProductInfo from "./SingleProductInfo";
 import { Link } from "react-router-dom";
 import { Card, Tabs } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
+import StarRatings from "react-star-ratings";
 
 // import caraousel from react-responsive-caraousel
 import { Carousel } from "react-responsive-carousel";
@@ -35,6 +36,12 @@ const SingleProductViewCard = ({ product }) => {
 
 			<div className="col-md-5">
 				<h3 className="bg-info text-center ">{title}</h3>
+				<StarRatings
+					rating={3}
+					numberOfStars={5}
+					starRatedColor="yellow"
+				></StarRatings>
+
 				<Card
 					actions={[
 						<>
