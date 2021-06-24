@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
-import { useSelector } from "react";
+import { useSelector } from "react-redux";
 import { StarOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 
@@ -11,21 +11,22 @@ const RatingModal = ({ children }) => {
 	return (
 		<>
 			<div onClick={() => setShowModal(true)}>
-				<StarOutlined /> <br /> {user ? "Rate Product" : "Login To Rate"}
+				<StarOutlined className="text-danger" /> <br />{" "}
+				{user ? "Leave rating" : "Login to leave rating"}
 			</div>
 
 			<Modal
-				title="Leave a Rating :)"
+				title="Leave your rating"
 				centered
 				visible={showModal}
 				onOk={() => {
 					setShowModal(false);
-					toast.suces("Thanks for your review");
+					toast.success("Thanks for your review. It will apper soon");
 				}}
-				oncancel={() => {
-					setShowModal(false);
-				}}
-			></Modal>
+				onCancel={() => setShowModal(false)}
+			>
+				{children}
+			</Modal>
 		</>
 	);
 };
