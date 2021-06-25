@@ -6,6 +6,9 @@ const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
 	const [product, setProduct] = useState([]);
 
+	//state of stars, instead of hard coding
+	const [star, setStar] = useState(0);
+
 	useEffect(() => {
 		readProduct(slug).then((res) => {
 			console.log("Response in the single product", res.data);
@@ -16,6 +19,9 @@ const ViewProduct = ({ match }) => {
 	function onStarClick(newRating, name) {
 		//name => id of the product which is being rated
 		console.table(newRating, name);
+
+		//setStar ti=o newrating=> whatver star number we useri is selecting
+		setStar(newRating);
 	}
 
 	return (
@@ -24,7 +30,11 @@ const ViewProduct = ({ match }) => {
 
 			<div className="container-fluid">
 				<div className="row pt-3 p-3">
-					<SingleProductViewCard product={product} onStarClick={onStarClick} />
+					<SingleProductViewCard
+						product={product}
+						onStarClick={onStarClick}
+						star={star}
+					/>
 				</div>
 
 				<div className="row">
