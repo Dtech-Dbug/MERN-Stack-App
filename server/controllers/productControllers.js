@@ -166,7 +166,7 @@ exports.rateProduct = async (req, res) => {
 	//If it is true => then we get matching element object. [meaning user already rated]
 	//or we get undefined [meaning: user has not rated the product yet]
 	let existingRatingObject = product.ratings.find(
-		(element) => element.postedBy == user._id
+		(element) => element.postedBy.toString() === user._id.toString()
 	);
 
 	//based on the existingratingProduct variable , we can add or update ratings.
