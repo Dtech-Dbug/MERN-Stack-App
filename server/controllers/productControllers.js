@@ -166,7 +166,9 @@ exports.rateProduct = async (req, res) => {
 	//If it is true => then we get matching element object. [meaning user already rated]
 	//or we get undefined [meaning: user has not rated the product yet]
 	let existingRatingObject = product.ratings.find(
-		(element) => element.postedBy.toString() === user._id.toString()
+		(element) => element.postedBy.toString() == user._id.toString()
+		//changed the IDs to trimg and made losse equal operation to make it work
+		//without th toString , the ratings arrays in the FrontEnd kept pushing new ratings, instead of updating
 	);
 
 	//based on the existingratingProduct variable , we can add or update ratings.
