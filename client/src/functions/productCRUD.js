@@ -43,3 +43,15 @@ export const listOrderedProducts = async (sort, order, page) =>
 export const getProductsCount = async () => {
 	return await axios.get(`http://localhost:8000/api/products/totalcount`);
 };
+
+export const productRating = async (productId, star, authtoken) => {
+	return axios.put(
+		`http://localhost:8000/api//product/star/${productId}`,
+		{ star },
+		{
+			headers: {
+				authtoken,
+			},
+		}
+	);
+};
