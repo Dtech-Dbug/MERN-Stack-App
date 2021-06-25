@@ -23,6 +23,18 @@ const ViewProduct = ({ match }) => {
 		});
 	};
 
+	useEffect(() => {
+		//to show the selected star rating
+		if (product.ratings && user) {
+			let existingRatingObject = product.ratings.find(
+				(element) => element.postedBy.toString() === user._id.toString()
+				//changed the IDs to trimg and made losse equal operation to make it work
+				//without th toString , the ratings arrays in the FrontEnd kept pushing new ratings, instead of updating
+			);
+			existingRatingObject && setStar(existingRatingObject.star); //to show the selected stars by the user
+		}
+	});
+
 	function onStarClick(newRating, name) {
 		//name => id of the product which is being rated
 		console.table(newRating, name);
