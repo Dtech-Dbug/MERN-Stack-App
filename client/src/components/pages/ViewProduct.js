@@ -13,13 +13,18 @@ const ViewProduct = ({ match }) => {
 		});
 	}, []);
 
+	function onStarClick(newRating, name) {
+		//name => id of the product which is being rated
+		console.table(newRating, name);
+	}
+
 	return (
 		<div>
 			<h1>Welcome</h1>
 
 			<div className="container-fluid">
 				<div className="row pt-3 p-3">
-					<SingleProductViewCard product={product} />
+					<SingleProductViewCard product={product} onStarClick={onStarClick} />
 				</div>
 
 				<div className="row">
