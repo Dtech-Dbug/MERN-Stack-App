@@ -1,4 +1,5 @@
 const ProductModel = require("../model/productModel");
+const User = require("../model/userModel");
 const slugify = require("slugify");
 
 exports.createProduct = async (req, res) => {
