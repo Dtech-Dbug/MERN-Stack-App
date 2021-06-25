@@ -46,7 +46,7 @@ export const getProductsCount = async () => {
 
 export const productRating = async (productId, star, authtoken) => {
 	return await axios.put(
-		`http://localhost:8000/api//product/star/${productId}`,
+		`http://localhost:8000/api/product/star/${productId}`,
 		{ star },
 		{
 			headers: {
