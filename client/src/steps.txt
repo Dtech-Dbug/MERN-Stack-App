@@ -39,3 +39,16 @@ AFTER RATING :
 case 1.Logged In  usercan Rate.
 case 2: Not logged in user will have to logIn to Rate
 case 2.a=> When user logn In to rate, he/she needs to be redirected
+
+
+STEPS TO SHOW SELECTED STAR RATINGS,by the user, in the FRONTEND
+STEPS:
+- included another useEffect
+
+-- checked if product.ratings and user exists
+
+- If they exist, we search for ratings object in the product object and see if user has already rated the product and store that in a variable named existingRatingObject
+
+- if yes, we setStar to existingratingObject.stars
+
+- existingRatingObject =product.ratings
