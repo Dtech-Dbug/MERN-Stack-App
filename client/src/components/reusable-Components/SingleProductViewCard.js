@@ -15,7 +15,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const { Meta } = Card;
 const { TabPane } = Tabs;
-const SingleProductViewCard = ({ product }) => {
+const SingleProductViewCard = ({ product, onStarClick, star }) => {
 	const { title, images, description, _id } = product;
 	return (
 		<>
@@ -53,10 +53,8 @@ const SingleProductViewCard = ({ product }) => {
 							<StarRatings
 								name={_id}
 								numberOfStars={5}
-								rating={2}
-								changeRating={(newRating, name) =>
-									console.log("newRating", newRating, "name", name)
-								}
+								rating={star}
+								changeRating={onStarClick}
 								isSelectable={true}
 								starRatedColor="Yellow"
 							/>
