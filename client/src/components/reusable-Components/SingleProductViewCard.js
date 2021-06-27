@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Card, Tabs } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
 import StarRatings from "react-star-ratings";
-import showAverageRating from "../../functions/rating";
+import { showAverageRating } from "../../functions/rating";
 
 //import modal component
 import RatingModal from "../Modal/RatingModal";
@@ -17,7 +17,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const { Meta } = Card;
 const { TabPane } = Tabs;
 const SingleProductViewCard = ({ product, onStarClick, star }) => {
-	const { title, images, description, _id } = product;
+	const { title, images, description, _id, ratings } = product;
 	return (
 		<>
 			<div className="col-md-7">
@@ -40,7 +40,7 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 
 			<div className="col-md-5">
 				<h3 className="bg-info text-center ">{title}</h3>
-				{product && product.ratings.length > 0 ? (
+				{product && ratings && ratings.length > 0 ? (
 					showAverageRating(product)
 				) : (
 					<div className="text-center pt-1 pb-3">No rating yet</div>
