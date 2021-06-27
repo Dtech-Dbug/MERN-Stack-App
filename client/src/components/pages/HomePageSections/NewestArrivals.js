@@ -6,6 +6,7 @@ import {
 } from "../../../functions/productCRUD";
 import HomePageProductCard from "../../reusable-Components/HomePageProductCard";
 import LoadingCardComponent from "../../reusable-Components/LoadingCardComponent";
+import { showAverageRating } from "../../../functions/rating";
 
 //import Pagination from antd
 import { Pagination } from "antd";
@@ -38,7 +39,6 @@ export const NewestArrivals = () => {
 	return (
 		<>
 			<div className="container">
-				{productsCount}
 				{loading ? (
 					<LoadingCardComponent count={3} />
 				) : (
