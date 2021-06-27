@@ -15,20 +15,19 @@ const showAverageRating = (p) => {
 
 		let averageRating = totalReduced / length;
 		// this is the calucated average
+		return (
+			<div className="text-center pt-1 pb-3">
+				<span>
+					<StarRating
+						starDimension="20px"
+						starSpacing="2px"
+						starRatedColor="yellow"
+						rating={averageRating}
+						editing={false}
+					/>{" "}
+					({p.ratings.length})
+				</span>
+			</div>
+		);
 	}
-
-	return (
-		<div className="text-center pt-1 pb-3">
-			<span>
-				<StarRating
-					starDimension="20px"
-					starSpacing="2px"
-					starRatedColor="yellow"
-					rating={averageRating}
-					editing={false}
-				/>{" "}
-				({p.ratings.length})
-			</span>
-		</div>
-	);
 };
