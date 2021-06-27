@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Card, Tabs } from "antd";
 import { ShoppingCartOutlined, HeartOutlined } from "@ant-design/icons";
 import StarRatings from "react-star-ratings";
+import showAverageRating from "../../functions/rating";
 
 //import modal component
 import RatingModal from "../Modal/RatingModal";
@@ -39,6 +40,11 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 
 			<div className="col-md-5">
 				<h3 className="bg-info text-center ">{title}</h3>
+				{product && product.ratings.length > 0 ? (
+					showAverageRating(product)
+				) : (
+					<div className="text-center pt-1 pb-3">No rating yet</div>
+				)}
 
 				<Card
 					actions={[
