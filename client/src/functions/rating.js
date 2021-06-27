@@ -1,6 +1,6 @@
 import StarRating from "react-star-ratings";
 
-const showAverageRating = (p) => {
+export const showAverageRating = (p) => {
 	if (p && p.ratings) {
 		let ratingsArray = p && p.ratings;
 		let total = [];
