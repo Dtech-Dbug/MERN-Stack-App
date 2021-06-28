@@ -1,4 +1,5 @@
 const express = require("express");
+const ProductModel = require("../model/productModel");
 
 const router = express.Router();
 //middlewares
@@ -56,6 +57,8 @@ router.put(
 	createOrUpdateUserMiddleware,
 	rateProduct
 );
+
+//new point for fetching related products
 
 router.get("/product/related/:productId", listRelatedProducts);
 
