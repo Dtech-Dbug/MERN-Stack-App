@@ -16,6 +16,7 @@ const {
 	list,
 	getProductsCount,
 	rateProduct,
+	listRelatedProducts,
 } = require("../controllers/productControllers");
 
 router.post(
@@ -55,5 +56,7 @@ router.put(
 	createOrUpdateUserMiddleware,
 	rateProduct
 );
+
+router.get("/product/related/:productId", listRelatedProducts);
 
 module.exports = router;
