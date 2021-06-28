@@ -1,6 +1,7 @@
 const ProductModel = require("../model/productModel");
 const User = require("../model/userModel");
 const slugify = require("slugify");
+const productModel = require("../model/productModel");
 
 exports.createProduct = async (req, res) => {
 	//
@@ -202,4 +203,23 @@ exports.rateProduct = async (req, res) => {
 		res.json(updateRating);
 		console.log("Rating Updated:::", updateRating);
 	}
+
+	exports.listRelatedProducts = async (productId) => {
+		const product = await ProductModel.find(productId);
+
+		const relatedProducts = await productModel
+			.find({
+				_id: {
+					$ne: product._id,
+				},
+				category: product.category,
+			})
+			.limit(3)
+			.populate("category")
+			.populate(subCategories)
+			.populate(postedBy)
+			.exec();
+
+		res.json(relatedProducts);
+	};
 };
