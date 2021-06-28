@@ -55,3 +55,7 @@ export const productRating = async (productId, star, authtoken) => {
 		}
 	);
 };
+
+export const relatedProducts = async (productId) => {
+	return axios.get(`http://localhost:8000/api/product/related/${productId}`);
+};
