@@ -204,8 +204,8 @@ exports.rateProduct = async (req, res) => {
 		console.log("Rating Updated:::", updateRating);
 	}
 
-	exports.listRelatedProducts = async (productId) => {
-		const product = await ProductModel.find(productId);
+	exports.listRelatedProducts = async (req, res) => {
+		const product = await ProductModel.find(req.params.productId);
 
 		const relatedProducts = await productModel
 			.find({
