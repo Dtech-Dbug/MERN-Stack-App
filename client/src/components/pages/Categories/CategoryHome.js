@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getCategory } from "../../../functions/categoryCRUD";
+import HomePageProductCard from "../../reusable-Components/HomePageProductCard";
 
 const CategoryHome = ({ match }) => {
 	const [loading, setLoading] = useState(false);
@@ -20,6 +21,17 @@ const CategoryHome = ({ match }) => {
 			<h2 className="jumbotron text-center display-4">
 				{product && product.length} Products under {category.name}
 			</h2>
+
+			<div className="row">
+				{product &&
+					product.map((p) => {
+						return (
+							<div className="col" key={p._id}>
+								<HomePageProductCard product={p} />;
+							</div>
+						);
+					})}
+			</div>
 		</>
 	);
 };
