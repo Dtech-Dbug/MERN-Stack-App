@@ -34,6 +34,7 @@ import { CreateProduct } from "./components/pages/protected-routes/admin/Product
 import ListAllProducts from "./components/pages/protected-routes/admin/Product/listProducts";
 import { UpdateProduct } from "./components/pages/protected-routes/admin/Product/updateProduct";
 import ViewProduct from "./components/pages/ViewProduct";
+import CategoryHome from "./components/pages/Categories/CategoryHome";
 //importing the axios function to send data to our bakcend
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
 			<Route path="/register/complete" exact component={RegisterComplete} />
 			<Route path="/forgot/password" exact component={ForgotPassword} />
 			<Route path="/products/:slug" exact component={ViewProduct} />
+			<Route path="/category/:slug" exact component={CategoryHome} />
 
 			<Switch>
 				<UserRoute exact path="/user/history" component={History} />
