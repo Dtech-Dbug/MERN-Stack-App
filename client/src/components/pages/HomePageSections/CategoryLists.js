@@ -18,8 +18,11 @@ const CategoryLists = () => {
 		allCategories &&
 		allCategories.map((c) => {
 			return (
-				<div key={c._id} className="col btn btn-primary btn-raised m-1">
-					{c.name}
+				<div
+					key={c._id}
+					className="col btn btn-outlined-primary btn-lg btn-raised m-3"
+				>
+					<Link to={`/category/${c.slug}`}>{c.name}</Link>
 				</div>
 			);
 		});
