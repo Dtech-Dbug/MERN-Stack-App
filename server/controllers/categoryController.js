@@ -2,6 +2,7 @@ const Category = require("../model/categoryModel");
 const SubCategory = require("../model/subCategoryModel");
 
 const slugify = require("slugify");
+const ProductModel = require("../model/productModel");
 
 exports.create = async (req, res) => {
 	//
@@ -24,7 +25,17 @@ exports.read = async (req, res) => {
 	//if we were not using asybc/await , we can assign a callback to the exec function : like exec((err, data)=> {data will be the category})
 	// params : parameeter for requests : that is => category/params
 	//the slug : name should be same as in the routes, in the routes we named it catergoy/:slug , so we used slug method, if we had named it id , it would be => slug : req.params.id
-	res.json(readCategory);
+	//res.json(readCategory);
+
+	//quering the database with the categoryid to find products
+	const product = await ProductModel.find({ readCategory })
+		.populate("category")
+		.exec();
+
+	res.json({
+		readCategory,
+		product,
+	});
 };
 
 exports.update = async (req, res) => {
