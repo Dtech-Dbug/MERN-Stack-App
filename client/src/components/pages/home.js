@@ -3,12 +3,18 @@ import {
 	listAllProducts,
 	listOrderedProducts,
 } from "../../functions/productCRUD";
+import { getCategoryLists } from "../../functions/categoryCRUD";
 
 import TypewriterComponent from "../reusable-Components/TypewriterComponent";
 import { NewestArrivals } from "./HomePageSections/NewestArrivals";
 import { BestSellers } from "./HomePageSections/BestSellers";
 
 export const Home = () => {
+	const [allcategories, setAllCategories] = useState([]);
+
+	useEffect(() => {
+		getCategoryLists().then((res) => console.log("all cats :", res.data));
+	}, []);
 	return (
 		<>
 			<h2>Home</h2>;
@@ -28,6 +34,7 @@ export const Home = () => {
 				Best Sellers
 			</h3>
 			<BestSellers />
+			<h3 className="display-6 jumbotron text-center mt-1 mb-1">Categories</h3>
 		</>
 	);
 };
