@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { readProduct, productRating } from "../../functions/productCRUD";
+import {
+	readProduct,
+	productRating,
+	relatedProducts,
+} from "../../functions/productCRUD";
 import SingleProductViewCard from "../reusable-Components/SingleProductViewCard";
 import { useSelector } from "react-redux";
+import { Card } from "antd";
+import HomePageProductCard from "../reusable-Components/HomePageProductCard";
+const { Meta } = Card;
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
 	const [product, setProduct] = useState([]);
+	const [relatedProductsList, setRelatedProductsList] = useState([]);
 
 	//state of stars, instead of hard coding
 	const [star, setStar] = useState(0);
@@ -16,10 +24,15 @@ const ViewProduct = ({ match }) => {
 	useEffect(() => {
 		loadProduct();
 	}, []);
+
 	const loadProduct = () => {
 		readProduct(slug).then((res) => {
 			console.log("Response in the single product", res.data);
 			setProduct(res.data);
+			relatedProducts(res.data._id).then((res) => {
+				console.log("related Products:", res.data);
+				setRelatedProductsList(res.data);
+			});
 		});
 	};
 
@@ -66,6 +79,21 @@ const ViewProduct = ({ match }) => {
 							<u>Related Prodcuts</u>
 						</h3>
 					</div>
+				</div>
+
+				<div className="row p-3 pb-3">
+					{relatedProductsList &&
+						relatedProductsList.map((p, index) => {
+							return (
+								<div className="col-md-4" key={index}>
+									<HomePageProductCard
+										product={p}
+										onStarClick={onStarClick}
+										star={star}
+									/>
+								</div>
+							);
+						})}
 				</div>
 			</div>
 		</div>
