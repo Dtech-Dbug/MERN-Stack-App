@@ -33,7 +33,7 @@ exports.read = async (req, res) => {
 		.exec();
 
 	res.json({
-		readCategory,
+		category: readCategory,
 		product,
 	});
 };
