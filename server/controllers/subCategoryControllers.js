@@ -4,6 +4,8 @@ const SubCategory = require("../model/subCategoryModel");
 //ste2: import slugify for slugs
 const slugify = require("slugify");
 
+const ProductModel = require("../model/productModel");
+
 //step3 : create the controller functions
 
 exports.create = async (req, res) => {
@@ -24,7 +26,20 @@ exports.create = async (req, res) => {
 };
 
 exports.read = async (req, res) => {
-	res.json(await SubCategory.findOne({ slug: req.params.slug }));
+	const subCategory = await SubCategory.findOne({
+		slug: req.params.slug,
+	}).exec();
+
+	const products = await ProductModel.find({
+		subCategories: subCategory,
+	})
+		.populate("category")
+		.exec();
+
+	res.json({
+		subCategory,
+		products,
+	});
 };
 
 exports.update = async (req, res) => {
