@@ -18,6 +18,7 @@ const {
 	getProductsCount,
 	rateProduct,
 	listRelatedProducts,
+	searchFilter,
 } = require("../controllers/productControllers");
 
 router.post(
@@ -61,5 +62,8 @@ router.put(
 //new point for fetching related products
 
 router.get("/product/related/:productId", listRelatedProducts);
+
+//filter : endpoint
+router.post("/search/filter", searchFilter);
 
 module.exports = router;
