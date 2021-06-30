@@ -14,7 +14,7 @@ const SubCategoriesList = () => {
 		});
 	}, []);
 
-	const showCategories = () =>
+	const showSubCategories = () =>
 		subCategories &&
 		subCategories.map((c) => {
 			return (
@@ -33,7 +33,7 @@ const SubCategoriesList = () => {
 				{loading ? (
 					<h4 className="text-center">Loading...</h4>
 				) : (
-					showCategories()
+					showSubCategories()
 				)}
 			</div>
 		</div>
