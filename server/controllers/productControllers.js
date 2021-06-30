@@ -227,3 +227,25 @@ exports.listRelatedProducts = async (req, res) => {
 		});
 	}
 };
+
+//controller for advanced search filter
+const handleQuery = async (req, res, query) => {
+	const products = await ProductModel.find({
+		$text: { $search: query },
+	})
+		.populate("category", "_id name")
+		.populate("subCategories", "_id name")
+		.exec();
+
+	res.json(products);
+};
+
+exports.searchFilter = async (req, res) => {
+	const { query } = req.body;
+
+	if (query) {
+		console.log("search Query :", query);
+		//use a custome function to handle all queries(search , price, filter etc)
+		await handleQuery(req, res, query);
+	}
+};
