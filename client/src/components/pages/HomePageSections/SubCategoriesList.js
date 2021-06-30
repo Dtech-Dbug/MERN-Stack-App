@@ -16,13 +16,13 @@ const SubCategoriesList = () => {
 
 	const showSubCategories = () =>
 		subCategories &&
-		subCategories.map((c) => {
+		subCategories.map((s) => {
 			return (
 				<div
-					key={c._id}
+					key={s._id}
 					className="col btn btn-outlined-primary btn-lg btn-raised m-3"
 				>
-					<Link to={`/category/${c.slug}`}>{c.name}</Link>
+					<Link to={`/subcategory/${s.slug}`}>{s.name}</Link>
 				</div>
 			);
 		});
