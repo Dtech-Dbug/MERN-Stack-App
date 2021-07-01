@@ -61,5 +61,5 @@ export const relatedProducts = async (productId) => {
 };
 
 export const searchedProducts = async (arg) => {
-	return await axios.post(`http:localhost:8000/api/search/filter`, arg);
+	return await axios.post(`http://localhost:8000/api/search/filter`, arg);
 };
