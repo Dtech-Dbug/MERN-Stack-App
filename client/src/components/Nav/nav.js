@@ -8,6 +8,7 @@ import {
 	HomeTwoTone,
 	LogoutOutlined,
 	DashboardTwoTone,
+	ShoppingOutlined,
 } from "@ant-design/icons";
 
 import Search from "../reusable-Components/Search";
@@ -45,6 +46,10 @@ export const Nav = () => {
 		<Menu onClick={handleClick} selectedKeys={current} mode="horizontal">
 			<Item key="home" icon={<HomeTwoTone twoToneColor="crimson" />}>
 				<Link to="/">Home</Link>
+			</Item>
+
+			<Item key="shop" icon={<ShoppingOutlined />}>
+				<Link to="/shop">Shop</Link>
 			</Item>
 
 			{!user && (
