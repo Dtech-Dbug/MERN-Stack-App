@@ -59,3 +59,7 @@ export const productRating = async (productId, star, authtoken) => {
 export const relatedProducts = async (productId) => {
 	return axios.get(`http://localhost:8000/api/product/related/${productId}`);
 };
+
+export const searchedProducts = async (arg) => {
+	return axios.post(`http:localhost:8000/api/search/filter`, arg);
+};
