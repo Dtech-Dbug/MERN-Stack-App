@@ -9,6 +9,7 @@ import {
 	LogoutOutlined,
 	DashboardTwoTone,
 	ShoppingOutlined,
+	ShoppingTwoTone,
 } from "@ant-design/icons";
 
 import Search from "../reusable-Components/Search";
@@ -48,7 +49,7 @@ export const Nav = () => {
 				<Link to="/">Home</Link>
 			</Item>
 
-			<Item key="shop" icon={<ShoppingOutlined />}>
+			<Item key="shop" icon={<ShoppingTwoTone twoToneColor="crimson" />}>
 				<Link to="/shop">Shop</Link>
 			</Item>
 
