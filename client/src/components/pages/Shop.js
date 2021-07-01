@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import HomePageProductCard from "../reusable-Components/HomePageProductCard";
 import { listAllProducts } from "../../functions/productCRUD";
+import { searchedProducts } from "../../functions/productCRUD";
 
 const Shop = () => {
 	const [loading, setLoading] = useState(false);
@@ -14,14 +15,19 @@ const Shop = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log("Pattern 🖌 ---> ", text);
+		loadSearchedProducts({ query: text });
 	}, [text]);
 
 	const loadProducts = () => {
 		listAllProducts(9).then((res) => {
 			setLoading(false);
 			setProducts(res.data);
+			console.log("shop page ", res);
 		});
+	};
+
+	const loadSearchedProducts = (text) => {
+		searchedProducts(text).then((res) => setProducts(res.data));
 	};
 
 	return (
