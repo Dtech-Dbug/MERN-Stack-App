@@ -10,8 +10,11 @@ import {
 	DashboardTwoTone,
 } from "@ant-design/icons";
 
+import Search from "../reusable-Components/Search";
+
 import firebase from "firebase";
 import { useHistory } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 
 const { SubMenu, Item } = Menu;
@@ -84,6 +87,10 @@ export const Nav = () => {
 					</Item>
 				</SubMenu>
 			)}
+
+			<span className="float-right">
+				<Search />
+			</span>
 		</Menu>
 	);
 };
