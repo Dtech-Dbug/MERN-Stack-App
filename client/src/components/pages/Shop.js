@@ -6,10 +6,16 @@ import { listAllProducts } from "../../functions/productCRUD";
 const Shop = () => {
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
+	const { search } = useSelector((state) => ({ ...state }));
+	const { text } = search;
 
 	useEffect(() => {
 		loadProducts();
 	}, []);
+
+	useEffect(() => {
+		console.log("Pattern 🖌 ---> ", text);
+	}, [text]);
 
 	const loadProducts = () => {
 		listAllProducts(9).then((res) => {
