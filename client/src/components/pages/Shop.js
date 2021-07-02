@@ -3,10 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import HomePageProductCard from "../reusable-Components/HomePageProductCard";
 import { listAllProducts } from "../../functions/productCRUD";
 import { searchedProducts } from "../../functions/productCRUD";
+import { Menu, Slider } from "antd";
+import { DollarOutlined } from "@ant-design/icons";
+
+const { SubMenu, ItemGroup } = Menu;
 
 const Shop = () => {
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
+	const [price, setPrice] = useState([0, 0]);
 	const { search } = useSelector((state) => ({ ...state }));
 	const { text } = search;
 
@@ -39,7 +44,32 @@ const Shop = () => {
 	return (
 		<div className="container-fluid">
 			<div className="row">
-				<div className="col-md-3"> Search / Filter Menu</div>
+				<div className="col-md-3">
+					{" "}
+					Search / Filter Menu
+					<hr />
+					<Menu mode="inline" defaultOpenKeys={["slider"]}>
+						<SubMenu
+							key="slider"
+							title={
+								<span className="h6">
+									<DollarOutlined /> Price
+								</span>
+							}
+						>
+							<div>
+								<Slider
+									className="ml-4 mr-4"
+									tipFormatter={(v) => `$${v}`}
+									range
+									value={price}
+									onChange={(v) => setPrice(v)}
+									max="4999"
+								/>
+							</div>
+						</SubMenu>
+					</Menu>
+				</div>
 
 				<div className="col-md-9">
 					{loading ? (
