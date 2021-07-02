@@ -37,8 +37,8 @@ const Shop = () => {
 		});
 	};
 
-	const loadSearchedProducts = (text) => {
-		searchedProducts(text).then((res) => setProducts(res.data));
+	const loadSearchedProducts = (arg) => {
+		searchedProducts(arg).then((res) => setProducts(res.data));
 	};
 
 	return (
