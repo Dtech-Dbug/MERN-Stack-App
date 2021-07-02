@@ -262,8 +262,21 @@ const handlePrice = async (req, res, price) => {
 	}
 };
 
+const handleCategory = async (req, res, category) => {
+	try {
+		products = await ProductModel.find({ category })
+			.populate("category", "_id name")
+			.populate("subCategories", "_id name")
+			.exec();
+
+		res.json(products);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 exports.searchFilter = async (req, res) => {
-	const { query, price } = req.body;
+	const { query, price, category } = req.body;
 
 	if (query) {
 		console.log("search Query :", query);
@@ -275,5 +288,11 @@ exports.searchFilter = async (req, res) => {
 		console.log(price);
 		//proce will be array like : [100,200] : min: 100 / max:200
 		await handlePrice(req, res, price);
+	}
+
+	if (category) {
+		console.log("search category :", category);
+		//use a custome function to handle all queries(search , price, filter etc)
+		await handleCategory(req, res, category);
 	}
 };
