@@ -275,8 +275,44 @@ const handleCategory = async (req, res, category) => {
 	}
 };
 
+const handleStars = async (req, res, stars) => {
+	//use a new method of mongoose : project Aggregation
+	//lets you add new features to the model , that does not exist in the existing model
+	ProductModel.aggregate([
+		{
+			$project: {
+				document: "$$ROOT",
+				//total access to the document => model
+				floorAverage: {
+					// native of math.floor and math.ceiling
+					// mongoose has its method floor : which does ethe same
+					//for rates 4.4 and below we show 4
+					//but for 4.5 or more we show 5
+					$floor: { $avg: "$ratings.star" },
+				},
+			},
+		},
+		{ $match: { floorAverage: stars } },
+		//every product will have their floorAverage generated
+		//we match the stars for the floorAvereage generated
+	])
+		.limit(12)
+		.exec((err, agg) => {
+			if (err) console.log("aggregates error", err);
+
+			//esle find thr model based on id => which is agg in the exec parameter
+			ProductModel.find({ _id: agg })
+				.populate("category", "_id name")
+				.populate("subCategories", "_id name")
+				.exec((err, products) => {
+					if (err) console.log("Prodcyt Aggregate error", err);
+					res.json(products);
+				});
+		});
+};
+
 exports.searchFilter = async (req, res) => {
-	const { query, price, category } = req.body;
+	const { query, price, category, stars } = req.body;
 
 	if (query) {
 		console.log("search Query :", query);
@@ -294,5 +330,9 @@ exports.searchFilter = async (req, res) => {
 		console.log("search category :", category);
 		//use a custome function to handle all queries(search , price, filter etc)
 		await handleCategory(req, res, category);
+	}
+	if (stars) {
+		console.log(stars);
+		await handleStars(req, res, stars);
 	}
 };
