@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import HomePageProductCard from "../reusable-Components/HomePageProductCard";
+import StarFilter from "../reusable-Components/StarFilter";
 import { getCategoryLists } from "../../functions/categoryCRUD";
 import { listAllProducts } from "../../functions/productCRUD";
 import { searchedProducts } from "../../functions/productCRUD";
 import { Menu, Slider, Checkbox } from "antd";
-import { DollarOutlined } from "@ant-design/icons";
+import { DollarOutlined, StarOutlined } from "@ant-design/icons";
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -19,6 +20,9 @@ const Shop = () => {
 	const [categories, setCategories] = useState([]);
 	//state for categoryids
 	const [categoryIds, setCategoryIds] = useState([]);
+
+	//state for stars
+	const [star, setStar] = useState("");
 
 	const dispatch = useDispatch();
 
@@ -116,6 +120,22 @@ const Shop = () => {
 		loadSearchedProducts({ category: inTheState });
 	};
 
+	const showStar = () => {
+		return (
+			<>
+				{" "}
+				<StarFilter starClick={handleStarClicks} numberOfStars={5} />
+				<StarFilter starClick={handleStarClicks} numberOfStars={4} />
+				<StarFilter starClick={handleStarClicks} numberOfStars={3} />
+				<StarFilter starClick={handleStarClicks} numberOfStars={2} />
+				<StarFilter starClick={handleStarClicks} numberOfStars={1} />
+			</>
+		);
+	};
+	const handleStarClicks = (num) => {
+		console.log("Star Filter :", num);
+	};
+
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -153,6 +173,17 @@ const Shop = () => {
 							}
 						>
 							<div> {showCategoriesList()}</div>
+						</SubMenu>
+
+						<SubMenu
+							key="stars"
+							title={
+								<span className="h6">
+									<StarOutlined /> Rating
+								</span>
+							}
+						>
+							<div className="pb-2 pl-4 pr-4">{showStar()}</div>
 						</SubMenu>
 					</Menu>
 				</div>
