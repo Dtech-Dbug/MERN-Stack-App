@@ -15,7 +15,13 @@ const Shop = () => {
 	}, []);
 
 	useEffect(() => {
-		loadSearchedProducts({ query: text });
+		//delay requests for optimization
+
+		const delay = setTimeout(() => {
+			loadSearchedProducts({ query: text });
+		}, 300);
+
+		return () => clearTimeout(delay);
 	}, [text]);
 
 	const loadProducts = () => {
