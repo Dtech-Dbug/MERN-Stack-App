@@ -1,7 +1,7 @@
 import React from "react";
 import StarRating from "react-star-ratings";
 
-const Star = ({ starClick, numberOfStars }) => (
+const StarFilter = ({ starClick, numberOfStars }) => (
 	<>
 		<StarRating
 			changeRating={() => starClick(numberOfStars)}
@@ -15,4 +15,4 @@ const Star = ({ starClick, numberOfStars }) => (
 	</>
 );
 
-export default Star;
+export default StarFilter;
