@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import HomePageProductCard from "../reusable-Components/HomePageProductCard";
+import { getCategoryLists } from "../../functions/categoryCRUD";
 import { listAllProducts } from "../../functions/productCRUD";
 import { searchedProducts } from "../../functions/productCRUD";
-import { Menu, Slider } from "antd";
+import { Menu, Slider, Checkbox } from "antd";
 import { DollarOutlined } from "@ant-design/icons";
 
 const { SubMenu, ItemGroup } = Menu;
@@ -15,13 +16,27 @@ const Shop = () => {
 	const [ok, setOk] = useState(false);
 	const { search } = useSelector((state) => ({ ...state }));
 	const { text } = search;
+	const [categories, setCategories] = useState([]);
+	//state for categoryids
+	const [categoryIds, setCategoryIds] = useState([]);
 
 	const dispatch = useDispatch();
 
+	//1st useEffect
 	useEffect(() => {
 		loadProducts();
+		getCategoryLists().then((res) => setCategories(res.data));
 	}, []);
 
+	const loadProducts = () => {
+		listAllProducts(9).then((res) => {
+			setLoading(false);
+			setProducts(res.data);
+			console.log("shop page ", res);
+		});
+	};
+
+	//2nd useEffect
 	useEffect(() => {
 		//delay requests for optimization
 
@@ -36,14 +51,6 @@ const Shop = () => {
 	useEffect(() => {
 		loadSearchedProducts({ price });
 	}, [ok]);
-
-	const loadProducts = () => {
-		listAllProducts(9).then((res) => {
-			setLoading(false);
-			setProducts(res.data);
-			console.log("shop page ", res);
-		});
-	};
 
 	const loadSearchedProducts = (arg) => {
 		searchedProducts(arg).then((res) => setProducts(res.data));
@@ -61,6 +68,52 @@ const Shop = () => {
 		setTimeout(() => {
 			setOk(!ok);
 		}, 300);
+	};
+
+	const showCategoriesList = () =>
+		categories.map((c) => {
+			return (
+				<div key={c._id}>
+					<Checkbox
+						className="pb-2 pl-4 pr-4"
+						value={c._id}
+						name="category"
+						onChange={handleCategoryChange}
+						checked={categoryIds.includes(c._id)}
+					/>{" "}
+					{c.name}
+				</div>
+			);
+		});
+
+	const handleCategoryChange = (e) => {
+		//reset price & search
+		dispatch({
+			type: "SEARCH_QUERY",
+			payload: { text: "" },
+		});
+
+		//push categoryIds to search, and not duplicate
+
+		let inTheState = [...categoryIds];
+		let justChecked = e.target.value;
+		//check if the user click is alredy in the state , and if checked , find the index
+		//indexOF returns : -1 if flase, if true returns the index of the element
+		let foundInState = inTheState.indexOf(justChecked);
+
+		if (foundInState === -1) {
+			inTheState.push(justChecked);
+		} else {
+			//if the category is already clicked
+			//find the index of the element, and pull one element out based on the index
+			inTheState.splice(foundInState, 1);
+		}
+
+		//set Categoryids with the the Ids that are in teh state
+		setCategoryIds(inTheState);
+
+		//run the function with category : inTheState
+		loadSearchedProducts({ category: inTheState });
 	};
 
 	return (
@@ -89,6 +142,17 @@ const Shop = () => {
 									max="4999"
 								/>
 							</div>
+						</SubMenu>
+
+						<SubMenu
+							key="categories"
+							title={
+								<span className="h6">
+									<DollarOutlined /> Categories
+								</span>
+							}
+						>
+							<div> {showCategoriesList()}</div>
 						</SubMenu>
 					</Menu>
 				</div>
