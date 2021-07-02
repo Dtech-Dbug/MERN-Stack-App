@@ -97,6 +97,9 @@ const Shop = () => {
 			payload: { text: "" },
 		});
 
+		setPrice([]);
+		setStar("");
+
 		//push categoryIds to search, and not duplicate
 
 		let inTheState = [...categoryIds];
@@ -133,6 +136,14 @@ const Shop = () => {
 		);
 	};
 	const handleStarClicks = (num) => {
+		//reset other filters
+		dispatch({
+			type: "SEARCH_QUERY",
+			payload: { text: "" },
+		});
+
+		setPrice([]);
+		setCategoryIds([]);
 		console.log("Star Filter :", num);
 		setStar(num);
 		loadSearchedProducts({ stars: num });
