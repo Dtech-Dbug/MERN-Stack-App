@@ -134,6 +134,8 @@ const Shop = () => {
 	};
 	const handleStarClicks = (num) => {
 		console.log("Star Filter :", num);
+		setStar(num);
+		loadSearchedProducts({ stars: num });
 	};
 
 	return (
