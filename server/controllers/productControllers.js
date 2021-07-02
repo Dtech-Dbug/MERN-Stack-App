@@ -240,12 +240,40 @@ const handleQuery = async (req, res, query) => {
 	res.json(products);
 };
 
+const handlePrice = async (req, res, price) => {
+	try {
+		const products = await ProductModel.find({
+			//using special mongoose method: greather than , less than
+			// price [100, 200]
+			//search for prodcuts greater than 100. That is 0th index of prioce array
+			//and products less than max proce :200// 1st index of price array
+			price: {
+				$gte: price[0],
+				$lte: price[1],
+			},
+		})
+			.populate("category", "_id name")
+			.populate("subCategories", "_id name")
+			.exec();
+
+		res.json(products);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 exports.searchFilter = async (req, res) => {
-	const { query } = req.body;
+	const { query, price } = req.body;
 
 	if (query) {
 		console.log("search Query :", query);
 		//use a custome function to handle all queries(search , price, filter etc)
 		await handleQuery(req, res, query);
+	}
+
+	if (price !== undefined) {
+		console.log(price);
+		//proce will be array like : [100,200] : min: 100 / max:200
+		await handlePrice(req, res, price);
 	}
 };
