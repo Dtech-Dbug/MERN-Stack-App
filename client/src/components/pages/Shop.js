@@ -12,8 +12,11 @@ const Shop = () => {
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
 	const [price, setPrice] = useState([0, 0]);
+	const [ok, setOk] = useState(false);
 	const { search } = useSelector((state) => ({ ...state }));
 	const { text } = search;
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		loadProducts();
@@ -29,6 +32,11 @@ const Shop = () => {
 		return () => clearTimeout(delay);
 	}, [text]);
 
+	//3rd useEffect to laod products based n price and render only price changes
+	useEffect(() => {
+		loadSearchedProducts({ price });
+	}, [ok]);
+
 	const loadProducts = () => {
 		listAllProducts(9).then((res) => {
 			setLoading(false);
@@ -39,6 +47,20 @@ const Shop = () => {
 
 	const loadSearchedProducts = (arg) => {
 		searchedProducts(arg).then((res) => setProducts(res.data));
+	};
+	const handleSlider = (value) => {
+		//clear the state of the search
+		dispatch({
+			type: "SEARCH_QUERY",
+			payload: { text: "" },
+		});
+		//set price to value of slider
+		setPrice(value);
+
+		//delay requests to optimize and avoid multiple requets
+		setTimeout(() => {
+			setOk(!ok);
+		}, 300);
 	};
 
 	return (
@@ -63,7 +85,7 @@ const Shop = () => {
 									tipFormatter={(v) => `$${v}`}
 									range
 									value={price}
-									onChange={(v) => setPrice(v)}
+									onChange={handleSlider}
 									max="4999"
 								/>
 							</div>
