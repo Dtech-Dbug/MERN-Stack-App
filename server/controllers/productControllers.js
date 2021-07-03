@@ -311,8 +311,17 @@ const handleStars = async (req, res, stars) => {
 		});
 };
 
+const handleSubCategory = async (req, res, subCategory) => {
+	const products = await ProductModel.find({ subCategory })
+		.populate("category", "_id name")
+		.populate("subCategories", "_id name")
+		.exec();
+
+	res.json(products);
+};
+
 exports.searchFilter = async (req, res) => {
-	const { query, price, category, stars } = req.body;
+	const { query, price, category, stars, subCategory } = req.body;
 
 	if (query) {
 		console.log("search Query :", query);
@@ -334,5 +343,10 @@ exports.searchFilter = async (req, res) => {
 	if (stars) {
 		console.log(stars);
 		await handleStars(req, res, stars);
+	}
+
+	if (subCategory) {
+		console.log(subCategory);
+		await handleSubCategory(req, res, subCategory);
 	}
 };
