@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import HomePageProductCard from "../reusable-Components/HomePageProductCard";
 import StarFilter from "../reusable-Components/StarFilter";
 import { getCategoryLists } from "../../functions/categoryCRUD";
+import { getSubcategoryLists } from "../../functions/subCategoryCrud";
 import { listAllProducts } from "../../functions/productCRUD";
 import { searchedProducts } from "../../functions/productCRUD";
 import { Menu, Slider, Checkbox } from "antd";
@@ -21,6 +22,12 @@ const Shop = () => {
 	//state for categoryids
 	const [categoryIds, setCategoryIds] = useState([]);
 
+	//subCatgory
+	const [subCategories, setSubCategories] = useState([]);
+
+	//clicked subCategory state that will be sent to backend to fetch products
+	const [subCategory, setSubCategory] = useState("");
+
 	//state for stars
 	const [star, setStar] = useState("");
 
@@ -30,6 +37,8 @@ const Shop = () => {
 	useEffect(() => {
 		loadProducts();
 		getCategoryLists().then((res) => setCategories(res.data));
+
+		getSubcategoryLists().then((res) => setSubCategories(res.data));
 	}, []);
 
 	const loadProducts = () => {
@@ -149,6 +158,36 @@ const Shop = () => {
 		loadSearchedProducts({ stars: num });
 	};
 
+	const showSubCategoriesList = () =>
+		subCategories.map((s) => {
+			return (
+				<div
+					key={s._id}
+					className="badge badge-secondary m-1"
+					onClick={() => handleSubCategoryChange(s)}
+					style={{ cursor: "pointer" }}
+				>
+					{s.name}
+				</div>
+			);
+		});
+
+	const handleSubCategoryChange = (sub) => {
+		console.log("sub clicked", sub);
+		//reset other filters
+		setSubCategory(sub);
+		dispatch({
+			type: "SEARCH_QUERY",
+			payload: { text: "" },
+		});
+
+		setPrice([]);
+		setCategoryIds([]);
+		setStar("");
+
+		loadSearchedProducts({ subCategory: sub });
+	};
+
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -197,6 +236,17 @@ const Shop = () => {
 							}
 						>
 							<div className="pb-2 pl-4 pr-4">{showStar()}</div>
+						</SubMenu>
+
+						<SubMenu
+							key="SubCategories"
+							title={
+								<span className="h6">
+									<DollarOutlined /> Sub Categories
+								</span>
+							}
+						>
+							<div className="pl-4 pr-4"> {showSubCategoriesList()}</div>
 						</SubMenu>
 					</Menu>
 				</div>
