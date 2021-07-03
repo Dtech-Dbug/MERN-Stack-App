@@ -312,7 +312,7 @@ const handleStars = async (req, res, stars) => {
 };
 
 const handleSubCategory = async (req, res, subCategory) => {
-	const products = await ProductModel.find({ subCategory })
+	const products = await ProductModel.find({ subCategories: subCategory })
 		.populate("category", "_id name")
 		.populate("subCategories", "_id name")
 		.exec();
