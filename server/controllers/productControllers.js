@@ -320,8 +320,27 @@ const handleSubCategory = async (req, res, subCategory) => {
 	res.json(products);
 };
 
+const handleShipping = async (req, res, shipping) => {
+	const products = await ProductModel.find({ shipping })
+		.populate("category", "_id name")
+		.populate("subCategories", "_id name")
+		.exec();
+
+	res.json(products);
+};
+
+const handleColor = async (req, res, color) => {
+	const products = await ProductModel.find({ color })
+		.populate("category", "_id name")
+		.populate("subCategories", "_id name")
+		.exec();
+
+	res.json(products);
+};
+
 exports.searchFilter = async (req, res) => {
-	const { query, price, category, stars, subCategory } = req.body;
+	const { query, price, category, stars, subCategory, shipping, color } =
+		req.body;
 
 	if (query) {
 		console.log("search Query :", query);
@@ -348,5 +367,15 @@ exports.searchFilter = async (req, res) => {
 	if (subCategory) {
 		console.log(subCategory);
 		await handleSubCategory(req, res, subCategory);
+	}
+
+	if (shipping) {
+		console.log(shipping);
+		await handleShipping(req, res, shipping);
+	}
+
+	if (color) {
+		console.log(color);
+		await handleColor(req, res, color);
 	}
 };
