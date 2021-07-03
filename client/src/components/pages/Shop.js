@@ -6,7 +6,7 @@ import { getCategoryLists } from "../../functions/categoryCRUD";
 import { getSubcategoryLists } from "../../functions/subCategoryCrud";
 import { listAllProducts } from "../../functions/productCRUD";
 import { searchedProducts } from "../../functions/productCRUD";
-import { Menu, Slider, Checkbox } from "antd";
+import { Menu, Slider, Checkbox, Radio } from "antd";
 import { DollarOutlined, StarOutlined } from "@ant-design/icons";
 
 const { SubMenu, ItemGroup } = Menu;
@@ -30,6 +30,17 @@ const Shop = () => {
 
 	//state for stars
 	const [star, setStar] = useState("");
+
+	//state for colors and color selected
+	const [colors, setColors] = useState([
+		"Red",
+		"Blue",
+		"Green",
+		"Black",
+		"White",
+	]);
+
+	const [color, setColor] = useState("");
 
 	const dispatch = useDispatch();
 
@@ -108,6 +119,7 @@ const Shop = () => {
 
 		setPrice([]);
 		setStar("");
+		setColor("");
 
 		//push categoryIds to search, and not duplicate
 
@@ -153,6 +165,7 @@ const Shop = () => {
 
 		setPrice([]);
 		setCategoryIds([]);
+		setColor("");
 		console.log("Star Filter :", num);
 		setStar(num);
 		loadSearchedProducts({ stars: num });
@@ -184,8 +197,40 @@ const Shop = () => {
 		setPrice([]);
 		setCategoryIds([]);
 		setStar("");
+		setColor("");
 
 		loadSearchedProducts({ subCategory: sub });
+	};
+
+	const showColors = () =>
+		colors.map((c) => {
+			return (
+				<div key={c._id}>
+					<Radio
+						className="pb-2 pl-4 pr-4"
+						value={c}
+						name="color"
+						checked={c === color}
+						onChange={handleColorChange}
+					/>{" "}
+					{c}
+				</div>
+			);
+		});
+
+	const handleColorChange = (e) => {
+		//reset other filters
+		dispatch({
+			type: "SEARCH_QUERY",
+			payload: { text: "" },
+		});
+
+		setPrice([]);
+		setCategoryIds([]);
+		setStar("");
+
+		setColor(e.target.value);
+		loadSearchedProducts({ color: e.target.value });
 	};
 
 	return (
@@ -247,6 +292,17 @@ const Shop = () => {
 							}
 						>
 							<div className="pl-4 pr-4"> {showSubCategoriesList()}</div>
+						</SubMenu>
+
+						<SubMenu
+							key="Color"
+							title={
+								<span className="h6">
+									<DollarOutlined /> Color
+								</span>
+							}
+						>
+							<div className="pl-4 pr-4"> {showColors()}</div>
 						</SubMenu>
 					</Menu>
 				</div>
