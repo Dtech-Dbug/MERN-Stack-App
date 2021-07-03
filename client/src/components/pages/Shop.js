@@ -42,6 +42,9 @@ const Shop = () => {
 
 	const [color, setColor] = useState("");
 
+	//state for shipping
+	const [shipping, setShipping] = useState("");
+
 	const dispatch = useDispatch();
 
 	//1st useEffect
@@ -120,6 +123,7 @@ const Shop = () => {
 		setPrice([]);
 		setStar("");
 		setColor("");
+		setShipping("");
 
 		//push categoryIds to search, and not duplicate
 
@@ -166,6 +170,7 @@ const Shop = () => {
 		setPrice([]);
 		setCategoryIds([]);
 		setColor("");
+		setShipping("");
 		console.log("Star Filter :", num);
 		setStar(num);
 		loadSearchedProducts({ stars: num });
@@ -198,6 +203,7 @@ const Shop = () => {
 		setCategoryIds([]);
 		setStar("");
 		setColor("");
+		setShipping("");
 
 		loadSearchedProducts({ subCategory: sub });
 	};
@@ -228,9 +234,49 @@ const Shop = () => {
 		setPrice([]);
 		setCategoryIds([]);
 		setStar("");
+		setShipping("");
 
 		setColor(e.target.value);
 		loadSearchedProducts({ color: e.target.value });
+	};
+
+	const showShipping = () => {
+		return (
+			<>
+				<Checkbox
+					className="pb-2 pl-4 pr-4"
+					onChange={handleShippingChange}
+					value="Yes"
+					checked={shipping === "Yes"}
+				>
+					Yes
+				</Checkbox>
+				<br />
+				<Checkbox
+					className="pb-2 pl-4 pr-4"
+					onChange={handleShippingChange}
+					value="No"
+					checked={shipping === "No"}
+				>
+					No
+				</Checkbox>
+			</>
+		);
+	};
+
+	const handleShippingChange = (e) => {
+		//reset
+		dispatch({
+			type: "SEARCH_QUERY",
+			payload: { text: "" },
+		});
+
+		setPrice([]);
+		setCategoryIds([]);
+		setStar("");
+		//set Shippong and send tp BE
+		setShipping(e.target.value);
+		loadSearchedProducts({ shipping: e.target.value });
 	};
 
 	return (
@@ -303,6 +349,17 @@ const Shop = () => {
 							}
 						>
 							<div className="pl-4 pr-4"> {showColors()}</div>
+						</SubMenu>
+
+						<SubMenu
+							key="shipping"
+							title={
+								<span className="h6">
+									<DollarOutlined /> Shipping
+								</span>
+							}
+						>
+							<div className="pl-4 pr-4"> {showShipping()}</div>
 						</SubMenu>
 					</Menu>
 				</div>
