@@ -8,6 +8,27 @@ const { Meta } = Card;
 
 const HomePageProductCard = ({ product }) => {
 	const { images, title, description, slug, price } = product;
+
+	const handleAddToCart = () => {
+		//create an array of cart to save the array in LocalStorgae
+		let cart = [];
+
+		//check if window === true , add cart to localStorage
+		if (typeof window !== undefined) {
+			//and localStorage has the cart already = case when user has already added one to cart
+			if (localStorage.getItem("cart")) {
+				//use JSON.parse to get the stored data a JS objects
+				cart = JSON.parse(localStorage.getItem("cart"));
+			}
+			//push newProduct to cart
+			//spread the product prop : to access all it's values
+			//and add a new key called count to the product object
+			cart.push({
+				...product,
+				count: 1,
+			});
+		}
+	};
 	return (
 		<>
 			<div className="text-center">
