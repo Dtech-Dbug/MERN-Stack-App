@@ -27,6 +27,9 @@ const HomePageProductCard = ({ product }) => {
 				...product,
 				count: 1,
 			});
+
+			//remove duplicate
+			//using lodash for that = uniqwith method of lodash
 		}
 	};
 	return (
