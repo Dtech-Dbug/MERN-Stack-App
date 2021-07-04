@@ -1,5 +1,5 @@
-import React from "react";
-import { Card } from "antd";
+import React, { useState } from "react";
+import { Card, Tooltip } from "antd";
 import { Link } from "react-router-dom";
 import JS from "../../Default images/js logo.png";
 import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
@@ -8,6 +8,7 @@ import _ from "lodash";
 const { Meta } = Card;
 
 const HomePageProductCard = ({ product }) => {
+	const [tootltip, setTooltip] = useState("click to add to cart");
 	const { images, title, description, slug, price } = product;
 
 	const handleAddToCart = () => {
@@ -35,6 +36,7 @@ const HomePageProductCard = ({ product }) => {
 
 			//save the new items to LS, when user adds to cart for forst time
 			localStorage.setItem("cart", JSON.stringify(unique));
+			setTooltip("Added");
 		}
 	};
 	return (
@@ -64,9 +66,12 @@ const HomePageProductCard = ({ product }) => {
 						</Link>
 					</>,
 
-					<a onClick={handleAddToCart}>
-						<ShoppingCartOutlined className="text-warning" /> <br /> Add To Cart
-					</a>,
+					<Tooltip title={tootltip}>
+						<a onClick={handleAddToCart}>
+							<ShoppingCartOutlined className="text-warning" /> <br /> Add To
+							Cart
+						</a>
+					</Tooltip>,
 				]}
 			>
 				<Meta title={`${title} - ${price}`} description={description} />
