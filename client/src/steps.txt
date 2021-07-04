@@ -52,3 +52,7 @@ STEPS:
 - if yes, we setStar to existingratingObject.stars
 
 - existingRatingObject =product.ratings
+
+//So far we have done a lot of things
+- Add to cart, when user adds any products to cart- save the item in local storage
+- so that we can send the saved item in LOcalStorage to the Backend
