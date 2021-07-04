@@ -35,9 +35,9 @@ const HomePageProductCard = ({ product }) => {
 						</Link>
 					</>,
 
-					<>
+					<a onClick={handleAddToCart}>
 						<ShoppingCartOutlined className="text-warning" /> <br /> Add To Cart
-					</>,
+					</a>,
 				]}
 			>
 				<Meta title={`${title} - ${price}`} description={description} />
