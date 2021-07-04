@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Card, Tooltip } from "antd";
 import { Link } from "react-router-dom";
 import JS from "../../Default images/js logo.png";
@@ -10,6 +11,8 @@ const { Meta } = Card;
 const HomePageProductCard = ({ product }) => {
 	const [tootltip, setTooltip] = useState("click to add to cart");
 	const { images, title, description, slug, price } = product;
+	const { user, cart } = useSelector((state) => ({ ...state }));
+	const dispatch = useDispatch();
 
 	const handleAddToCart = () => {
 		//create an array of cart to save the array in LocalStorgae
@@ -37,6 +40,12 @@ const HomePageProductCard = ({ product }) => {
 			//save the new items to LS, when user adds to cart for forst time
 			localStorage.setItem("cart", JSON.stringify(unique));
 			setTooltip("Added");
+
+			//add to redux
+			dispatch({
+				type: "ADD_TO_CART",
+				payload: cart,
+			});
 		}
 	};
 	return (
