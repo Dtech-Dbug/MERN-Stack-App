@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import JS from "../../Default images/js logo.png";
 import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
 import { showAverageRating } from "../../functions/rating";
+import _ from "lodash";
 const { Meta } = Card;
 
 const HomePageProductCard = ({ product }) => {
@@ -30,6 +31,10 @@ const HomePageProductCard = ({ product }) => {
 
 			//remove duplicate
 			//using lodash for that = uniqwith method of lodash
+			let unique = _.uniqWith(cart, _.isEqual);
+
+			//save the new items to LS, when user adds to cart for forst time
+			localStorage.setItem("cart", JSON.stringify(unique));
 		}
 	};
 	return (
