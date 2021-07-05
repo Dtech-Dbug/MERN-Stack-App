@@ -30,9 +30,9 @@ const Cart = () => {
 					</tr>
 				</thead>
 
-				{cart.map((p) => {
-					<ProductCartTableView key={p._id} product={p} />;
-				})}
+				{cart.map((p) => (
+					<ProductCartTableView key={p._id} product={p} />
+				))}
 			</table>
 		);
 	};
