@@ -33,10 +33,11 @@ import { UpdateSubCategory } from "./components/pages/protected-routes/admin/Cat
 import { CreateProduct } from "./components/pages/protected-routes/admin/Product/createProduct";
 import ListAllProducts from "./components/pages/protected-routes/admin/Product/listProducts";
 import { UpdateProduct } from "./components/pages/protected-routes/admin/Product/updateProduct";
+
 import ViewProduct from "./components/pages/ViewProduct";
 import CategoryHome from "./components/pages/Categories/CategoryHome";
 import Shop from "./components/pages/Shop";
-//importing the axios function to send data to our bakcend
+import Cart from "./components/pages/Cart";
 
 function App() {
 	const dispatch = useDispatch();
@@ -82,6 +83,7 @@ function App() {
 			<Route path="/products/:slug" exact component={ViewProduct} />
 			<Route path="/category/:slug" exact component={CategoryHome} />
 			<Route path="/shop" exact component={Shop} />
+			<Route path="/cart" exact component={Cart} />
 
 			<Switch>
 				<UserRoute exact path="/user/history" component={History} />
