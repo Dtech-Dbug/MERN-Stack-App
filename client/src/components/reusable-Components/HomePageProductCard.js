@@ -25,7 +25,7 @@ const HomePageProductCard = ({ product }) => {
 				//use JSON.parse to get the stored data a JS objects
 				cart = JSON.parse(localStorage.getItem("cart"));
 			}
-			//push newProduct to cart
+			// //push newProduct to cart
 			//spread the product prop : to access all it's values
 			//and add a new key called count to the product object
 			cart.push({
