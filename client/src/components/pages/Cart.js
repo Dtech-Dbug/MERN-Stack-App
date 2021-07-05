@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import ProductCartTableView from "../reusable-Components/ProductCartTableView";
 
 const Cart = () => {
 	const dispatch = useDispatch();
@@ -13,6 +14,29 @@ const Cart = () => {
 		}, 0);
 	}
 
+	//creatingthe card table in a fncn
+	const showCartTable = () => {
+		return (
+			<table className="table table-bordered">
+				<thead className="thead-light">
+					<tr>
+						<th scope="col"> Image</th>
+						<th scope="col"> Title</th>
+						<th scope="col"> Price</th>
+						<th scope="col"> Color</th>
+						<th scope="col"> Count</th>
+						<th scope="col"> Shipping</th>
+						<th scope="col"> Remove</th>
+					</tr>
+				</thead>
+
+				{cart.map((p) => {
+					<ProductCartTableView key={p._id} product={p} />;
+				})}
+			</table>
+		);
+	};
+
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -24,7 +48,7 @@ const Cart = () => {
 							No products in cart. <Link to="/shop">Continue Shopping.</Link>
 						</p>
 					) : (
-						"show cart items"
+						showCartTable()
 					)}
 				</div>
 
