@@ -7,7 +7,12 @@ import { getSubcategoryLists } from "../../functions/subCategoryCrud";
 import { listAllProducts } from "../../functions/productCRUD";
 import { searchedProducts } from "../../functions/productCRUD";
 import { Menu, Slider, Checkbox, Radio } from "antd";
-import { DollarOutlined, StarOutlined } from "@ant-design/icons";
+import {
+	DollarOutlined,
+	StarOutlined,
+	DownSquareOutlined,
+	BgColorsOutlined,
+} from "@ant-design/icons";
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -314,7 +319,7 @@ const Shop = () => {
 							key="categories"
 							title={
 								<span className="h6">
-									<DollarOutlined /> Categories
+									<DownSquareOutlined /> Categories
 								</span>
 							}
 						>
@@ -336,7 +341,7 @@ const Shop = () => {
 							key="SubCategories"
 							title={
 								<span className="h6">
-									<DollarOutlined /> Sub Categories
+									<DownSquareOutlined /> Sub Categories
 								</span>
 							}
 						>
@@ -347,7 +352,7 @@ const Shop = () => {
 							key="Color"
 							title={
 								<span className="h6">
-									<DollarOutlined /> Color
+									<BgColorsOutlined /> Color
 								</span>
 							}
 						>
@@ -358,7 +363,7 @@ const Shop = () => {
 							key="shipping"
 							title={
 								<span className="h6">
-									<DollarOutlined /> Shipping
+									<DownSquareOutlined /> Shipping
 								</span>
 							}
 						>
