@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu } from "antd";
+import { Menu, Badge } from "antd";
 import {
 	SmileTwoTone,
 	UserOutlined,
@@ -10,6 +10,7 @@ import {
 	DashboardTwoTone,
 	ShoppingTwoTone,
 	ShoppingCartOutlined,
+	CarTwoTone,
 } from "@ant-design/icons";
 
 import Search from "../reusable-Components/Search";
@@ -24,7 +25,7 @@ const { SubMenu, Item } = Menu;
 export const Nav = () => {
 	const [current, setCurrent] = useState("home");
 	const dispatch = useDispatch();
-	const { user } = useSelector((state) => ({ ...state }));
+	const { user, cart } = useSelector((state) => ({ ...state }));
 	const history = useHistory();
 
 	const handleClick = (e) => {
@@ -54,7 +55,11 @@ export const Nav = () => {
 			</Item>
 
 			<Item key="cart" icon={<ShoppingCartOutlined />}>
-				<Link to="/cart">Cart</Link>
+				<Link to="/cart">
+					<Badge count={cart.length} offset={[10, 0]}>
+						Cart{" "}
+					</Badge>
+				</Link>
 			</Item>
 
 			{!user && (
