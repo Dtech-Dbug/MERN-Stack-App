@@ -80,7 +80,10 @@ const Shop = () => {
 	}, [ok]);
 
 	const loadSearchedProducts = (arg) => {
-		searchedProducts(arg).then((res) => setProducts(res.data));
+		searchedProducts(arg).then((res) => {
+			setLoading(false);
+			setProducts(res.data);
+		});
 	};
 	const handleSlider = (value) => {
 		//clear the state of the search
@@ -372,14 +375,18 @@ const Shop = () => {
 					)}
 
 					<div className="row pb-5">
-						{products &&
+						{products && products.length > 0 ? (
+							products &&
 							products.map((p) => {
 								return (
 									<div className="col-md-4 mt-3" key={p._id}>
 										<HomePageProductCard product={p} />
 									</div>
 								);
-							})}
+							})
+						) : (
+							<h2 className="col-md-4 mt-3">No Products Found ☹</h2>
+						)}
 					</div>
 				</div>
 			</div>
