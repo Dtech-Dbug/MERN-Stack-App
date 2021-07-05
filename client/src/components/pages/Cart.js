@@ -53,7 +53,14 @@ const Cart = () => {
 						</button>
 					) : (
 						<button className="btn btn-sm btn-primary btn-raised">
-							Login to checkout
+							<Link
+								to={{
+									pathname: "/login",
+									state: { from: "cart" },
+								}}
+							>
+								Login to checkout
+							</Link>
 						</button>
 					)}
 				</div>
