@@ -54,7 +54,7 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 			//add to redux
 			dispatch({
 				type: "ADD_TO_CART",
-				payload: cart,
+				payload: unique,
 			});
 		}
 	};
