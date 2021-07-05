@@ -51,7 +51,6 @@ const Shop = () => {
 	useEffect(() => {
 		loadProducts();
 		getCategoryLists().then((res) => setCategories(res.data));
-
 		getSubcategoryLists().then((res) => setSubCategories(res.data));
 	}, []);
 
@@ -81,8 +80,9 @@ const Shop = () => {
 
 	const loadSearchedProducts = (arg) => {
 		searchedProducts(arg).then((res) => {
-			setLoading(false);
+			setLoading(true);
 			setProducts(res.data);
+			setLoading(false);
 		});
 	};
 	const handleSlider = (value) => {
@@ -371,7 +371,7 @@ const Shop = () => {
 					{loading ? (
 						<h4 className="text-danger">Loading...</h4>
 					) : (
-						<h4 className="info-bg">Products</h4>
+						<h4 className="info-Bg">Products</h4>
 					)}
 
 					<div className="row pb-5">
