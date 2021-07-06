@@ -3,6 +3,11 @@ import ModalImage from "react-modal-image";
 import JS from "../../Default images/js logo.png";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import {
+	CheckCircleOutlined,
+	CloseCircleOutlined,
+	CloseOutlined,
+} from "@ant-design/icons";
 
 const ProductCartTableView = ({ product }) => {
 	const colors = ["Red", "Blue", "Green", "Black", "White"];
@@ -123,7 +128,13 @@ const ProductCartTableView = ({ product }) => {
 						onChange={handleCountChange}
 					/>
 				</td>
-				<td>Shipping</td>
+				<td>
+					{product.shipping === "Yes" ? (
+						<CheckCircleOutlined className="text-success" />
+					) : (
+						<CloseCircleOutlined className="text-danger" />
+					)}
+				</td>
 				<td>Delete icon</td>
 			</tr>
 		</tbody>
