@@ -29,7 +29,18 @@ const ProductCartTableView = ({ product }) => {
 						onChange={handleColorChange}
 						name="color"
 						className="form-control"
-					></select>
+					>
+						{product.color ? (
+							<option vlaue={product.color}>{product.color}</option>
+						) : (
+							<option>Select</option>
+						)}
+						{colors.map((c) => (
+							<option value={c} key={c}>
+								{c}
+							</option>
+						))}
+					</select>
 				</td>
 				<td>{product.count}</td>
 				<td>Shipping</td>
