@@ -14,6 +14,8 @@ const DrawerCard = ({ children }) => {
 					payload: false,
 				})
 			}
+			className="text-center"
+			title={`cart / ${cart.length} Products`}
 			visible={drawer}
 		>
 			{JSON.stringify(cart)}
