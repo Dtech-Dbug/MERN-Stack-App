@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Drawer, Button } from "antd";
 import JS from "../../Default images/js logo.png";
+import { Link } from "react-router-dom";
 
 const DrawerCard = () => {
 	const { drawer, cart } = useSelector((state) => ({ ...state }));
@@ -52,6 +53,12 @@ const DrawerCard = () => {
 					</div>
 				);
 			})}
+
+			<Link to="/cart">
+				<button className="text-center btn btn-primary btn-raised btn-block">
+					Go To Cart
+				</button>
+			</Link>
 		</Drawer>
 	);
 };
