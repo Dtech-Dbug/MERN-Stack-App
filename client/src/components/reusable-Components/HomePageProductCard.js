@@ -46,6 +46,12 @@ const HomePageProductCard = ({ product }) => {
 				type: "ADD_TO_CART",
 				payload: unique,
 			});
+
+			//redux state to show drawer
+			dispatch({
+				type: "SHOW_CART_DRAWER",
+				payload: true,
+			});
 		}
 	};
 	return (
