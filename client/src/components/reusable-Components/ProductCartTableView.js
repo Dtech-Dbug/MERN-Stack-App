@@ -1,9 +1,13 @@
 import React from "react";
 import ModalImage from "react-modal-image";
 import JS from "../../Default images/js logo.png";
+import { useDispatch } from "react-redux";
 
 const ProductCartTableView = ({ product }) => {
 	const colors = ["Red", "Blue", "Green", "Black", "White"];
+
+	const dispatch = useDispatch();
+
 	const handleColorChange = (e) => {
 		//
 		console.log("color changed to ", e.target.value);
@@ -30,6 +34,12 @@ const ProductCartTableView = ({ product }) => {
 
 					//save that to local storage
 					localStorage.setItem("cart", JSON.stringify(cart));
+
+					//dispatching to redux to save the state globally
+					dispatch({
+						type: "ADD_TO_CART",
+						payload: cart,
+					});
 				}
 			});
 		}
