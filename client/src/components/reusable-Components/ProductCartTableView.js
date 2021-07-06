@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ModalImage from "react-modal-image";
 import JS from "../../Default images/js logo.png";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const ProductCartTableView = ({ product }) => {
 	const colors = ["Red", "Blue", "Green", "Black", "White"];
@@ -46,7 +47,13 @@ const ProductCartTableView = ({ product }) => {
 
 	const handleCountChange = (e) => {
 		//use case 1: to prevent negative quntity
+		console.log("quantiti", product.quantity);
 		let count = e.target.value < 1 ? 1 : e.target.value;
+		if (count > product.quantity) {
+			toast.error(
+				`Maximum available units ${product.quantity}. You have exceeded the total available units`
+			);
+		}
 
 		console.log("count value", e.target.value);
 
