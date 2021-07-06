@@ -136,7 +136,11 @@ const ProductCartTableView = ({ product }) => {
 					)}
 				</td>
 				<td>
-					<CloseOutlined className="text-danger" />
+					<CloseOutlined
+						className="text-danger"
+						onClick={handleRemoveCartItem}
+						style={{ cursor: "pointer" }}
+					/>
 				</td>
 			</tr>
 		</tbody>
