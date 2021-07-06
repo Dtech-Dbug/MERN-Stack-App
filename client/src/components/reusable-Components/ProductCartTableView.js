@@ -83,12 +83,32 @@ const ProductCartTableView = ({ product }) => {
 		}
 	};
 
+	const handleRemoveCartItem = () => {
+		let cart = [];
+		if (typeof window !== "undefined") {
+			if (localStorage.getItem("cart")) {
+				cart = JSON.parse(localStorage.getItem("cart"));
+			}
+
+			cart.map((item, i) => {
+				if (product._id === item._id) {
+					cart.splice(i, 1);
+				}
+			});
+			localStorage.setItem("cart", JSON.stringify(cart));
+			dispatch({
+				type: "ADD_TO_CART",
+				payload: cart,
+			});
+		}
+	};
+
 	return (
 		<tbody>
 			<tr>
 				<td>
 					<div style={{ width: "100px", height: "auto" }}>
-						{product.images ? (
+						{product.images.length ? (
 							<ModalImage
 								small={product.images[0].url}
 								large={product.images[0].url}
