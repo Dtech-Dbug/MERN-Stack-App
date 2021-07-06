@@ -44,6 +44,8 @@ const ProductCartTableView = ({ product }) => {
 			});
 		}
 	};
+
+	const handleCountChange = (e) => {};
 	return (
 		<tbody>
 			<tr>
@@ -82,7 +84,12 @@ const ProductCartTableView = ({ product }) => {
 					</select>
 				</td>
 				<td>
-					<input type="number" name="count" className="form-control" />
+					<input
+						onChange={handleCountChange}
+						type="number"
+						name="count"
+						className="form-control"
+					/>
 				</td>
 				<td>Shipping</td>
 				<td>Delete icon</td>
