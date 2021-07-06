@@ -35,11 +35,13 @@ const ProductCartTableView = ({ product }) => {
 						) : (
 							<option>Select</option>
 						)}
-						{colors.map((c) => (
-							<option value={c} key={c}>
-								{c}
-							</option>
-						))}
+						{colors
+							.filter((c) => c !== product.color)
+							.map((c) => (
+								<option value={c} key={c}>
+									{c}
+								</option>
+							))}
 					</select>
 				</td>
 				<td>{product.count}</td>
