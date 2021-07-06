@@ -38,6 +38,7 @@ import ViewProduct from "./components/pages/ViewProduct";
 import CategoryHome from "./components/pages/Categories/CategoryHome";
 import Shop from "./components/pages/Shop";
 import Cart from "./components/pages/Cart";
+import DrawerCard from "./components/Drawer/DrawerCard";
 
 function App() {
 	const dispatch = useDispatch();
@@ -73,6 +74,7 @@ function App() {
 	return (
 		<div className="App">
 			<Nav />
+			<DrawerCard />
 			<ToastContainer />
 
 			<Route path="/" exact component={Home} />
