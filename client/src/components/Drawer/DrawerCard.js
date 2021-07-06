@@ -55,7 +55,15 @@ const DrawerCard = () => {
 			})}
 
 			<Link to="/cart">
-				<button className="text-center btn btn-primary btn-raised btn-block">
+				<button
+					onClick={() =>
+						dispatch({
+							type: "SHOW_CART_DRAWER",
+							payload: false,
+						})
+					}
+					className="text-center btn btn-primary btn-raised btn-block"
+				>
 					Go To Cart
 				</button>
 			</Link>
