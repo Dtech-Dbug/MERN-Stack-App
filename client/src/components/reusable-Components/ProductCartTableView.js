@@ -46,7 +46,7 @@ const ProductCartTableView = ({ product }) => {
 
 	const handleCountChange = (e) => {
 		//use case 1: to prevent negative quntity
-		//let count = e.target.value < 1 ? 1 : e.target.value;
+		let count = e.target.value < 1 ? 1 : e.target.value;
 
 		console.log("count value", e.target.value);
 
@@ -57,7 +57,7 @@ const ProductCartTableView = ({ product }) => {
 			}
 			cart.map((item, i) => {
 				if (item._id === product._id) {
-					cart[i].count = e.target.value;
+					cart[i].count = count;
 				}
 			});
 
