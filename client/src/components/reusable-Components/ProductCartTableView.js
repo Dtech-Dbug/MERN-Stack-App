@@ -6,6 +6,33 @@ const ProductCartTableView = ({ product }) => {
 	const colors = ["Red", "Blue", "Green", "Black", "White"];
 	const handleColorChange = (e) => {
 		//
+		console.log("color changed to ", e.target.value);
+		let cart = [];
+
+		if (typeof window !== undefined) {
+			if (localStorage.getItem("cart")) {
+				cart = JSON.parse(localStorage.getItem("cart"));
+			}
+
+			cart.map((cartItem, i) => {
+				//check if the products'sid matched with the item in the cart that is being modified'
+				if (cartItem._id === product._id) {
+					console.log("cartItem clicked", cartItem.title);
+					console.table(
+						cartItem._id,
+						product._id,
+						cartItem.title,
+						product.title
+					);
+
+					//set the color of cart[i] = cartItem to the e.target.value
+					cart[i].color = e.target.value;
+
+					//save that to local storage
+					localStorage.setItem("cart", JSON.stringify(cart));
+				}
+			});
+		}
 	};
 	return (
 		<tbody>
