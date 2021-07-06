@@ -135,7 +135,9 @@ const ProductCartTableView = ({ product }) => {
 						<CloseCircleOutlined className="text-danger" />
 					)}
 				</td>
-				<td>Delete icon</td>
+				<td>
+					<CloseOutlined className="text-danger" />
+				</td>
 			</tr>
 		</tbody>
 	);
