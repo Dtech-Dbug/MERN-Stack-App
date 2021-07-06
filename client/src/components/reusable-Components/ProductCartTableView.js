@@ -53,6 +53,7 @@ const ProductCartTableView = ({ product }) => {
 			toast.error(
 				`Maximum available units ${product.quantity}. You have exceeded the total available units`
 			);
+			return;
 		}
 
 		console.log("count value", e.target.value);
