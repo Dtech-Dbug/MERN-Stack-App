@@ -56,6 +56,11 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 				type: "ADD_TO_CART",
 				payload: unique,
 			});
+
+			dispatch({
+				type: "SHOW_CART_DRAWER",
+				payload: true,
+			});
 		}
 	};
 	return (
