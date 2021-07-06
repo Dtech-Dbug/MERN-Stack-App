@@ -81,7 +81,9 @@ const ProductCartTableView = ({ product }) => {
 							))}
 					</select>
 				</td>
-				<td>{product.count}</td>
+				<td>
+					<input type="number" name="count" className="form-control" />
+				</td>
 				<td>Shipping</td>
 				<td>Delete icon</td>
 			</tr>
