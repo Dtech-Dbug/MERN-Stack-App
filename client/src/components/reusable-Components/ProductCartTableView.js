@@ -3,6 +3,10 @@ import ModalImage from "react-modal-image";
 import JS from "../../Default images/js logo.png";
 
 const ProductCartTableView = ({ product }) => {
+	const colors = ["Red", "Blue", "Green", "Black", "White"];
+	const handleColorChange = (e) => {
+		//
+	};
 	return (
 		<tbody>
 			<tr>
@@ -20,7 +24,13 @@ const ProductCartTableView = ({ product }) => {
 				</td>
 				<td>{product.title}</td>
 				<td>${product.price}</td>
-				<td>Color </td>
+				<td>
+					<select
+						onChange={handleColorChange}
+						name="color"
+						className="form-control"
+					></select>
+				</td>
 				<td>{product.count}</td>
 				<td>Shipping</td>
 				<td>Delete icon</td>
