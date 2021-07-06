@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalImage from "react-modal-image";
 import JS from "../../Default images/js logo.png";
 import { useDispatch } from "react-redux";
@@ -31,21 +31,45 @@ const ProductCartTableView = ({ product }) => {
 
 					//set the color of cart[i] = cartItem to the e.target.value
 					cart[i].color = e.target.value;
-
-					//save that to local storage
-					localStorage.setItem("cart", JSON.stringify(cart));
-
-					//dispatching to redux to save the state globally
-					dispatch({
-						type: "ADD_TO_CART",
-						payload: cart,
-					});
 				}
+				//save that to local storage
+				localStorage.setItem("cart", JSON.stringify(cart));
+
+				//dispatching to redux to save the state globally
+				dispatch({
+					type: "ADD_TO_CART",
+					payload: cart,
+				});
 			});
 		}
 	};
 
-	const handleCountChange = (e) => {};
+	const handleCountChange = (e) => {
+		//use case 1: to prevent negative quntity
+		//let count = e.target.value < 1 ? 1 : e.target.value;
+
+		console.log("count value", e.target.value);
+
+		let cart = [];
+		if (typeof window !== "undefined") {
+			if (localStorage.getItem("cart")) {
+				cart = JSON.parse(localStorage.getItem("cart"));
+			}
+			cart.map((item, i) => {
+				if (item._id === product._id) {
+					cart[i].count = e.target.value;
+				}
+			});
+
+			localStorage.setItem("cart", JSON.stringify(cart));
+
+			dispatch({
+				type: "ADD_TO_CART",
+				payload: cart,
+			});
+		}
+	};
+
 	return (
 		<tbody>
 			<tr>
@@ -85,10 +109,10 @@ const ProductCartTableView = ({ product }) => {
 				</td>
 				<td>
 					<input
-						onChange={handleCountChange}
 						type="number"
-						name="count"
 						className="form-control"
+						value={product.count}
+						onChange={handleCountChange}
 					/>
 				</td>
 				<td>Shipping</td>
