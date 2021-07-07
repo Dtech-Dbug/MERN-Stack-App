@@ -17,7 +17,9 @@ exports.userCart = async (req, res) => {
 	const user = await User.findOne({ email: req.user.email }).exec();
 
 	//check if loggedin user had already cart.
-	let existingCartOfUser = await CartModel.find({ orderedBy: user._id }).exec();
+	let existingCartOfUser = await CartModel.findOne({
+		orderedBy: user._id,
+	}).exec();
 
 	//If user does habe existing cart, we need to start afresh, beacsue users will have only one cart always.
 	if (existingCartOfUser) {
@@ -53,7 +55,7 @@ exports.userCart = async (req, res) => {
 	//getting the total of the cart : price
 	let cartTotal = 0;
 	for (let i = 0; i < cartProducts.length; i++) {
-		let cartTotal = cartTotal + cartProducts[i].price * cartProducts[i].count;
+		cartTotal = cartTotal + cartProducts[i].price * cartProducts[i].count;
 	}
 
 	console.log("Total Of cart value", cartTotal);
