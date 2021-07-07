@@ -15,7 +15,7 @@ const Cart = ({ history }) => {
 	}
 
 	function saveCartItemsToDb() {
-		alert("hello i ma working");
+		console.log("Cart", JSON.stringify(cart, null, 4));
 		history.push("/checkout");
 	}
 
