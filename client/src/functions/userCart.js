@@ -1,10 +1,14 @@
 import axios from "axios";
 
-export const userCart = (cart, authtoken) =>
-	axios.post(
+export const userCart = async (cart, authtoken) =>
+	await axios.post(
 		`http://localhost:8000/api/user/cart`,
 		{ cart },
-		{ headers: { authtoken } }
+		{
+			headers: {
+				authtoken,
+			},
+		}
 	);
 
 //wrapping the cart in {} to be able to access it in the backend from req.body.cart
