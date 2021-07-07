@@ -39,6 +39,7 @@ import CategoryHome from "./components/pages/Categories/CategoryHome";
 import Shop from "./components/pages/Shop";
 import Cart from "./components/pages/Cart";
 import DrawerCard from "./components/Drawer/DrawerCard";
+import Checkout from "./components/pages/Checkout";
 
 function App() {
 	const dispatch = useDispatch();
@@ -86,6 +87,7 @@ function App() {
 			<Route path="/category/:slug" exact component={CategoryHome} />
 			<Route path="/shop" exact component={Shop} />
 			<Route path="/cart" exact component={Cart} />
+			<Route path="/checkout" exact component={Checkout} />
 
 			<Switch>
 				<UserRoute exact path="/user/history" component={History} />
