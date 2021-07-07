@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCartTableView from "../reusable-Components/ProductCartTableView";
 
-const Cart = () => {
+const Cart = ({ history }) => {
 	const dispatch = useDispatch();
 	const { cart, user } = useSelector((state) => ({ ...state }));
 
@@ -12,6 +12,11 @@ const Cart = () => {
 		return cart.reduce((current, next) => {
 			return current + next.price * next.count;
 		}, 0);
+	}
+
+	function saveCartItemsToDb() {
+		alert("hello i ma working");
+		history.pushState("/checkout");
 	}
 
 	//creatingthe card table in a fncn
@@ -72,7 +77,10 @@ const Cart = () => {
 					Total :<b>${getTotal()}</b>
 					<hr />
 					{user ? (
-						<button className="btn btn-sm btn-primary btn-raised">
+						<button
+							onClick={saveCartItemsToDb}
+							className="btn btn-sm btn-primary btn-raised"
+						>
 							Proceed to checkout
 						</button>
 					) : (
