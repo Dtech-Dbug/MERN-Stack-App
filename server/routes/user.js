@@ -10,6 +10,6 @@ const {
 //controller
 const { userCart } = require("../controllers/userCart");
 
-router.post("/cart", createOrUpdateUserMiddleware, userCart);
+router.post("user/cart", createOrUpdateUserMiddleware, userCart);
 
 module.exports = router;
