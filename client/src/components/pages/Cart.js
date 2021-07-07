@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCartTableView from "../reusable-Components/ProductCartTableView";
 
+//import function to save cartItem in backedn under user loggedin
+import { userCart } from "../../functions/userCart";
+
 const Cart = ({ history }) => {
 	const dispatch = useDispatch();
 	const { cart, user } = useSelector((state) => ({ ...state }));
@@ -16,7 +19,14 @@ const Cart = ({ history }) => {
 
 	function saveCartItemsToDb() {
 		console.log("Cart", JSON.stringify(cart, null, 4));
-		history.push("/checkout");
+
+		//save the cartItems in the backedn. databasse under the loggedIn user
+		userCart(cart, user.token)
+			.then((res) => {
+				console.log(res);
+				if (res.data.ok) history.push("/checkout");
+			})
+			.catch((err) => console.log("cart save error", err));
 	}
 
 	//creatingthe card table in a fncn
