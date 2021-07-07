@@ -1,6 +1,7 @@
 const User = require("../model/userModel");
 const ProductModel = require("../model/productModel");
 const CartModel = require("../model/cart");
+const { findOne, findById } = require("../model/userModel");
 
 exports.userCart = async (req, res) => {
 	console.log("cart controller::", req.body);
@@ -73,4 +74,20 @@ exports.userCart = async (req, res) => {
 	//we do not have to send anuthing as response
 	//in the FE we are just checking if res.data.ok = true
 	//if true we redirect user to chacekout page
+};
+
+exports.getUserCart = async (req, res) => {
+	//find the user first
+	const user = await findOne({ email: req.user.email }).exec();
+	//find cart based on user
+
+	const cart = await findById({ orderedBy: user._id })
+		.populate("products.product")
+		.exec();
+
+	const { product, cartTotal, totalAfterDiscount } = cart;
+	//destructure them for simplicity
+
+	res.json({ product, cartTotal, totalAfterDiscount });
+	//referr to them by res.data.product | res.data.cartTotal & so on
 };
