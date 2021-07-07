@@ -8,8 +8,9 @@ const {
 } = require("../middlewares/authMiddleware");
 
 //controller
-const { userCart } = require("../controllers/userCart");
+const { userCart, getUserCart } = require("../controllers/userCart");
 
-router.post("/user/cart", createOrUpdateUserMiddleware, userCart);
+router.post("/user/cart", createOrUpdateUserMiddleware, userCart); //save cartItems in DB
+router.get("/user/cart", createOrUpdateUserMiddleware, getUserCart); //get user cart info from out own backend
 
 module.exports = router;
