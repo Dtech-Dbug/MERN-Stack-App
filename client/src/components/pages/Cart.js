@@ -16,7 +16,7 @@ const Cart = ({ history }) => {
 
 	function saveCartItemsToDb() {
 		alert("hello i ma working");
-		history.pushState("/checkout");
+		history.push("/checkout");
 	}
 
 	//creatingthe card table in a fncn
