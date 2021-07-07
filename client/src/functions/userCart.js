@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const userCart = (cart, authtoken) =>
 	axios.post(
-		`http://localhost:8000/api/cart`,
+		`http://localhost:8000/api/user/cart`,
 		{ cart },
 		{ headers: { authtoken } }
 	);
