@@ -77,14 +77,19 @@ exports.userCart = async (req, res) => {
 };
 
 exports.getUserCart = async (req, res) => {
+	//check user
 	const user = await User.findOne({ email: req.user.email }).exec();
 
+	//check cart Items based on user
 	let cart = await Cart.findOne({ orderedBy: user._id })
 		.populate("products.product", "_id title price totalAfterDiscount")
 		.exec();
 
 	const { products, cartTotal, totalAfterDiscount } = cart;
+	//destructure for simplicity
+
 	res.json({ products, cartTotal, totalAfterDiscount });
+	//so that we can acces them like : res.data.products | res.data.cartTotal
 };
 
 //fix 1: query mongoDb based on model : model was missing
