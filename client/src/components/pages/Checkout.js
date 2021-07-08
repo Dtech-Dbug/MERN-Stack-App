@@ -16,6 +16,7 @@ const Checkout = () => {
 	const [cartProducts, setCartProducts] = useState([]);
 	const [cartTotal, setCartTotal] = useState(0);
 	const [address, setAddress] = useState("");
+	const [addressSaved, setAddressSaved] = useState(false);
 	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => ({ ...state }));
@@ -59,8 +60,15 @@ const Checkout = () => {
 	}
 
 	function saveAddressToDb() {
-		//
-		console.log(address);
+		//make request to backend to save address
+		saveUserAddress(address, user.token)
+			.then((res) => {
+				if (res.data.ok) {
+					setAddressSaved(true);
+					toast.success(`Address saved. Continue to checkout & place order 😁`);
+				}
+			})
+			.catch((err) => console.log(err));
 	}
 	return (
 		<div className="row">
@@ -106,7 +114,12 @@ const Checkout = () => {
 
 				<div className="row">
 					<div className="col-md-6">
-						<button className="btn btn-primary">Place Order</button>
+						<button
+							disabled={!addressSaved || !cartProducts.length}
+							className="btn btn-primary"
+						>
+							Place Order
+						</button>
 					</div>
 
 					<div className="col-md-6">
