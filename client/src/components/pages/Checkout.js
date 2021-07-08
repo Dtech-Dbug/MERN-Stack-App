@@ -19,7 +19,11 @@ const Checkout = () => {
 	}, [user]);
 
 	const fetchCart = () =>
-		getUserCart(user.token).then((res) => console.log("res from cart BE", res));
+		getUserCart(user.token).then((res) => {
+			console.log("res from cart BE", res);
+			setCartProducts(res.data.products);
+			setCartTotal(res.data.cartTotal);
+		});
 
 	function saveAddressToDb() {
 		//
@@ -28,6 +32,7 @@ const Checkout = () => {
 		<div className="row">
 			<div className="col-md-6">
 				<h4>Delivery Address</h4>
+				<h4>{cartTotal}</h4>
 				<br />
 				<br />
 				textarea
