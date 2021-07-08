@@ -101,3 +101,15 @@ exports.emptyUserCart = async (req, res) => {
 
 	res.json(cart);
 };
+
+exports.userAddress = async (req, res) => {
+	//find user by email and update : address
+	const userAddress = await User.findOneAndUpdate(
+		{ email: req.user.email },
+		{ address: req.body.address }
+	).exec();
+
+	console.log("User address --->", userAddress);
+
+	res.json({ ok: true });
+};
