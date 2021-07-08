@@ -32,7 +32,6 @@ const Checkout = () => {
 		<div className="row">
 			<div className="col-md-6">
 				<h4>Delivery Address</h4>
-				<h4>{cartTotal}</h4>
 				<br />
 				<br />
 				textarea
@@ -48,11 +47,28 @@ const Checkout = () => {
 			<div className="col-md-6">
 				<h4>Order Summary</h4>
 				<hr />
-				<p>Products x</p>
+				<p>
+					Products : <b>{cartProducts.length}</b>
+				</p>
 				<hr />
-				<p>List of products</p>
+
+				<p>
+					<u>List of Products</u>
+				</p>
+				{cartProducts.map((p, i) => {
+					return (
+						<div kry={i}>
+							<p>
+								{p.product.title} ({p.color}) x {p.count} = {p.product.price} x{" "}
+								{p.count}
+							</p>
+						</div>
+					);
+				})}
 				<hr />
-				<p>Cart Total: $x</p>
+				<p>
+					Cart Total: <b>${cartTotal}</b>
+				</p>
 
 				<div className="row">
 					<div className="col-md-6">
