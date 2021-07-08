@@ -7,10 +7,15 @@ import {
 } from "../../functions/userCart";
 import { toast } from "react-toastify";
 
+//import plugIn for rich text editor and the css , without that unexpected outcomes will be shwn
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
 const Checkout = () => {
 	//state of products
 	const [cartProducts, setCartProducts] = useState([]);
 	const [cartTotal, setCartTotal] = useState(0);
+	const [address, setAddress] = useState("");
 	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => ({ ...state }));
@@ -55,6 +60,7 @@ const Checkout = () => {
 
 	function saveAddressToDb() {
 		//
+		console.log(address);
 	}
 	return (
 		<div className="row">
@@ -62,7 +68,7 @@ const Checkout = () => {
 				<h4>Delivery Address</h4>
 				<br />
 				<br />
-				textarea
+				<ReactQuill theme="snow" value={address} onChange={setAddress} />
 				<button className="btn btn-primary mt-2" onClick={saveAddressToDb}>
 					Save
 				</button>
