@@ -22,7 +22,7 @@ export const getUserCart = async (authtoken) =>
 	});
 
 export const emptyUserCart = async (authtoken) =>
-	await axios.put(`http://localhost:8000/api/user/cart`, {
+	await axios.delete(`http://localhost:8000/api/user/cart`, {
 		headers: {
 			authtoken,
 		},
