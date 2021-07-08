@@ -27,3 +27,15 @@ export const emptyUserCart = async (authtoken) =>
 			authtoken,
 		},
 	});
+
+//savve address to DB
+export const saveUserAddress = async (address, authtoken) =>
+	await axios.post(
+		`http://localhost:8000/api/user/address`,
+		{ address },
+		{
+			headers: {
+				authtoken,
+			},
+		}
+	);
