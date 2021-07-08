@@ -92,4 +92,12 @@ exports.getUserCart = async (req, res) => {
 	//so that we can acces them like : res.data.products | res.data.cartTotal
 };
 
-//fix 1: query mongoDb based on model : model was missing
+exports.emptyUserCart = async (req, res) => {
+	//find user
+	const user = await User.findOne({ email: req.user.email }).exec();
+
+	//find cart of user and remove
+	const cart = await CartModel.findOneAndRemove({ orderedBy: user._id }).exec();
+
+	res.json(cart);
+};
