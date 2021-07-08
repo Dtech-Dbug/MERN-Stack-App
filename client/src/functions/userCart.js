@@ -20,3 +20,10 @@ export const getUserCart = async (authtoken) =>
 			authtoken,
 		},
 	});
+
+export const emptyUserCart = async (authtoken) =>
+	await axios.put(`http://localhost:8000/api/user/cart`, {
+		headers: {
+			authtoken,
+		},
+	});
