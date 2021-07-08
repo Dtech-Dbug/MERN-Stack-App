@@ -152,3 +152,12 @@ iii. Update front end function
 iv. use pagination component from antd
 
 v. have a state to stpre the current pagaination count and the update
+
+
+
+
+///we have some a long way . Before implementing payment with stripe, we need to work woth coupons
+- admin can create coupons
+- then user can apply coupons while checkout
+- if coupon is valid , we will apply that discount on the user's order
+- then user will pay after the  price after discount
