@@ -6,12 +6,24 @@ import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const fields = { coupon: "", discount: "test%" };
+const fields = { coupon: "", discount: "" };
 const CouponPageAdmin = () => {
 	const [expiry, setExpiry] = useState("");
 	const [values, setValues] = useState(fields);
 
-	const { discount, coupon } = fields;
+	const { coupon, discount } = values;
+
+	const handleChange = (e) => {
+		e.preventDefault();
+		setValues({ ...values, [e.target.name]: e.target.value });
+	};
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		console.log(values);
+		console.log(expiry);
+	}
+
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -31,6 +43,8 @@ const CouponPageAdmin = () => {
 								type="text"
 								autoFocus
 								required
+								onChange={handleChange}
+								value={coupon}
 							/>
 						</div>
 
@@ -42,6 +56,7 @@ const CouponPageAdmin = () => {
 								type="text"
 								required
 								value={discount}
+								onChange={handleChange}
 							/>
 						</div>
 
@@ -51,11 +66,17 @@ const CouponPageAdmin = () => {
 							<DatePicker
 								className="form-control"
 								selected={new Date()}
+								value={expiry}
 								onChange={(date) => setExpiry(date)}
 							/>
 						</div>
 
-						<button className="btn btn-raised btn-primary mt-2">Save</button>
+						<button
+							onClick={handleSubmit}
+							className="btn btn-raised btn-primary mt-2"
+						>
+							Save
+						</button>
 					</form>
 				</div>
 			</div>
