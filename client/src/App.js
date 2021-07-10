@@ -40,6 +40,7 @@ import Shop from "./components/pages/Shop";
 import Cart from "./components/pages/Cart";
 import DrawerCard from "./components/Drawer/DrawerCard";
 import Checkout from "./components/pages/Checkout";
+import CouponPageAdmin from "./components/pages/protected-routes/admin/Coupons/CouponPageAdmin";
 
 function App() {
 	const dispatch = useDispatch();
@@ -116,6 +117,7 @@ function App() {
 					path="/admin/product/:slug"
 					component={UpdateProduct}
 				/>
+				<AdminRoute exact path="/admin/coupons" component={CouponPageAdmin} />
 			</Switch>
 		</div>
 	);
