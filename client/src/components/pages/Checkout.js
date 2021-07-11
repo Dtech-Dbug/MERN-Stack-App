@@ -17,6 +17,7 @@ const Checkout = () => {
 	const [cartTotal, setCartTotal] = useState(0);
 	const [address, setAddress] = useState("");
 	const [addressSaved, setAddressSaved] = useState(false);
+	const [couponCode, setCouponCode] = useState("");
 	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => ({ ...state }));
@@ -74,11 +75,24 @@ const Checkout = () => {
 	const couponFormForUsers = () => (
 		<>
 			<form className="form-group">
-				<input className="form-control" />
+				<input
+					className="form-control"
+					value={couponCode}
+					onChange={(e) => setCouponCode(e.target.value)}
+				/>
 			</form>
-			<button className="btn btn-primaty btn-raised">Apply</button>
+			<button
+				onClick={handleApplyCoupon}
+				className="btn btn-primaty btn-raised"
+			>
+				Apply
+			</button>
 		</>
 	);
+	const handleApplyCoupon = (e) => {
+		e.preventDefault();
+		console.log(couponCode);
+	};
 	return (
 		<div className="row">
 			<div className="col-md-6">
