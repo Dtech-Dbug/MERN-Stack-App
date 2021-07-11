@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	createCoupon,
@@ -14,9 +14,13 @@ const fields = { coupon: "", discount: "" };
 const CouponPageAdmin = () => {
 	const [expiry, setExpiry] = useState("");
 	const [values, setValues] = useState(fields);
+	const { coupon, discount } = values;
+	const [coupons, setCoupons] = useState([]);
 	const { user } = useSelector((state) => ({ ...state }));
 
-	const { coupon, discount } = values;
+	useEffect(() => {
+		getCoupons().then((res) => setCoupons(res.data));
+	}, []);
 
 	const handleChange = (e) => {
 		e.preventDefault();
@@ -87,6 +91,10 @@ const CouponPageAdmin = () => {
 							Save
 						</button>
 					</form>
+
+					<hr />
+
+					{JSON.stringify(coupons)}
 				</div>
 			</div>
 		</div>
