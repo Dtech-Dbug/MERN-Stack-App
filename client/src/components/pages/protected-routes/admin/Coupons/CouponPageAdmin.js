@@ -65,7 +65,7 @@ const CouponPageAdmin = () => {
 							<br />
 							<DatePicker
 								className="form-control"
-								selected={new Date()}
+								selected={expiry}
 								value={expiry}
 								onChange={(date) => setExpiry(date)}
 							/>
