@@ -26,11 +26,11 @@ const CouponPageAdmin = () => {
 	function handleSubmit(e) {
 		e.preventDefault();
 
-		let test = { name: coupon, discount: discount, expiry: expiry };
+		let couponValues = { name: coupon, discount: discount, expiry: expiry };
 
-		console.table(test);
+		console.table(couponValues);
 
-		createCoupon(test, user.token).then(toast.success("Created"));
+		createCoupon(couponValues, user.token).then(toast.success("Created"));
 	}
 
 	return (
