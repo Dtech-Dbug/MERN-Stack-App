@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Moment from "react-moment";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const fields = { coupon: "", discount: "" };
 const CouponPageAdmin = () => {
@@ -117,7 +118,9 @@ const CouponPageAdmin = () => {
 										<td>
 											<Moment>{c.expiry}</Moment>
 										</td>
-										<td></td>
+										<td>
+											<DeleteOutlined />
+										</td>
 									</tbody>
 								);
 							})}
