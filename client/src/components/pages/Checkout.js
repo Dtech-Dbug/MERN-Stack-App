@@ -70,6 +70,15 @@ const Checkout = () => {
 			})
 			.catch((err) => console.log(err));
 	}
+
+	const couponFormForUsers = () => (
+		<>
+			<form className="form-group">
+				<input className="form-control" />
+			</form>
+			<button className="btn btn-primaty btn-raised">Apply</button>
+		</>
+	);
 	return (
 		<div className="row">
 			<div className="col-md-6">
@@ -83,7 +92,7 @@ const Checkout = () => {
 				<hr />
 				<h4>Got Coupon?</h4>
 				<br />
-				coupon input and apply button
+				{couponFormForUsers()}
 			</div>
 
 			<div className="col-md-6">
