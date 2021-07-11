@@ -25,8 +25,14 @@ exports.list = async (req, res) => {
 //remove
 exports.remove = async (req, res) => {
 	try {
-		res.json(await CouponModel.findByIdAndDelete(req.params.couponId).exec());
+		console.log("param Id::", req.params.couponId);
+
+		const removedCoupon = await CouponModel.findByIdAndDelete(
+			req.params.couponId
+		).exec();
+		//res.json(await CouponModel.findByIdAndDelete(req.params.couponId).exec());
+		res.json(removedCoupon);
 	} catch (err) {
-		console.log("err while deleting coupon", err);
+		console.log("err while deleting coupon", err.message);
 	}
 };
