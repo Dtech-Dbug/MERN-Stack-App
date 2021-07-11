@@ -9,6 +9,7 @@ import AdminNav from "../../../../Nav/Admin-Nav";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Moment from "react-moment";
 
 const fields = { coupon: "", discount: "" };
 const CouponPageAdmin = () => {
@@ -94,7 +95,33 @@ const CouponPageAdmin = () => {
 
 					<hr />
 
-					{JSON.stringify(coupons)}
+					<h3>{coupons.length} Coupons</h3>
+
+					<table className="table table-bordered">
+						<thead className="thead-light">
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Discount</th>
+								<th scope="col">Expiry</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+
+						{coupons &&
+							coupons.length &&
+							coupons.map((c, i) => {
+								return (
+									<tbody key={i}>
+										<td>{c.name}</td>
+										<td>{c.discount}</td>
+										<td>
+											<Moment>{c.expiry}</Moment>
+										</td>
+										<td></td>
+									</tbody>
+								);
+							})}
+					</table>
 				</div>
 			</div>
 		</div>
