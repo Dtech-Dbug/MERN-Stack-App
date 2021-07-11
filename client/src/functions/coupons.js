@@ -4,7 +4,7 @@ export const getCoupons = async () =>
 	await axios.get(`http://localhost:8000/api/coupons`);
 
 export const removeCoupon = async (couponId, authtoken) =>
-	await axios.delete(`http://localhost:8000/api/coupon:${couponId}`, {
+	await axios.delete(`http://localhost:8000/api/coupon/${couponId}`, {
 		headers: { authtoken },
 	});
 
