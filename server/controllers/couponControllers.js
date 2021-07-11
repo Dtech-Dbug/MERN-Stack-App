@@ -6,7 +6,9 @@ exports.create = async (req, res) => {
 		//to create we need information from fronTend
 		//we destructure them from req.body
 		console.log("Coupon body ===>", req.body);
+
 		const { name, expiry, discount } = req.body;
+		console.log(name, expiry, discount);
 
 		const saveCoupon = await new CouponModel({ name, expiry, discount }).save();
 		res.json(saveCoupon);
