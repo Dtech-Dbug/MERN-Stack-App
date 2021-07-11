@@ -36,9 +36,24 @@ const CouponPageAdmin = () => {
 
 		console.table(couponValues);
 
-		createCoupon(couponValues, user.token).then(toast.success("Created"));
+		createCoupon(couponValues, user.token).then((res) => {
+			toast.success("Created");
+			getCoupons().then((res) => setCoupons(res.data));
+		});
 	}
 
+	const handleRemoveCoupon = (couponId) => {
+		if (window.confirm("Sure?")) {
+			removeCoupon(couponId, user.token)
+				.then((res) => {
+					toast.error(`Coupon "${res.data.name}" is deleted`);
+					//instantly show the change by fetching available coupons again
+					getCoupons().then((res) => setCoupons(res.data));
+				})
+				.catch((err) => console.log(err));
+		}
+		console.log(couponId);
+	};
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -112,14 +127,16 @@ const CouponPageAdmin = () => {
 							coupons.length &&
 							coupons.map((c, i) => {
 								return (
-									<tbody key={i}>
+									<tbody key={c._id}>
 										<td>{c.name}</td>
 										<td>{c.discount}</td>
 										<td>
 											<Moment>{c.expiry}</Moment>
 										</td>
 										<td>
-											<DeleteOutlined />
+											<DeleteOutlined
+												onClick={() => handleRemoveCoupon(c._id)}
+											/>
 										</td>
 									</tbody>
 								);
