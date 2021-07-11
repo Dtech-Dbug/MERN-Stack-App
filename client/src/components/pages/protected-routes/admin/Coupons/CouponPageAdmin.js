@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import * as functions from "../../../../../functions/coupons";
+import {
+	createCoupon,
+	removeCoupon,
+	getCoupons,
+} from "../../../../../functions/coupons";
 import AdminNav from "../../../../Nav/Admin-Nav";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
@@ -10,6 +14,7 @@ const fields = { coupon: "", discount: "" };
 const CouponPageAdmin = () => {
 	const [expiry, setExpiry] = useState("");
 	const [values, setValues] = useState(fields);
+	const { user } = useSelector((state) => ({ ...state }));
 
 	const { coupon, discount } = values;
 
@@ -20,8 +25,12 @@ const CouponPageAdmin = () => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log(values);
-		console.log(expiry);
+
+		let test = { name: coupon, discount: discount, expiry: expiry };
+
+		console.table(test);
+
+		createCoupon(test, user.token).then(toast.success("Created"));
 	}
 
 	return (
