@@ -4,6 +4,7 @@ import {
 	getUserCart,
 	emptyUserCart,
 	saveUserAddress,
+	applyCoupon,
 } from "../../functions/userCart";
 import { toast } from "react-toastify";
 
@@ -18,6 +19,10 @@ const Checkout = () => {
 	const [address, setAddress] = useState("");
 	const [addressSaved, setAddressSaved] = useState(false);
 	const [couponCode, setCouponCode] = useState("");
+
+	//state to store discount price
+	const [discountPrice, setDiscountPrice] = useState("");
+	const [discountError, setDiscountError] = useState("");
 	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => ({ ...state }));
@@ -92,6 +97,12 @@ const Checkout = () => {
 	const handleApplyCoupon = (e) => {
 		e.preventDefault();
 		console.log(couponCode);
+		applyCoupon({ coupon: couponCode }, user.token).then((res) => {
+			console.log("res fater coupon applied", res.data);
+			if (res.data.err) {
+				setDiscountError(res.data.err);
+			}
+		});
 	};
 	return (
 		<div className="row">
