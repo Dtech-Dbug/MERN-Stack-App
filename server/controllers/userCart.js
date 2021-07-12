@@ -1,6 +1,7 @@
 const User = require("../model/userModel");
 const ProductModel = require("../model/productModel");
 const CartModel = require("../model/cart");
+const CouponModel = require("../model/couponModel");
 const { findOne, findById } = require("../model/userModel");
 
 exports.userCart = async (req, res) => {
@@ -112,4 +113,45 @@ exports.userAddress = async (req, res) => {
 	console.log("User address --->", userAddress);
 
 	res.json({ ok: true });
+};
+
+exports.applyCouponDiscountToCart = async (req, res) => {
+	//first acess the coupon
+	const { coupon } = req.body;
+	cosnsole.log("Coupon==>", coupon);
+
+	//once we have the coupon, check the validity of coupon
+	const validCoupon = await CouponModel.findOne({ name: coupon }).exec();
+
+	//if coupon srnt from FR is not valied : validCoupon will be null
+
+	if (validCoupon === null) {
+		res.json({
+			err: "Invalid Coupon",
+		});
+	}
+
+	const user = await User.findOne({ email: req.user.email }).exec();
+
+	//now we query the cartModel by userID and apply discount
+
+	let cart = await CartModel.findOne({ orderedBy: user._id })
+		.populate("products.product", "_id title price")
+		.exec();
+	//destructure cart products , cartTotal from cart
+	const { products, cartTotal } = cart;
+
+	console.log("Cart Total =>", cartTotal, "Discount%===", validCoupon.discount);
+	let discountedPrice = (cartTotal * validCoupon.discount) / 100;
+
+	let totalAfterDiscount = (cartTotal - discountedPrice).toFixed(2); //upto two ecimal place
+
+	//once we have the discounted proce , update the cart
+	CartModel.findOneAndUpdate(
+		{ orderedBy: user._id },
+		{ totalAfterDiscount },
+		{ new: true }
+	).exec();
+
+	res.json(totalAfterDiscount);
 };
