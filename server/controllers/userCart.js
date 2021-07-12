@@ -117,8 +117,9 @@ exports.userAddress = async (req, res) => {
 
 exports.applyCouponDiscountToCart = async (req, res) => {
 	//first acess the coupon
+	console.log("coupon body to be applied", req.body);
 	const { coupon } = req.body;
-	cosnsole.log("Coupon==>", coupon);
+	console.log("Coupon==>", coupon);
 
 	//once we have the coupon, check the validity of coupon
 	const validCoupon = await CouponModel.findOne({ name: coupon }).exec();
