@@ -83,7 +83,10 @@ const Checkout = () => {
 				<input
 					className="form-control"
 					value={couponCode}
-					onChange={(e) => setCouponCode(e.target.value)}
+					onChange={(e) => {
+						setCouponCode(e.target.value);
+						setDiscountError("");
+					}}
 				/>
 			</form>
 			<button
