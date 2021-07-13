@@ -103,9 +103,19 @@ const Checkout = () => {
 		console.log(couponCode);
 		applyCoupon({ coupon: couponCode }, user.token).then((res) => {
 			console.log("res fater coupon applied", res);
-			setDiscountPrice(res.data);
+			if (res.data) {
+				setDiscountPrice(res.data);
+				dispatch({
+					type: "COUPON_APPLIED",
+					payload: true,
+				});
+			}
 			if (res.data.err) {
 				setDiscountError(res.data.err);
+				dispatch({
+					type: "COUPON_APPLIED",
+					payload: false,
+				});
 			}
 		});
 	};
