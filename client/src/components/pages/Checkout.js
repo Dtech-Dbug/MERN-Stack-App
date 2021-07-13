@@ -21,7 +21,7 @@ const Checkout = () => {
 	const [couponCode, setCouponCode] = useState("");
 
 	//state to store discount price
-	const [discountPrice, setDiscountPrice] = useState("");
+	const [discountPrice, setDiscountPrice] = useState(0);
 	const [discountError, setDiscountError] = useState("");
 	const dispatch = useDispatch();
 
@@ -98,7 +98,8 @@ const Checkout = () => {
 		e.preventDefault();
 		console.log(couponCode);
 		applyCoupon({ coupon: couponCode }, user.token).then((res) => {
-			console.log("res fater coupon applied", res.data);
+			console.log("res fater coupon applied", res);
+			setDiscountPrice(res.data);
 			if (res.data.err) {
 				setDiscountError(res.data.err);
 			}
@@ -118,6 +119,8 @@ const Checkout = () => {
 				<h4>Got Coupon?</h4>
 				<br />
 				{couponFormForUsers()}
+				<br />
+				{discountError && <p className="h4 text-danger">{discountError}</p>}
 			</div>
 
 			<div className="col-md-6">
