@@ -40,6 +40,7 @@ import Shop from "./components/pages/Shop";
 import Cart from "./components/pages/Cart";
 import DrawerCard from "./components/Drawer/DrawerCard";
 import Checkout from "./components/pages/Checkout";
+import Payment from "./components/pages/Payment";
 import CouponPageAdmin from "./components/pages/protected-routes/admin/Coupons/CouponPageAdmin";
 
 function App() {
@@ -89,6 +90,7 @@ function App() {
 			<Route path="/shop" exact component={Shop} />
 			<Route path="/cart" exact component={Cart} />
 			<Route path="/checkout" exact component={Checkout} />
+			<Route path="/payment" exact component={Payment} />
 
 			<Switch>
 				<UserRoute exact path="/user/history" component={History} />
