@@ -46,6 +46,7 @@ const Checkout = () => {
 	//emoty cart from localstorage, redux and DB
 	function emptyCart() {
 		console.log("empty cart?");
+		setDiscountPrice(0);
 		if (typeof window !== "undefined") {
 			//remove from Local Storage
 			localStorage.removeItem("cart");
@@ -151,7 +152,7 @@ const Checkout = () => {
 				<p>
 					Cart Total: <b>${cartTotal}</b>
 					<br />
-					{discountPrice && discountPrice > 0 && (
+					{discountPrice > 0 && (
 						<p className="alert alert-success text-success">
 							`Discount Applied Succesfully. Price to pay : ${discountPrice}`
 						</p>
