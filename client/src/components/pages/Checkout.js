@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const Checkout = () => {
+const Checkout = ({ history }) => {
 	//state of products
 	const [cartProducts, setCartProducts] = useState([]);
 	const [cartTotal, setCartTotal] = useState(0);
@@ -174,6 +174,7 @@ const Checkout = () => {
 						<button
 							disabled={!addressSaved || !cartProducts.length}
 							className="btn btn-primary"
+							onClick={() => history.push("/payment")}
 						>
 							Place Order
 						</button>
