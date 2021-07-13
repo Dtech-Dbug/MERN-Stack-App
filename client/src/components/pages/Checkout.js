@@ -150,6 +150,12 @@ const Checkout = () => {
 				<hr />
 				<p>
 					Cart Total: <b>${cartTotal}</b>
+					<br />
+					{discountPrice && discountPrice > 0 && (
+						<p className="alert alert-success text-success">
+							`Discount Applied Succesfully. Price to pay : ${discountPrice}`
+						</p>
+					)}
 				</p>
 
 				<div className="row">
