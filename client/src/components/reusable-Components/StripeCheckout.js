@@ -18,16 +18,22 @@ const StripeCheckout = () => {
 	const elements = useElements();
 
 	useEffect(() => {
+		console.log("use effect stripe");
 		user &&
-			user.token !== null &&
-			createPaymentIntent(user.token).then((res) => {
-				console.log("create payment intent response", res);
-				setClientSecret(res.data);
-			});
-		console.log("hello");
+			createPaymentIntent(user.token)
+				.then((res) => {
+					console.log("create payment intent response", res);
+					setClientSecret(res.data.clientSecret);
+				})
+				.catch((err) =>
+					console.log("err while client key fetching", err.message)
+				);
 	}, []);
 
-	const handleSubmit = async (e) => {};
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		console.log("waitinf for client secret key");
+	};
 
 	const handleChange = async (e) => {};
 
@@ -60,7 +66,7 @@ const StripeCheckout = () => {
 
 				<button
 					className="stripe-button"
-					disabled={processing || disabled || paymentSuccess}
+					//	disabled={processing || disabled || paymentSuccess}
 				>
 					<span id="button-text">
 						{processing ? <div className="spinner" id="spinner"></div> : "Pay"}
