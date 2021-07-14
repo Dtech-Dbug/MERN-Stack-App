@@ -14,6 +14,8 @@ exports.createPaymentIntent = async (req, res) => {
 		currency: "usd",
 	});
 
+	console.log("secret", paymentIntent.client_secret);
+
 	res.send({
 		clientSecret: paymentIntent.client_secret,
 	});
