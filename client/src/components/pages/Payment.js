@@ -1,6 +1,8 @@
 import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import StripeCheckout from "../reusable-Components/StripeCheckout";
+import "../../stripe.css";
 
 //load strip outside component to be sure it doesnt recreate on every render
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHER_KEY);
@@ -12,6 +14,7 @@ const Payment = () => {
 			<Elements stripe={promise}>
 				<div className="col-md-8 offset-md-2">
 					<h3>Payment</h3>
+					<StripeCheckout />
 				</div>
 			</Elements>
 		</div>
