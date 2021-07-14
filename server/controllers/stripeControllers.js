@@ -5,6 +5,7 @@ const CouponModel = require("../model/couponModel");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.createPaymentIntent = async (req, res) => {
+	console.log("Requet to stripe backend coming");
 	//apply coupon
 
 	//later caluculate price
