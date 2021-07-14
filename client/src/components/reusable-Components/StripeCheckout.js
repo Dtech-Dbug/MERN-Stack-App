@@ -19,10 +19,12 @@ const StripeCheckout = () => {
 
 	useEffect(() => {
 		user &&
+			user.token !== null &&
 			createPaymentIntent(user.token).then((res) => {
-				console.log("create payment intent response", res.data);
+				console.log("create payment intent response", res);
 				setClientSecret(res.data);
 			});
+		console.log("hello");
 	}, []);
 
 	const handleSubmit = async (e) => {};
@@ -64,6 +66,7 @@ const StripeCheckout = () => {
 						{processing ? <div className="spinner" id="spinner"></div> : "Pay"}
 					</span>
 				</button>
+				{JSON.stringify(clientSecret)}
 			</form>
 		</>
 	);
