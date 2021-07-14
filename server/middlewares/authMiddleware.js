@@ -10,8 +10,8 @@ exports.createOrUpdateUserMiddleware = async (req, res, next) => {
 		const firebaseUser = await admin
 			.auth()
 			.verifyIdToken(req.headers.authtoken);
-		//console.log("FIREBASE USER : ", firebaseUser);
-		console.log("tpken", req.headers.authtoken);
+		console.log("FIREBASE USER : ", firebaseUser);
+		//console.log("tpken", req.headers.authtoken);
 
 		//we can add more properties in the request and access them from everywrhre , controllers
 		// the req, res are shared through oyt the app ,hence adding request methods will help us access the userToken easily and pass it to the controller , in the routes
