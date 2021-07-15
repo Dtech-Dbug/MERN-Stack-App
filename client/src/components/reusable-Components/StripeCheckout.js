@@ -35,7 +35,12 @@ const StripeCheckout = () => {
 		console.log("waitinf for client secret key");
 	};
 
-	const handleChange = async (e) => {};
+	const handleChange = async (e) => {
+		//listen fo changes in the cardElement & display any errors
+		console.log(e.empty);
+		setDisabled(e.empty);
+		setError(e.error ? e.error.message : "");
+	};
 
 	const cartStyle = {
 		style: {
@@ -72,7 +77,13 @@ const StripeCheckout = () => {
 						{processing ? <div className="spinner" id="spinner"></div> : "Pay"}
 					</span>
 				</button>
-				{JSON.stringify(clientSecret)}
+
+				<br />
+				{error && (
+					<div className="card-error" role="alert">
+						{error}
+					</div>
+				)}
 			</form>
 		</>
 	);
