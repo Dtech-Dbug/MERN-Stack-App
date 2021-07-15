@@ -13,6 +13,19 @@ exports.createPaymentIntent = async (req, res) => {
 	const paymentIntent = await stripe.paymentIntents.create({
 		amount: 200,
 		currency: "usd",
+		//shipping & description needed for indian usage
+		//get name and address from userrModel
+		description: "Software development services | Tes",
+		shipping: {
+			name: "Jenny Rosen",
+			address: {
+				line1: "510 Townsend St",
+				postal_code: "98140",
+				city: "San Francisco",
+				state: "CA",
+				country: "US",
+			},
+		},
 	});
 
 	console.log("secret", paymentIntent.client_secret);
