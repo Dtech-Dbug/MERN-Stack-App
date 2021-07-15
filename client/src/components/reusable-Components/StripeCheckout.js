@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useSelector, useDispatch } from "react-redux";
 import { createPaymentIntent } from "../../functions/stripe";
+import { Link } from "react-router-dom";
 
 const StripeCheckout = () => {
 	const dispatch = useDispatch();
@@ -17,22 +18,58 @@ const StripeCheckout = () => {
 	const stripe = useStripe();
 	const elements = useElements();
 
+	// Test card : 4242 4242 4242 4242
+
 	useEffect(() => {
 		console.log("use effect stripe");
-		user &&
-			createPaymentIntent(user.token)
-				.then((res) => {
-					console.log("create payment intent response", res);
-					setClientSecret(res.data.clientSecret);
-				})
-				.catch((err) =>
-					console.log("err while client key fetching", err.message)
-				);
+
+		createPaymentIntent(user.token)
+			.then((res) => {
+				console.log("create payment intent response", res.data);
+				setClientSecret(res.data.clientSecret);
+			})
+			.catch((err) =>
+				console.log("err while client key fetching", err.message)
+			);
 	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("waitinf for client secret key");
+		setProcessing(true);
+		console.log("client secret on submit", clientSecret);
+		//once we get response from stripe
+		//we set processing to false
+		//to make req to stripe so we conform the card payment
+
+		//use the stripe ; stripe = useStripe()
+		//1st arg, : clientSecret
+		//2nd arg : payment method and details
+
+		const payload = await stripe.confirmCardPayment(clientSecret, {
+			//access cardElement component and storing it in a variable
+			payment_method: {
+				card: elements.getElement(CardElement),
+				billing_details: {
+					name: e.target.name.value,
+				},
+			},
+		});
+
+		//if error : handle error
+		if (payload.error) {
+			setError(`Pyament Failed ${payload.error.message}`);
+			setProcessing(false);
+		}
+		//esle show success message
+		else {
+			//here , we get result for sucessful payment
+			//create order and save it in database for admin to process
+			//dafter payment, remove order from cartfrom  redux , and localStorage
+			console.log(JSON.stringify(payload, null, 4));
+			setError("");
+			setProcessing(false);
+			setPaymentSucces(true);
+		}
 	};
 
 	const handleChange = async (e) => {
@@ -62,6 +99,11 @@ const StripeCheckout = () => {
 
 	return (
 		<>
+			<p
+				className={paymentSuccess ? "result-message" : "result-message-hidden"}
+			>
+				Payment Success! <Link to="/user/history">View your order here.</Link>
+			</p>
 			<form id="payment-form" className="stripe-form" onSubmit={handleSubmit}>
 				<CardElement
 					id="card-element"
