@@ -27,6 +27,7 @@ const StripeCheckout = () => {
 		createPaymentIntent(user.token, coupon)
 			.then((res) => {
 				console.log("create payment intent response", res.data);
+				console.log("Client secret stripe", res.data.clientSecret);
 				setClientSecret(res.data.clientSecret);
 			})
 			.catch((err) =>
