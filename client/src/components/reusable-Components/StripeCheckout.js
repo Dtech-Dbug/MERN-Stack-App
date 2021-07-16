@@ -78,7 +78,7 @@ const StripeCheckout = () => {
 			console.log(JSON.stringify(payload, null, 4));
 			setError("");
 			setProcessing(false);
-			setPaymentSucces(false);
+			setPaymentSucces(true);
 		}
 	};
 
@@ -111,7 +111,7 @@ const StripeCheckout = () => {
 		<>
 			<p
 				className={
-					paymentSuccess === true ? "result-message" : "result-message-hidden"
+					paymentSuccess === true ? "result-message" : "result-message hidden"
 				}
 			>
 				Payment Success! <Link to="/user/history">View your order here.</Link>
