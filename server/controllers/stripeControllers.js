@@ -35,15 +35,19 @@ exports.createPaymentIntent = async (req, res) => {
 		//sends the webhook event instead of the whole paymmentIntent to strip to track success status of payment
 
 		const paymentIntent = await stripe.paymentIntents.create({
-			amount: 100,
-			currency: "usd",
 			description: "TESTING MERN APP",
 			shipping: {
 				name: user.name,
 				address: {
 					line1: user.address,
+					// postal_code: "700150",
+					// city: "India",
+					// state: "WB",
+					// country: "INDIA",
 				},
 			},
+			amount: 100,
+			currency: "inr",
 		});
 		console.log("Payment Intent", paymentIntent);
 
