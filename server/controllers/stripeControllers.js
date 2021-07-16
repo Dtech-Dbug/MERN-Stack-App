@@ -6,13 +6,15 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.createPaymentIntent = async (req, res) => {
 	console.log(req.body);
-	return;
+
 	try {
 		console.log(
 			"Requet to stripe backend coming",
 			process.env.STRIPE_SECRET_KEY
 		);
-		//apply coupon
+
+		//destructure coupon information sent from frontEnd
+		const { couponApplied } = req.body;
 
 		//later caluculate price
 
@@ -20,12 +22,23 @@ exports.createPaymentIntent = async (req, res) => {
 		const user = await User.findOne({ email: req.user.email }).exec();
 
 		//2. Find the user's cart : cartTotal
-		const { cartTotal } = await CartModel.findOne({ orderedBy: user._id });
+		const { cartTotal, totalAfterDiscount } = await CartModel.findOne({
+			orderedBy: user._id,
+		});
+
+		//check if coupon applied is true , if yes apply discount
+		if (couponApplied === true) {
+			console.log("Discount on the way");
+			const { totalAfterDiscount } = await CartModel.findOne({
+				orderedBy: user._id,
+			});
+		}
 
 		const details = {
 			User: user.name,
 			Adress: user.address,
 			Total: cartTotal,
+			total: totalAfterDiscount,
 		};
 		console.table(details);
 
