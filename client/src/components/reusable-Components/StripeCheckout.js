@@ -109,6 +109,11 @@ const StripeCheckout = () => {
 
 	return (
 		<>
+			{coupon ? (
+				<p className="alert alert-success">Coupon Apllied</p>
+			) : (
+				<p className="alert alert-danger">No Coupon Apllied</p>
+			)}
 			<p
 				className={
 					paymentSuccess === true ? "result-message" : "result-message hidden"
@@ -125,7 +130,7 @@ const StripeCheckout = () => {
 						</>,
 
 						<>
-							<CheckOutlined className="text-info" /> <br /> Payable:s{" "}
+							<CheckOutlined className="text-info" /> <br /> Payable:{" "}
 							{finalPrice}
 						</>,
 					]}
