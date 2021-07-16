@@ -56,3 +56,9 @@ STEPS:
 //So far we have done a lot of things
 - Add to cart, when user adds any products to cart- save the item in local storage
 - so that we can send the saved item in LOcalStorage to the Backend
+
+
+//after payment
+- when payment is successfull , that is stauts : succeded
+- we will delete the products from cart of the user
+- and create order , so that admin can see and take the further steps
