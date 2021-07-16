@@ -26,19 +26,21 @@ exports.createPaymentIntent = async (req, res) => {
 			orderedBy: user._id,
 		});
 
+		let finalPrice = 0;
+
 		//check if coupon applied is true , if yes apply discount
-		if (couponApplied === true) {
-			console.log("Discount on the way");
-			const { totalAfterDiscount } = await CartModel.findOne({
-				orderedBy: user._id,
-			});
+		if (couponApplied && totalAfterDiscount) {
+			finalPrice = Math.round(totalAfterDiscount);
+		} else {
+			finalPrice = Math.round(cartTotal);
 		}
 
 		const details = {
 			User: user.name,
 			Adress: user.address,
 			Total: cartTotal,
-			total: totalAfterDiscount,
+			appliedCoupon: couponApplied,
+			total: finalPrice,
 		};
 		console.table(details);
 
@@ -61,13 +63,14 @@ exports.createPaymentIntent = async (req, res) => {
 					// country: "INDIA",
 				},
 			},
-			amount: cartTotal,
+			amount: finalPrice,
 			currency: "inr",
 		});
 		console.log("Payment Intent", paymentIntent);
 
 		res.send({
 			clientSecret: paymentIntent.client_secret,
+			info: details,
 		});
 	} catch (err) {
 		console.log("error in strip controller", err, err.message);
