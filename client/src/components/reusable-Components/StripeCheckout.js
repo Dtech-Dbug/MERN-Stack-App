@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 
 const StripeCheckout = () => {
 	const dispatch = useDispatch();
-	const { user } = useSelector((state) => ({ ...state }));
+	const { user, coupon } = useSelector((state) => ({ ...state }));
 
 	//state varaibles
 	const [paymentSuccess, setPaymentSucces] = useState(false);
 	const [error, setError] = useState(null);
-	const [processing, setProcessing] = useState("");
+	const [processing, setProcessing] = useState(false);
 	const [disabled, setDisabled] = useState(true);
 	const [clientSecret, setClientSecret] = useState("");
 
@@ -23,7 +23,8 @@ const StripeCheckout = () => {
 	useEffect(() => {
 		console.log("use effect stripe");
 
-		createPaymentIntent(user.token)
+		user && console.log("making request to backend with token", user.token);
+		createPaymentIntent(user.token, coupon)
 			.then((res) => {
 				console.log("create payment intent response", res.data);
 				setClientSecret(res.data.clientSecret);
@@ -59,16 +60,19 @@ const StripeCheckout = () => {
 		if (payload.error) {
 			setError(`Pyament Failed ${payload.error.message}`);
 			setProcessing(false);
+			setPaymentSucces(false);
 		}
 		//esle show success message
 		else {
 			//here , we get result for sucessful payment
 			//create order and save it in database for admin to process
 			//dafter payment, remove order from cartfrom  redux , and localStorage
+			setProcessing(true);
 			console.log(JSON.stringify(payload, null, 4));
 			setError("");
 			setProcessing(false);
-			setPaymentSucces(true);
+
+			setPaymentSucces(false);
 		}
 	};
 
@@ -100,7 +104,9 @@ const StripeCheckout = () => {
 	return (
 		<>
 			<p
-				className={paymentSuccess ? "result-message" : "result-message-hidden"}
+				className={
+					paymentSuccess === true ? "result-message" : "result-message-hidden"
+				}
 			>
 				Payment Success! <Link to="/user/history">View your order here.</Link>
 			</p>
