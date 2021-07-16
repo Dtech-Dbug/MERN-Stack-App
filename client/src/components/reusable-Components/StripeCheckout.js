@@ -14,6 +14,8 @@ const StripeCheckout = () => {
 	const [processing, setProcessing] = useState(false);
 	const [disabled, setDisabled] = useState(true);
 	const [clientSecret, setClientSecret] = useState("");
+	const [cartTotal, setCartTotal] = useState(0);
+	const [finalPrice, setFinalPrice] = useState(0);
 
 	const stripe = useStripe();
 	const elements = useElements();
@@ -29,6 +31,8 @@ const StripeCheckout = () => {
 				console.log("create payment intent response", res.data);
 				console.log("Client secret stripe", res.data.clientSecret);
 				setClientSecret(res.data.clientSecret);
+				setCartTotal(res.data.info.Total);
+				setFinalPrice(res.data.info.total);
 			})
 			.catch((err) =>
 				console.log("err while client key fetching", err.message)
@@ -72,7 +76,6 @@ const StripeCheckout = () => {
 			console.log(JSON.stringify(payload, null, 4));
 			setError("");
 			setProcessing(false);
-
 			setPaymentSucces(false);
 		}
 	};
