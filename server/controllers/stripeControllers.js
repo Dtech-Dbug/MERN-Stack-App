@@ -46,7 +46,7 @@ exports.createPaymentIntent = async (req, res) => {
 					// country: "INDIA",
 				},
 			},
-			amount: 100,
+			amount: cartTotal,
 			currency: "inr",
 		});
 		console.log("Payment Intent", paymentIntent);
