@@ -3,6 +3,8 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useSelector, useDispatch } from "react-redux";
 import { createPaymentIntent } from "../../functions/stripe";
 import { Link } from "react-router-dom";
+import { Card } from "antd";
+import { DollarOutlined, CheckOutlined } from "@ant-design/icons";
 
 const StripeCheckout = () => {
 	const dispatch = useDispatch();
@@ -114,6 +116,21 @@ const StripeCheckout = () => {
 			>
 				Payment Success! <Link to="/user/history">View your order here.</Link>
 			</p>
+
+			<div className="text-center pb-5">
+				<Card
+					actions={[
+						<>
+							<DollarOutlined className="text-info" /> <br /> Total: {cartTotal}
+						</>,
+
+						<>
+							<CheckOutlined className="text-info" /> <br /> Payable:s{" "}
+							{finalPrice}
+						</>,
+					]}
+				/>
+			</div>
 			<form id="payment-form" className="stripe-form" onSubmit={handleSubmit}>
 				<CardElement
 					id="card-element"
