@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema(
 		paymentIntent: {},
 		orderStatus: {
 			type: String,
-			default: "not Processed yet",
+			default: "not processed yet",
 			enum: [
 				"not processed yet",
 				"processing",
