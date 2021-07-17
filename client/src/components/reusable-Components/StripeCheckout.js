@@ -5,6 +5,7 @@ import { createPaymentIntent } from "../../functions/stripe";
 import { Link } from "react-router-dom";
 import { Card } from "antd";
 import { DollarOutlined, CheckOutlined } from "@ant-design/icons";
+import { newOrder } from "../../functions/userCart";
 
 const StripeCheckout = () => {
 	const dispatch = useDispatch();
@@ -72,7 +73,12 @@ const StripeCheckout = () => {
 		//esle show success message
 		else {
 			//here , we get result for sucessful payment
+
 			//create order and save it in database for admin to process
+			newOrder(payload, user.token).then((res) =>
+				console.log("ORDER SAVED", res.data)
+			);
+
 			//dafter payment, remove order from cartfrom  redux , and localStorage
 			setProcessing(true);
 			console.log(JSON.stringify(payload, null, 4));
