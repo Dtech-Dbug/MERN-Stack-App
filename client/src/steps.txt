@@ -62,3 +62,5 @@ STEPS:
 - when payment is successfull , that is stauts : succeded
 - we will delete the products from cart of the user
 - and create order , so that admin can see and take the further steps
+- admin can fetch all orders with statuts like : order status and all, whenthe payment is succesfull.
+- Each order will have an orderedBy which we can show in the user dashbprad in the history page.
