@@ -49,3 +49,16 @@ export const applyCoupon = async (coupon, authtoken) =>
 //we can send {coupon } as req.body , and in the backend it will be recived as req.body.coupon
 //we can also send , coupon as the parameter, but the argument should be what is expected like in the frinEnd while making request wiuth the above applyCOupon fyunction , the arguement can be {coupon : coupon} just to let the fuction know what is expected. And in the backend it will be accessed as <req className="body coupon">
 //if we dont use {} to define object anywhere in this function or using it , req.body will be {} : null object
+
+// user function to create a new order
+
+export const newOrder = async (stripeResponse, authtoken) =>
+	await axios.post(
+		`http://localhost:8000/api/user/order`,
+		{ stripeResponse },
+		{
+			headers: {
+				authtoken,
+			},
+		}
+	);
