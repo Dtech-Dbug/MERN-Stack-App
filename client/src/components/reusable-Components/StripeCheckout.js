@@ -5,7 +5,7 @@ import { createPaymentIntent } from "../../functions/stripe";
 import { Link } from "react-router-dom";
 import { Card } from "antd";
 import { DollarOutlined, CheckOutlined } from "@ant-design/icons";
-import { newOrder } from "../../functions/userCart";
+import { emptyUserCart, newOrder } from "../../functions/userCart";
 
 const StripeCheckout = () => {
 	const dispatch = useDispatch();
@@ -83,10 +83,14 @@ const StripeCheckout = () => {
 						if (typeof window !== undefined) {
 							localStorage.removeItem("cart");
 						}
+						//from redux
 						dispatch({
 							type: "ADD_TO_CART",
 							payload: [],
 						});
+
+						//delete cart from databse
+						emptyUserCart(user.token);
 					}
 				})
 				.catch((err) => alert(err.message));
