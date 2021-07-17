@@ -2,6 +2,7 @@ const User = require("../model/userModel");
 const ProductModel = require("../model/productModel");
 const CartModel = require("../model/cart");
 const CouponModel = require("../model/couponModel");
+const Order = require("../model/order");
 const { findOne, findById } = require("../model/userModel");
 
 exports.userCart = async (req, res) => {
@@ -155,4 +156,27 @@ exports.applyCouponDiscountToCart = async (req, res) => {
 	).exec();
 
 	res.json(totalAfterDiscount);
+};
+
+//creating order
+
+exports.createOrder = async (req, res) => {
+	//we need the payment intent, that is stripe response that we get in the backend
+	const { paymentIntent } = req.user.stripeResponse;
+	const user = await User.findOne({ email: req.user.email }).exec();
+
+	const { products } = await CartModel.findOne({ orderedBy: user._id }).exec();
+
+	//at this momemt, we have paymentIntet=nt , user and user's products
+	//we can create an order now
+
+	const newOrder = await new Order({
+		products,
+		paymentIntent,
+		orderedBy: user._id,
+	}).save();
+
+	console.log("NEW ORDER SAVED", newOrder);
+
+	res.send({ ok: true, invoice: newOrder });
 };
