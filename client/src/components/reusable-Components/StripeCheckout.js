@@ -75,9 +75,21 @@ const StripeCheckout = () => {
 			//here , we get result for sucessful payment
 
 			//create order and save it in database for admin to process
-			newOrder(payload, user.token).then((res) =>
-				console.log("ORDER SAVED", res.data)
-			);
+			newOrder(payload, user.token)
+				.then((res) => {
+					console.log("ORDER SAVED", res.data);
+					if (res.data.ok) {
+						//delete order from local storage and redux
+						if (typeof window !== undefined) {
+							localStorage.removeItem("cart");
+						}
+						dispatch({
+							type: "ADD_TO_CART",
+							payload: [],
+						});
+					}
+				})
+				.catch((err) => alert(err.message));
 
 			//dafter payment, remove order from cartfrom  redux , and localStorage
 			setProcessing(true);
