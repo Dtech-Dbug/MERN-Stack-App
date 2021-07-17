@@ -9,7 +9,7 @@ export const UserRoute = ({ children, ...rest }) => {
 	//access the user for protection
 	const { user } = useSelector((state) => ({ ...state }));
 
-	return user && user.token && user.role === "subsriber" ? (
+	return user && user.token && user.role === "subscriber" ? (
 		<Route {...rest} />
 	) : (
 		<LoadingToRedirect />
