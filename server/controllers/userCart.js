@@ -178,7 +178,38 @@ exports.createOrder = async (req, res) => {
 		orderedBy: user._id,
 	}).save();
 
-	console.log("NEW ORDER SAVED", newOrder);
+	//decrement quanity of products and  increment sold after order is placed
 
-	res.send({ ok: true, invoice: newOrder });
+	let availableUnits = products.map((item) => {
+		return {
+			//special mongoose mthod : updateOne
+			//1st arg : filter by what?
+			//uodate what
+			updateOne: {
+				filter: { _id: item.product._id }, //saved like that in DAtabse
+				update: { $inc: { quantity: -item.count, sold: +item.count } }, //$inc method : increment
+			},
+		};
+	});
+
+	let updatedUnits = await ProductModel.bulkWrite(availableUnits, {
+		new: true,
+	});
+
+	// let initialUnitsAndSold = await CartModel.findOne({
+	// 	id: products.product._id,
+	// })
+	// 	.select("quantity sold")
+	// 	.exec();
+	//bulwrite : writes in bulk - that is reads and edit multiple fields at once
+
+	console.log("NEW ORDER SAVED", newOrder);
+	console.log("Update UNits===>", updatedUnits);
+
+	res.send({
+		ok: true,
+		invoice: newOrder,
+
+		updatedUnits: updatedUnits,
+	});
 };
