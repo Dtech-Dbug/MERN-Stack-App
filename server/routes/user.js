@@ -16,6 +16,7 @@ const {
 	applyCouponDiscountToCart,
 
 	createOrder,
+	listOrders,
 } = require("../controllers/userCart");
 
 router.post("/user/cart", createOrUpdateUserMiddleware, userCart); //save cartItems in DB
@@ -25,6 +26,7 @@ router.post("/user/address", createOrUpdateUserMiddleware, userAddress); //save 
 
 //orders
 router.post("/user/order", createOrUpdateUserMiddleware, createOrder);
+router.get("/user/orders", createOrUpdateUserMiddleware, listOrders);
 
 //coupon
 router.post(
