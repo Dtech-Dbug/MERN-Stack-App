@@ -162,7 +162,9 @@ exports.applyCouponDiscountToCart = async (req, res) => {
 
 exports.createOrder = async (req, res) => {
 	//we need the payment intent, that is stripe response that we get in the backend
-	const { paymentIntent } = req.user.stripeResponse;
+	console.log("CERATE PRDEER REQ BODY--->", req.body);
+
+	const { paymentIntent } = req.body.stripeResponse;
 	const user = await User.findOne({ email: req.user.email }).exec();
 
 	const { products } = await CartModel.findOne({ orderedBy: user._id }).exec();
