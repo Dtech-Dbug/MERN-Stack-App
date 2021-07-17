@@ -192,16 +192,17 @@ exports.createOrder = async (req, res) => {
 		};
 	});
 
+	//bulwrite : writes in bulk - that is reads and edit multiple fields at once
 	let updatedUnits = await ProductModel.bulkWrite(availableUnits, {
 		new: true,
 	});
 
-	// let initialUnitsAndSold = await CartModel.findOne({
-	// 	id: products.product._id,
+	// let initialUnitsAndSold = await Order.findOne({
+	// 	_id: products.product._id,
 	// })
-	// 	.select("quantity sold")
+	// 	.populate("sold")
+	// 	.populate("quantity")
 	// 	.exec();
-	//bulwrite : writes in bulk - that is reads and edit multiple fields at once
 
 	console.log("NEW ORDER SAVED", newOrder);
 	console.log("Update UNits===>", updatedUnits);
@@ -209,7 +210,7 @@ exports.createOrder = async (req, res) => {
 	res.send({
 		ok: true,
 		invoice: newOrder,
-
+		initialUnits: initialUnitsAndSold,
 		updatedUnits: updatedUnits,
 	});
 };
