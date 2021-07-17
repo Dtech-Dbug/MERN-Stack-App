@@ -210,7 +210,17 @@ exports.createOrder = async (req, res) => {
 	res.send({
 		ok: true,
 		invoice: newOrder,
-		initialUnits: initialUnitsAndSold,
+
 		updatedUnits: updatedUnits,
 	});
+};
+
+exports.listOrders = async (req, res) => {
+	const user = await User.findOne({ email: req.user.email }).exec();
+
+	const orders = await Order.findOne({ orderedBy: user._id }).populate(
+		"products.product"
+	);
+	console.log("ORDERSSSS --->", orders);
+	res.send({ order: orders });
 };
