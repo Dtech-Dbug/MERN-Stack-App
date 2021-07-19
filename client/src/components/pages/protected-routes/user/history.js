@@ -63,7 +63,7 @@ export const History = () => {
 								<CloseCircleOutlined style={{ color: "red" }} />
 							)}
 						</td>
-						<td>
+						<td className="badge bg-primary text-white m-1">
 							<b>{order.order.orderStatus}</b>
 						</td>
 					</tr>
