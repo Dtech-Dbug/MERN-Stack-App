@@ -83,7 +83,7 @@ export const History = () => {
 			</p>
 
 			<p>
-				<b>Payment Status :</b> {order.paymentIntent.status}
+				<b>Payment Status :</b> {order.paymentIntent.status.toUpperCase()}
 			</p>
 		</div>
 	);
