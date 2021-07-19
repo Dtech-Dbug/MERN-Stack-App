@@ -10,7 +10,7 @@ import {
 	CloseCircleOutlined,
 } from "@ant-design/icons";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import Invoice from "../../../Invoice";
+import Invoice from "../../../Invoice/invoice";
 
 //we will have to protect this route , so only logged in users can see this page. if the route is not proteted anyone can navigate to this page without even logging
 
@@ -33,9 +33,7 @@ export const History = () => {
 			<div key={i} className="m-5 p-3 card">
 				{ShowPaymentInfo(order.order)}
 				{showOrderInTable(order)}
-				<div className="row">
-					<div className="col">PDF Download??</div>
-				</div>
+				<div className="row">{showDownloadPdfLink(order)}</div>
 			</div>
 		));
 
@@ -95,7 +93,9 @@ export const History = () => {
 			document={<Invoice order={order} />}
 			fileName="oreder-invoice.pdf"
 			className="btn btn-sm btn-block btn-outline-primary btn-raised"
-		></PDFDownloadLink>
+		>
+			Download PDF
+		</PDFDownloadLink>
 	);
 
 	return (
