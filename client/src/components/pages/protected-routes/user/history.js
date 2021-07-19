@@ -90,7 +90,7 @@ export const History = () => {
 
 	const showDownloadPdfLink = (order) => (
 		<PDFDownloadLink
-			document={<Invoice order={order} />}
+			document={<Invoice order={order.order} />}
 			fileName="oreder-invoice.pdf"
 			className="btn btn-sm btn-block btn-outline-primary btn-raised"
 		>
