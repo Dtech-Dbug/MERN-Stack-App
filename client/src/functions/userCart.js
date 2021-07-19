@@ -62,3 +62,9 @@ export const newOrder = async (stripeResponse, authtoken) =>
 			},
 		}
 	);
+
+export const userOrders = async (authtoken) => {
+	return await axios.get(`http://localhost:8000/api/user/orders`, {
+		headers: { authtoken },
+	});
+};
