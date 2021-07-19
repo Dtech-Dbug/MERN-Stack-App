@@ -17,10 +17,23 @@ export const History = () => {
 			userOrders(user.token)
 				.then((res) => {
 					console.log("Order of user", JSON.stringify(res.data, null, 4));
-					setOrders(res.data);
+					setOrders([res.data]);
 				})
 				.catch((err) => console.log(err.message));
 	}, []);
+
+	const showOrders = () =>
+		orders.map((order, i) => (
+			<div key={i} className="m-5 p-3 card">
+				<h4>Payment Info</h4>
+				{showOrderInTable(order)}
+				<div className="row">
+					<di className="col">PDF Download</di>
+				</div>
+			</div>
+		));
+
+	const showOrderInTable = (order) => <p>Orders </p>;
 
 	return (
 		<div className="container-fluid">
@@ -28,10 +41,14 @@ export const History = () => {
 				<div className="col-md-2">
 					<UserNav />
 				</div>
-				<div className="col-md-10">
-					<h4>{orders.length > 0 ? "Your Orders" : "	No Orders , found"}</h4>
+				<div className="col text-center">
+					<h4>
+						{orders.length > 0
+							? `${orders.length} Orders`
+							: "	No Orders , found"}
+					</h4>
 
-					{orders.length}
+					{showOrders()}
 				</div>
 			</div>
 		</div>
