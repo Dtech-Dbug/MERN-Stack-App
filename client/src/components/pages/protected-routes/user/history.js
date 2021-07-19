@@ -29,7 +29,7 @@ export const History = () => {
 	const showOrders = () =>
 		orders.map((order, i) => (
 			<div key={i} className="m-5 p-3 card">
-				<h4>Payment Info</h4>
+				{ShowPaymentInfo(order.order)}
 				{showOrderInTable(order)}
 				<div className="row">
 					<div className="col">PDF Download??</div>
@@ -70,6 +70,22 @@ export const History = () => {
 				))}
 			</tbody>
 		</table>
+	);
+
+	const ShowPaymentInfo = (order) => (
+		<div>
+			<p>
+				<b>Order id :</b> {order._id}
+				{""}
+			</p>
+			<p>
+				<b>Order Created :</b> {new Date(order.createdAt).toLocaleString()}
+			</p>
+
+			<p>
+				<b>Payment Status :</b> {order.paymentIntent.status}
+			</p>
+		</div>
 	);
 
 	return (
