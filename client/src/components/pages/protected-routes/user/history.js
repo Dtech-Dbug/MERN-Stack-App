@@ -10,6 +10,7 @@ import {
 	CloseCircleOutlined,
 } from "@ant-design/icons";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import Invoice from "../../../Invoice";
 
 //we will have to protect this route , so only logged in users can see this page. if the route is not proteted anyone can navigate to this page without even logging
 
