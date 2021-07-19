@@ -4,7 +4,11 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { userOrders } from "../../../../functions/userCart";
 import { toast } from "react-toastify";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import {
+	CheckCircleOutlined,
+	CheckOutlined,
+	CloseCircleOutlined,
+} from "@ant-design/icons";
 
 //we will have to protect this route , so only logged in users can see this page. if the route is not proteted anyone can navigate to this page without even logging
 
@@ -28,12 +32,45 @@ export const History = () => {
 				<h4>Payment Info</h4>
 				{showOrderInTable(order)}
 				<div className="row">
-					<di className="col">PDF Download</di>
+					<div className="col">PDF Download??</div>
 				</div>
 			</div>
 		));
 
-	const showOrderInTable = (order) => <p>Orders </p>;
+	const showOrderInTable = (order) => (
+		<table className="table table-bordered">
+			<thead className="thead-light">
+				<tr>
+					<th scope="col">Title</th>
+					<th scope="col">Price</th>
+					<th scope="col">Quantity</th>
+					<th scope="col">Color</th>
+					<th scope="col">Shipping</th>
+					<th scope="col">Order Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				{order.order.products.map((p, i) => (
+					<tr key={i}>
+						<td>{p.product.title}</td>
+						<td>{p.product.price}</td>
+						<td>{p.product.quantity}</td>
+						<td>{p.product.color}</td>
+						<td>
+							{p.product.shipping === "Yes" ? (
+								<CheckCircleOutlined style={{ color: "green" }} />
+							) : (
+								<CloseCircleOutlined style={{ color: "red" }} />
+							)}
+						</td>
+						<td>
+							<b>{order.order.orderStatus}</b>
+						</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	);
 
 	return (
 		<div className="container-fluid">
