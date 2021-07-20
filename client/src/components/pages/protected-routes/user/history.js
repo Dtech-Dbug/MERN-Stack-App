@@ -22,7 +22,7 @@ export const History = () => {
 		user &&
 			userOrders(user.token)
 				.then((res) => {
-					console.log("Order of user", JSON.stringify(res.data, null, 4));
+					console.log("Order of user", res.data);
 					setOrders([res.data]);
 				})
 				.catch((err) => console.log(err.message));
