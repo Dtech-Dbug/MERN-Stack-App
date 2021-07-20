@@ -13,11 +13,11 @@ const Invoice = ({ order }) => (
 			<Text style={styles.header} fixed>
 				~ {new Date().toLocaleString()} ~
 			</Text>
-
 			<Text style={styles.title}>Order Invoice</Text>
 			<Text style={styles.author}>MERN App</Text>
 			<Text style={styles.subtitle}>Order Summary</Text>
-
+			{/* <Text>{JSON.stringify(order)}</Text>
+			<Text>{JSON.stringify(order.products)}</Text> */}
 			<Table>
 				<TableHeader>
 					<TableCell>Title</TableCell>
@@ -27,16 +27,27 @@ const Invoice = ({ order }) => (
 					<TableCell>Shipping</TableCell>
 				</TableHeader>
 			</Table>
-			{/* 
 			<Table data={order.products}>
 				<TableBody>
-					<DataTableCell getContent={(x) => x.product.title} />
-					<DataTableCell getContent={(x) => `$${x.product.price}`} />
-					<DataTableCell getContent={(x) => x.product.quantity} />
-					<DataTableCell getContent={(x) => x.product.color} />
-					<DataTableCell getContent={(x) => x.product.shipping} />
+					<DataTableCell getContent={(p) => <Text> {p.product.title}</Text>} />
+					<DataTableCell getContent={(p) => <Text> {p.product.price}</Text>} />
+					<DataTableCell
+						getContent={(p) => <Text> {p.product.quantity}</Text>}
+					/>
+					<DataTableCell getContent={(p) => <Text> {p.product.color}</Text>} />
+					<DataTableCell
+						getContent={(p) => <Text> {p.product.shipping}</Text>}
+					/>
 				</TableBody>
-			</Table> */}
+			</Table>
+			<Text style={styles.title}>Payment Invoice</Text>
+			<Text style={styles.subtitle}>Order Invoice</Text>
+			<Text>Amount : {order.paymentIntent.amount}</Text>
+			<Text>Status : {order.paymentIntent.status}</Text>
+			<Text>
+				Paid at : {new Date(order.paymentIntent.created).toLocaleString()}
+			</Text>
+			<Text style={styles.footer}>~Thanks For shopping with us ~</Text>
 		</Page>
 	</Document>
 );
