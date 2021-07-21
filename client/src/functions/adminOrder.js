@@ -8,7 +8,7 @@ export const adminOrderList = async (authtoken) => {
 	});
 };
 
-export const adminUpdateOrdersStatus = async (
+export const adminUpdateOrderStatus = async (
 	orderId,
 	orderStatus,
 	authtoken
