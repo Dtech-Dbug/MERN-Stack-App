@@ -1,6 +1,7 @@
 const Order = require("../model/order");
 
 exports.adminOrders = async (req, res) => {
+	console.log("Server got admin order list");
 	const orders = await Order.find({})
 		.populate("products.product")
 		.sort("-createdAt")
