@@ -24,7 +24,7 @@ router.get(
 );
 
 router.put(
-	"admin/order-status",
+	"/admin/order-status",
 	createOrUpdateUserMiddleware,
 	adminCheckMiddleware,
 	adminOrderStatus
