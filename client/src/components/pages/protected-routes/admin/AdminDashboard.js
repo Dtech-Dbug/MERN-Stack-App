@@ -2,29 +2,58 @@ import React, { useState, useEffect } from "react";
 import AdminNav from "../../../Nav/Admin-Nav";
 import {
 	adminOrderList,
-	adminUpdateOrdersStatus,
+	adminUpdateOrderStatus,
 } from "../../../../functions/adminOrder";
+import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { Select } from "antd";
+const { Option } = Select;
 
 export const AdminDashboard = () => {
 	const [orders, setOrders] = useState([]);
 	const { user } = useSelector((state) => ({ ...state }));
 
+	let orderStatusEnum = [
+		"not processed yet",
+		"processing",
+		"dispatching",
+		"dispatched",
+		"cancelled",
+		"completed",
+	];
+	const [currentOrderStatus, setCurrentOrderStatus] = useState("");
+
 	useEffect(() => {
 		user && console.log(user.token);
+		loadAllOrders();
+	}, []);
+
+	const loadAllOrders = () =>
 		adminOrderList(user.token)
 			.then((res) => {
 				console.log("RES oredr admin", res.data);
 				setOrders(res.data);
+				setInitialOrderStatus(res.data);
 			})
+
 			.catch((err) => console.log(err.message));
-	}, []);
+
+	const setInitialOrderStatus = (data) => {
+		console.log("orders", data);
+		data &&
+			data.length > 1 &&
+			data.map((order, i) => {
+				// console.log(order.orderStatus);
+				setCurrentOrderStatus(order.orderStatus);
+			});
+	};
 
 	const showOrders = () =>
 		orders.map((order, i) => (
 			<div key={i} className="m-5 p-3 card">
 				{ShowPaymentInfo(order)}
+				{showOrderStatus(order)}
 				{showOrderInTable(order)}
 				{/* <div className="row">HAhaha</div> */}
 			</div>
@@ -56,9 +85,7 @@ export const AdminDashboard = () => {
 								<CloseCircleOutlined style={{ color: "red" }} />
 							)}
 						</td>
-						<td className="badge bg-primary text-white m-1">
-							<b>{order.orderStatus}</b>
-						</td>
+						<td className="badge bg-primary text-white m-1"></td>
 					</tr>
 				))}
 			</tbody>
@@ -81,6 +108,33 @@ export const AdminDashboard = () => {
 			</p>
 		</div>
 	);
+
+	const showOrderStatus = (order) => (
+		<p className="badge bg-primary text-white">
+			Order Status :{" "}
+			<Select
+				value={currentOrderStatus}
+				placeholder="Selecet"
+				onChange={(stats) => handleStatusChange(order._id, stats)}
+			>
+				{orderStatusEnum.map((stats, i) => {
+					return (
+						<Option key={i} value={stats}>
+							{stats}
+						</Option>
+					);
+				})}
+			</Select>
+		</p>
+	);
+
+	const handleStatusChange = (orderId, orderStatus) => {
+		console.log(orderStatus);
+		adminUpdateOrderStatus(orderId, orderStatus, user.token).then((res) => {
+			toast.success("Order Status Updated");
+			loadAllOrders();
+		});
+	};
 
 	return (
 		<div className="container-fluid">
