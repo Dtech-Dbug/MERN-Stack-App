@@ -14,7 +14,7 @@ exports.adminOrderStatus = async (req, res) => {
 	const { orderId, orderStatus } = req.body;
 
 	const updatedOrderStatus = await Order.findByIdAndUpdate(
-		oderId,
+		orderId,
 		{ orderStatus },
 		{ new: true }
 	).exec();
