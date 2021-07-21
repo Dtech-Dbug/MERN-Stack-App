@@ -10,22 +10,16 @@ export const AdminDashboard = () => {
 	const [orders, setOrders] = useState([]);
 	const { user } = useSelector((state) => ({ ...state }));
 
-	// useEffect(() => {
-	// 	user &&
-
-	// }, []);
-
-	function test(e) {
-		e.preventDefault();
-		console.log("Test Buttton Pressed");
-
+	useEffect(() => {
 		user && console.log(user.token);
 		adminOrderList(user.token)
 			.then((res) => {
 				console.log("RES oredr admin", res.data);
+				setOrders(res.data);
 			})
 			.catch((err) => console.log(err.message));
-	}
+	}, []);
+
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -34,7 +28,7 @@ export const AdminDashboard = () => {
 				</div>
 				<div className="col">
 					Welcome Admin to your dashboard.
-					<button onClick={test}>Test</button>
+					{JSON.stringify(orders)}
 				</div>
 			</div>
 		</div>
