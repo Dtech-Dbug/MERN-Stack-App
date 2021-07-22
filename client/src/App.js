@@ -42,6 +42,7 @@ import DrawerCard from "./components/Drawer/DrawerCard";
 import Checkout from "./components/pages/Checkout";
 import Payment from "./components/pages/Payment";
 import CouponPageAdmin from "./components/pages/protected-routes/admin/Coupons/CouponPageAdmin";
+import Wishlist from "./components/pages/protected-routes/user/wishlist";
 
 function App() {
 	const dispatch = useDispatch();
@@ -95,8 +96,11 @@ function App() {
 			<Switch>
 				<UserRoute exact path="/user/history" component={History} />
 				<UserRoute exact path="/user/password" component={UserPassword} />
+				<UserRoute exact path="/user/wishlist" component={Wishlist} />
+
 				<AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
 				<AdminRoute exact path="/admin/category" component={CreateCategory} />
+
 				<AdminRoute
 					exact
 					path="/admin/category/:slug"
