@@ -224,3 +224,41 @@ exports.listOrders = async (req, res) => {
 	console.log("ORDERSSSS --->", orders);
 	res.send({ order: orders });
 };
+
+//user wishlist funtions
+
+//createWishlist listUserWishlist removeWishlist
+
+exports.createWishlist = async (req, res) => {
+	const { productId } = req.body;
+
+	const user = await User.findOneAndUpdate(
+		{ email: req.user.email },
+		{ $addToSet: { wishlist: productId } },
+		{ new: true }
+	).exec();
+
+	//$addToSet : soecial mongoose method to make sure no duplicates entries are entered
+	//case : user may click on the same product multiple times, we do not want to repeat same entries
+	res.json({ ok: true, userWishlist: user });
+};
+
+exports.listUserWishlist = async (req, res) => {
+	const wishList = await User.findOne({ email: req.user.email })
+		.select("wishlist")
+		.populate("wishlist")
+		.exec();
+
+	res.json(wishList);
+};
+
+exports.removeWishlist = async (req, res) => {
+	//$ pull : method to pull out elements from a model, wishlist is an array, the item w id will be pulled out from the wishlist array
+	const { productId } = req.params;
+	const user = await User.findOneAndUpdate(
+		{ email: req.user.email },
+		{ $pull: { wishlist: removeWishlist } }
+	).exec();
+
+	res.json({ ok: true });
+};
