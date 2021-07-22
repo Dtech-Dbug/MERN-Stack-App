@@ -44,6 +44,10 @@ router.post(
 
 router.post("/user/wishlist", createOrUpdateUserMiddleware, createWishlist);
 router.post("/user/wishlist", createOrUpdateUserMiddleware, listUserWishlist);
-router.delete("/user/wishlist", createOrUpdateUserMiddleware, removeWishlist);
+router.delete(
+	"/user/wishlist/:productId",
+	createOrUpdateUserMiddleware,
+	removeWishlist
+);
 
 module.exports = router;
