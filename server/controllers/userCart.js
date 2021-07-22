@@ -255,9 +255,10 @@ exports.listUserWishlist = async (req, res) => {
 exports.removeWishlist = async (req, res) => {
 	//$ pull : method to pull out elements from a model, wishlist is an array, the item w id will be pulled out from the wishlist array
 	const { productId } = req.params;
+
 	const user = await User.findOneAndUpdate(
 		{ email: req.user.email },
-		{ $pull: { wishlist: removeWishlist } }
+		{ $pull: { wishlist: productId } }
 	).exec();
 
 	res.json({ ok: true });
