@@ -22,6 +22,8 @@ const userSchema = new mongoose.Schema(
 		},
 
 		address: String,
+
+		wishlist: [{ type: ObjectId, ref: "ProductModel" }],
 	},
 	{ timestamps: true }
 );
