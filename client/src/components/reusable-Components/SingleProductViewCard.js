@@ -16,6 +16,7 @@ import { Carousel } from "react-responsive-carousel";
 //import css files for react-responsive-Carousel
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { addToWishlist } from "../../functions/userCart";
+import { useHistory } from "react-router-dom";
 
 const { Meta } = Card;
 const { TabPane } = Tabs;
@@ -24,6 +25,7 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 	const { title, images, description, _id, ratings } = product;
 	const { user, cart } = useSelector((state) => ({ ...state }));
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const handleAddToCart = () => {
 		//create an array of cart to save the array in LocalStorgae
