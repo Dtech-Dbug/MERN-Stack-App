@@ -22,7 +22,7 @@ export const AdminDashboard = () => {
 		"cancelled",
 		"completed",
 	];
-	const [currentOrderStatus, setCurrentOrderStatus] = useState("");
+	// const [currentOrderStatus, setCurrentOrderStatus] = useState("");
 
 	useEffect(() => {
 		user && console.log(user.token);
@@ -34,20 +34,20 @@ export const AdminDashboard = () => {
 			.then((res) => {
 				console.log("RES oredr admin", res.data);
 				setOrders(res.data);
-				setInitialOrderStatus(res.data);
+				// setInitialOrderStatus(res.data);
 			})
 
 			.catch((err) => console.log(err.message));
 
-	const setInitialOrderStatus = (data) => {
-		console.log("orders", data);
-		data &&
-			data.length > 1 &&
-			data.map((order, i) => {
-				// console.log(order.orderStatus);
-				setCurrentOrderStatus(order.orderStatus);
-			});
-	};
+	// const setInitialOrderStatus = (data) => {
+	// 	console.log("orders", data);
+	// 	data &&
+	// 		data.length > 1 &&
+	// 		data.map((order, i) => {
+	// 			// console.log(order.orderStatus);
+	// 			setCurrentOrderStatus(order.orderStatus);
+	// 		});
+	// };
 
 	const showOrders = () =>
 		orders.map((order, i) => (
@@ -113,7 +113,7 @@ export const AdminDashboard = () => {
 		<p className="badge bg-primary text-white">
 			Order Status :{" "}
 			<Select
-				value={currentOrderStatus}
+				value={order.orderStatus}
 				placeholder="Selecet"
 				onChange={(stats) => handleStatusChange(order._id, stats)}
 			>
