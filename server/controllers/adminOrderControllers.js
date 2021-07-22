@@ -11,7 +11,10 @@ exports.adminOrders = async (req, res) => {
 };
 
 exports.adminOrderStatus = async (req, res) => {
+	//update order status , coming from forntened
+
 	const { orderId, orderStatus } = req.body;
+	console.log("ORderId --->", orderId, "Order Statuts--->", orderStatus);
 
 	const updatedOrderStatus = await Order.findByIdAndUpdate(
 		orderId,
