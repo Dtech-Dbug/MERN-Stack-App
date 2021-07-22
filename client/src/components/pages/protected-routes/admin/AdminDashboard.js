@@ -68,7 +68,6 @@ export const AdminDashboard = () => {
 					<th scope="col">Quantity</th>
 					<th scope="col">Color</th>
 					<th scope="col">Shipping</th>
-					<th scope="col">Order Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -85,7 +84,6 @@ export const AdminDashboard = () => {
 								<CloseCircleOutlined style={{ color: "red" }} />
 							)}
 						</td>
-						<td className="badge bg-primary text-white m-1"></td>
 					</tr>
 				))}
 			</tbody>
