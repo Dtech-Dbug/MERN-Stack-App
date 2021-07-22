@@ -68,3 +68,27 @@ export const userOrders = async (authtoken) => {
 		headers: { authtoken },
 	});
 };
+
+//wishlist fronetnd functions
+export const addToWishlist = async (productId, authtoken) => {
+	return await axios.post(
+		`http://localhost:8000/api/user/wishlist`,
+		{
+			productId,
+		},
+		{ header: { authtoken } }
+	);
+};
+
+export const listWishlist = async (authtoken) =>
+	await axios.get(`http://localhost:8000/api/user/wishlist`, {
+		headers: { authtoken },
+	});
+
+export const removeWishlist = async (productId, authtoken) => {
+	return await axios.put(
+		`http://localhost:8000/api/user/wishlist/${productId}`,
+		{},
+		{ headers: { authtoken } }
+	);
+};
