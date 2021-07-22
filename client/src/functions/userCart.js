@@ -76,7 +76,7 @@ export const addToWishlist = async (productId, authtoken) => {
 		{
 			productId,
 		},
-		{ header: { authtoken } }
+		{ headers: { authtoken } }
 	);
 };
 

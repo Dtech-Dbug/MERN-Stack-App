@@ -7,7 +7,7 @@ import StarRatings from "react-star-ratings";
 import { showAverageRating } from "../../functions/rating";
 import { useSelector, useDispatch } from "react-redux";
 import _ from "lodash";
-
+import { toast } from "react-toastify";
 //import modal component
 import RatingModal from "../Modal/RatingModal";
 
@@ -15,6 +15,7 @@ import RatingModal from "../Modal/RatingModal";
 import { Carousel } from "react-responsive-carousel";
 //import css files for react-responsive-Carousel
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { addToWishlist } from "../../functions/userCart";
 
 const { Meta } = Card;
 const { TabPane } = Tabs;
@@ -63,6 +64,15 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 			});
 		}
 	};
+
+	const handleAddToWishList = (e) => {
+		e.preventDefault();
+		addToWishlist(product._id, user.token).then((res) => {
+			toast.success("Added To Wihslist");
+			console.log(res.data);
+		});
+	};
+
 	return (
 		<>
 			<div className="col-md-7">
@@ -99,9 +109,9 @@ const SingleProductViewCard = ({ product, onStarClick, star }) => {
 								Add to Cart
 							</a>
 						</Tooltip>,
-						<Link to="/">
+						<a onClick={handleAddToWishList}>
 							<HeartOutlined className="text-info" /> <br /> Add to Wishlist
-						</Link>,
+						</a>,
 						<RatingModal>
 							<StarRatings
 								name={_id}
