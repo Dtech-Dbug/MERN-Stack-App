@@ -5,6 +5,7 @@ import {
 	emptyUserCart,
 	saveUserAddress,
 	applyCoupon,
+	createCashOrder,
 } from "../../functions/userCart";
 import { toast } from "react-toastify";
 
@@ -121,7 +122,8 @@ const Checkout = ({ history }) => {
 	};
 
 	const saveUserOrderWithCash = () => {
-		//
+		createCashOrder(user.token).then((res) => console.log(res));
+		//empty user cart from DB , redux , localstorage and proceed to user hidtory on success response
 	};
 
 	return (
