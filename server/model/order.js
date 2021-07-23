@@ -28,6 +28,7 @@ const orderSchema = new mongoose.Schema(
 				"dispatched",
 				"cancelled",
 				"completed",
+				"cash on delivery",
 			],
 		},
 
