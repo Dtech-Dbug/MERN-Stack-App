@@ -29,6 +29,24 @@ const Cart = ({ history }) => {
 			.catch((err) => console.log("cart save error", err));
 	}
 
+	//saveCashOrders
+	function saveCashOrders() {
+		console.log("Cart", JSON.stringify(cart, null, 4));
+
+		dispatch({
+			type: "CASH_ON_DELIVERY",
+			payload: true,
+		});
+
+		//save the cartItems in the backedn. databasse under the loggedIn user
+		userCart(cart, user.token)
+			.then((res) => {
+				console.log(res);
+				if (res.data.ok) history.push("/checkout");
+			})
+			.catch((err) => console.log("cart save error", err));
+	}
+
 	//creatingthe card table in a fncn
 	const showCartTable = () => {
 		return (
@@ -98,7 +116,7 @@ const Cart = ({ history }) => {
 							<br />
 
 							<button
-								onClick={saveCartItemsToDb}
+								onClick={saveCashOrders}
 								className="btn btn-sm btn-secondary btn-raised"
 							>
 								Cash On Delivery
