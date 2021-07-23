@@ -21,6 +21,8 @@ const {
 	createWishlist,
 	listUserWishlist,
 	removeWishlist,
+
+	createCashOrder,
 } = require("../controllers/userCart");
 
 router.post("/user/cart", createOrUpdateUserMiddleware, userCart); //save cartItems in DB
@@ -49,5 +51,8 @@ router.put(
 	createOrUpdateUserMiddleware,
 	removeWishlist
 );
+
+//cash order
+router.post("/cash-order", createOrUpdateUserMiddleware, createCashOrder);
 
 module.exports = router;
