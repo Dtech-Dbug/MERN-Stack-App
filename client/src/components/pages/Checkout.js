@@ -122,7 +122,7 @@ const Checkout = ({ history }) => {
 	};
 
 	const saveUserOrderWithCash = () => {
-		createCashOrder(user.token).then((res) => console.log(res));
+		createCashOrder(user.token, COD).then((res) => console.log(res));
 		//empty user cart from DB , redux , localstorage and proceed to user hidtory on success response
 	};
 
