@@ -87,12 +87,23 @@ const Cart = ({ history }) => {
 					Total :<b>${getTotal()}</b>
 					<hr />
 					{user ? (
-						<button
-							onClick={saveCartItemsToDb}
-							className="btn btn-sm btn-primary btn-raised"
-						>
-							Proceed to checkout
-						</button>
+						<>
+							<button
+								onClick={saveCartItemsToDb}
+								className="btn btn-sm btn-primary btn-raised"
+							>
+								Proceed to checkout
+							</button>
+
+							<br />
+
+							<button
+								onClick={saveCartItemsToDb}
+								className="btn btn-sm btn-secondary btn-raised"
+							>
+								Cash On Delivery
+							</button>
+						</>
 					) : (
 						<button className="btn btn-sm btn-primary btn-raised">
 							<Link
