@@ -269,17 +269,26 @@ exports.createCashOrder = async (req, res) => {
 	const { COD } = req.body;
 	console.log("COD STATAYTS -->", COD);
 
+	if (!COD) return res.status(400).send("INVALID ACTION");
 	const user = await User.findOne({ email: req.user.email }).exec();
 
 	const userCart = await CartModel.findOne({ orderedBy: user._id }).exec();
 
 	//create the new order wityh custom paymentIntent
+	let finalPrice = 0;
+
+	//check if coupon applied is true , if yes apply discount
+	if (couponApplied && userCart.totalAfterDiscount) {
+		finalPrice = Math.round(userCart.totalAfterDiscount);
+	} else {
+		finalPrice = Math.rounduserCart(userCart.cartTotal);
+	}
 
 	let newOrder = await new Order({
 		products: userCart.products,
 		paymentIntent: {
 			id: uniqueid(),
-			amount: userCart.cartTotal,
+			amount: finalPrice,
 			created: Date.now(),
 			payment_method_types: ["cash on delivery"],
 		},
