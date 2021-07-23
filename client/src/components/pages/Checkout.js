@@ -25,7 +25,7 @@ const Checkout = ({ history }) => {
 	const [discountError, setDiscountError] = useState("");
 	const dispatch = useDispatch();
 
-	const { user } = useSelector((state) => ({ ...state }));
+	const { user, COD } = useSelector((state) => ({ ...state }));
 
 	useEffect(() => {
 		// let token = user.token;
@@ -119,6 +119,11 @@ const Checkout = ({ history }) => {
 			}
 		});
 	};
+
+	const saveUserOrderWithCash = () => {
+		//
+	};
+
 	return (
 		<div className="row">
 			<div className="col-md-6">
@@ -171,13 +176,23 @@ const Checkout = ({ history }) => {
 
 				<div className="row">
 					<div className="col-md-6">
-						<button
-							disabled={!addressSaved || !cartProducts.length}
-							className="btn btn-primary"
-							onClick={() => history.push("/payment")}
-						>
-							Place Order
-						</button>
+						{COD ? (
+							<button
+								disabled={!addressSaved || !cartProducts.length}
+								className="btn btn-primary"
+								onClick={saveUserOrderWithCash}
+							>
+								Confirm Order
+							</button>
+						) : (
+							<button
+								disabled={!addressSaved || !cartProducts.length}
+								className="btn btn-primary"
+								onClick={() => history.push("/payment")}
+							>
+								Place Order
+							</button>
+						)}
 					</div>
 
 					<div className="col-md-6">
