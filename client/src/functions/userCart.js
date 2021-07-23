@@ -92,3 +92,11 @@ export const removeWishlist = async (productId, authtoken) => {
 		{ headers: { authtoken } }
 	);
 };
+
+//fronten function to save user order with cash on delivery
+export const createCashOrder = async (authtoken) =>
+	await axios.post(
+		`http://localhost:8000/api/cash-order`,
+		{},
+		{ headers: { authtoken } }
+	);
